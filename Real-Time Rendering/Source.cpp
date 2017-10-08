@@ -71,11 +71,6 @@ int main(int argc, char* args[]) {
 	//Attempt to init the video component of SDL and print an error if it fails
 	if (init(&window, &windowSurface)) {
 
-		//loadMedia(&helloWorld);
-
-		//Fill the surface with black
-		//SDL_FillRect(windowSurface, NULL, SDL_MapRGB(windowSurface->format, 0xFF, 0xFF, 0xFF));
-
 		try {
 			Device device = Device(windowSurface);
 			Camera camera = Camera();
@@ -117,7 +112,8 @@ int main(int argc, char* args[]) {
 				m.rot += 0.1f;
 
 				device.Render(camera, m);
-				//Update the window witht he changes
+
+				//Update the window with changes
 				SDL_UpdateWindowSurface(window);
 				fpsCounter();
 
@@ -132,7 +128,6 @@ int main(int argc, char* args[]) {
 	}
 
 	SDL_FreeSurface(helloWorld);
-	helloWorld = NULL;
 
 	close(&window);
 

@@ -17,8 +17,6 @@
 		Uint32* pixels = (Uint32*)buffer->pixels;
 		
 		pixels[index] = colour;
-		pixels[index + 1] = colour;
-		pixels[index + 2] = colour;
 	}
 
 
@@ -53,7 +51,7 @@
 
 		glm::mat4 transformMatrix = projectionMatrix * viewMatrix * modelMatrix;
 
-	/*	for (int i = 0; i < 12; i++) {
+		for (int i = 0; i < 12; i++) {
 
 			glm::vec3 vert1 = mesh.vertices[mesh.faces[i].a];
 			glm::vec3 vert2 = mesh.vertices[mesh.faces[i].b];
@@ -67,27 +65,20 @@
 			DrawLine(Project(point1), Project(point2));
 			DrawLine(Project(point2), Project(point3));
 			DrawLine(Project(point3), Project(point1));
-		}*/
-
-		for (int i = 0; i < 8; i++) {
-			glm::vec2 point1 = transformMatrix * glm::vec4(mesh.vertices[i], 1);
-			DrawPoint(Project(point1));
 		}
-
 	}
 
 
 	void Device::DrawLine(glm::vec2& start, glm::vec2& end) {
 		glm::vec2 distance = end - start;
 
-		//std::cout << glm::length(distance) << std::endl;
 		if (glm::length(distance) < 2) {
 			return;
 		}
 
 		glm::vec2 middle =  start + distance/2.f;
-		DrawPoint(middle);
 
+		DrawPoint(middle);
 		DrawLine(start, middle);
 		DrawLine(end, middle);
 	}
