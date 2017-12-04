@@ -194,7 +194,7 @@ int main(int argc, char* args[]) {
 						}
 					}
 					else if (event.type == SDL_MOUSEMOTION) {
-	
+
 						camera.direction = glm::rotate(glm::radians((float)-event.motion.xrel), camera.up) * glm::vec4(camera.direction, 0);
 						camera.direction = glm::rotate(glm::radians((float)-event.motion.yrel), glm::cross(camera.direction, camera.up)) * glm::vec4(camera.direction, 0);
 						camera.direction = glm::normalize(camera.direction);

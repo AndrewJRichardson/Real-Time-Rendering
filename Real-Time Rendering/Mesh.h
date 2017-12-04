@@ -1,13 +1,14 @@
 #ifndef MESH_H
 #define MESH_H
 
+#include "Exports.h"
+
 #include <string>
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 
 
-
-struct Face {
+struct REALTIME_API Face {
 	int a;
 	int b;
 	int c;
@@ -25,8 +26,8 @@ public:
 	float rot = 0.0f;
 
 	//Constructors
-	Mesh(std::string name, int vertCount, int faceCount);
-	~Mesh();
+	REALTIME_API Mesh(std::string name, int vertCount, int faceCount);
+	REALTIME_API ~Mesh();
 };
 
 #endif // !MESH_H
