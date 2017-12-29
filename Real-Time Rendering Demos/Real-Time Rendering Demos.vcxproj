@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{8DF6AFB4-F65B-41D5-8570-DFCC1EF94274}</ProjectGuid>
     <RootNamespace>RealTimeRenderingDemos</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -98,8 +98,7 @@
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;Real-Time-Rendering.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll";
-copy "$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform)\Real-Time-Rendering.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\Real-Time-Rendering.dll";</Command>
+      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -110,8 +109,7 @@ copy "$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform)\Real-Time-Renderi
       <AdditionalIncludeDirectories>$(SolutionDir)/Libs/glm/;$(SolutionDir)/Libs/SDL2-2.0.6/include/;$(SolutionDir)/Real-Time Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll";
-copy "$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform)\Real-Time-Rendering.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\Real-Time-Rendering.dll";</Command>
+      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll" /Y</Command>
     </PostBuildEvent>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDIr)Libs\SDL2-2.0.6\Lib\$(Platform);$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -131,8 +129,7 @@ copy "$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform)\Real-Time-Renderi
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;Real-Time-Rendering.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll";
-copy "$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform)\Real-Time-Rendering.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\Real-Time-Rendering.dll";</Command>
+      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -151,8 +148,7 @@ copy "$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform)\Real-Time-Renderi
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;Real-Time-Rendering.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll";
-copy "$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform)\Real-Time-Rendering.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\Real-Time-Rendering.dll";</Command>
+      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

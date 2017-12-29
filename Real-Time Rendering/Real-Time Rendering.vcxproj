@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{67D65653-17C1-48C1-8951-B731ACD7FC5C}</ProjectGuid>
     <RootNamespace>RealTimeRendering</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
     <ProjectName>Real-Time-Rendering</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -100,7 +100,8 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform)\SDL2.dll"</Command>
+      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll" /Y 
+copy "$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform)\Real-Time-Rendering.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\Real-Time-Rendering.dll" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -117,7 +118,8 @@
       <SubSystem>NotSet</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform)\SDL2.dll"</Command>
+      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll" /Y 
+copy "$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform)\Real-Time-Rendering.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\Real-Time-Rendering.dll" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -138,7 +140,8 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform)\SDL2.dll"</Command>
+      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll" /Y 
+copy "$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform)\Real-Time-Rendering.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\Real-Time-Rendering.dll" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -159,20 +162,22 @@
       <SubSystem>NotSet</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform)\SDL2.dll"</Command>
+      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll" /Y 
+copy "$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform)\Real-Time-Rendering.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\Real-Time-Rendering.dll" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Object.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="Exports.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Object.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

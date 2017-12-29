@@ -10,6 +10,7 @@
 #include "Camera.h"
 #include "Mesh.h"
 #include "Device.h"
+#include "Object.h"
 
 
 
@@ -40,7 +41,7 @@ int main(int argc, char* args[]) {
 
 
 	Mesh m = Mesh("Cube", 8, 12);
-	m.position = glm::vec3(0, 0, 500.f);
+	m.position = glm::vec3(0, 0, 0);
 
 	m.vertices[0] = glm::vec3(-1, 1, 1);
 	m.vertices[1] = glm::vec3(1, 1, 1);
@@ -65,23 +66,28 @@ int main(int argc, char* args[]) {
 	m.faces[10] = Face{ 4, 5, 6 };
 	m.faces[11] = Face{ 4, 6, 7 };
 
+	Object objA = Object(&m, glm::vec3(0, 0, 0));
+	Object objB = Object(&m, glm::vec3(10, 0, -10));
+
+
 	int mousePrevX = 0;
 	int mousePrevY = 0;
-
 
 
 	//Attempt to init the video component of SDL and print an error if it fails
 	if (init(&window, &windowSurface)) {
 		float camSpeed = 0.2f;
+		SDL_SetWindowGrab(window, SDL_TRUE);
+		SDL_SetRelativeMouseMode(SDL_TRUE);
 
 		try {
 			Device device = Device(windowSurface);
 			device.currentRenderMode = &Device::RenderPoints;
-			Camera camera = Camera(glm::vec3(0, 0, 500.0f), glm::vec3(0, 0, 530.f));
-
+			Camera camera = Camera(glm::vec3(0, 0, -10));
+			
 			bool quit = false;
 			while (!quit) {
-				device.Clear();
+				device.Clear(camera);
 				SDL_Event event;
 				if (SDL_PollEvent(&event))
 				{
@@ -91,6 +97,10 @@ int main(int argc, char* args[]) {
 					else if (event.type == SDL_KEYDOWN) {
 						switch (event.key.keysym.sym)
 						{
+
+						case SDLK_ESCAPE:
+							quit = true;
+							break;
 						case SDLK_LEFTBRACKET:
 							if (delay > 0) {
 								delay -= 1;
@@ -116,39 +126,30 @@ int main(int argc, char* args[]) {
 							}
 							break;
 						case SDLK_3:
-							if (device.currentRenderMode != &Device::RenderFill) {
+							/*if (device.currentRenderMode != &Device::RenderFill) {
 								device.currentRenderMode = &Device::RenderFill;
 								std::cout << "Render Mode: Fill" << std::endl;
-							}
+							}*/
 							break;
 
 						case SDLK_w:
-							camera.position -= camera.direction * camSpeed;
-							camera.direction = glm::normalize(camera.direction);
-							camera.target = camera.direction + camera.position;
+							camera.position -= camSpeed * camera.front;
 							//camera.position += (glm::conjugate(camera.dir) * glm::vec3(0.0f, 0.0f, -1.0f) * camSpeed);
 							break;
 						case SDLK_s:
 							//camera.position -= (glm::conjugate(camera.dir) * glm::vec3(0.0f, 0.0f, -1.0f) * camSpeed);
-
-							camera.position += camera.direction * camSpeed;
-							camera.direction = glm::normalize(camera.direction);
-							camera.target = camera.direction + camera.position;
+							camera.position += camera.front * camSpeed;
 
 							break;
 
 						case SDLK_d:
 							//camera.position -= (glm::conjugate(camera.dir) * glm::vec3(-1.0f, 0.0f, 0.f) * camSpeed);
-							camera.position -= glm::cross(camera.direction, camera.up) * camSpeed;
-							camera.direction = glm::normalize(camera.direction);
-							camera.target = camera.direction + camera.position;
+							camera.position += glm::cross(camera.front, camera.up) * camSpeed;
 
 							break;
 						case SDLK_a:
 							//camera.position += (glm::conjugate(camera.dir) * glm::vec3(-1.0f, 0.0f, 0.f) * camSpeed);
-							camera.position += glm::cross(camera.direction, camera.up) * camSpeed;
-							camera.direction = glm::normalize(camera.direction);
-							camera.target = camera.direction + camera.position;
+							camera.position -= glm::cross(camera.front, camera.up) * camSpeed;
 
 							break;
 
@@ -168,23 +169,16 @@ int main(int argc, char* args[]) {
 						break;
 						case SDLK_DOWN:
 						{
-							glm::quat q = glm::angleAxis(glm::radians(1.f), camera.dir * glm::vec3(1.0f, 0.0f, 0.0f));
-							camera.dir = q * camera.dir;
 						}
 						//camera.target = glm::vec3(camera.target.x, camera.target.y - camSpeed, camera.target.z);
 						break;
 						case SDLK_LEFT:
 						{
-							camera.direction = glm::rotate(glm::radians(1.f), camera.up) * glm::vec4(camera.direction, 0);
-							camera.direction = glm::normalize(camera.direction);
-							camera.target = camera.direction + camera.position;
 						}
 						break;
 						case SDLK_RIGHT:
 						{
-							camera.direction = glm::rotate(glm::radians(-1.f), camera.up) * glm::vec4(camera.direction, 0);
-							camera.direction = glm::normalize(camera.direction);
-							camera.target = camera.direction + camera.position;
+
 						}
 						//camera.target = glm::vec3(camera.target.x + camSpeed, camera.target.y, camera.target.z);
 						break;
@@ -195,29 +189,21 @@ int main(int argc, char* args[]) {
 					}
 					else if (event.type == SDL_MOUSEMOTION) {
 
-						camera.direction = glm::rotate(glm::radians((float)-event.motion.xrel), camera.up) * glm::vec4(camera.direction, 0);
-						camera.direction = glm::rotate(glm::radians((float)-event.motion.yrel), glm::cross(camera.direction, camera.up)) * glm::vec4(camera.direction, 0);
-						camera.direction = glm::normalize(camera.direction);
-						std::cout << camera.direction.x << " : " << camera.direction.y << " : " << camera.direction.z << std::endl;
-						camera.target = camera.direction + camera.position;
-
-
+						camera.Rotate(-event.motion.xrel, event.motion.yrel);
 						/*glm::quat x = glm::angleAxis(glm::radians((float)event.motion.xrel), camera.dir * glm::vec3(0.0f, 1.0f, 0.0f));
 						glm::quat y = glm::angleAxis(glm::radians((float)event.motion.yrel), camera.dir * glm::vec3(1.0f, 0.0f, 0.0f));*/
 						//camera.dir = camera.dir * x;
 						//camera.dir = y * camera.dir;
 
-
 					}
 
 				}
 
-				if (m.rot > 10000) {
-					m.rot = 0;
-				}
-				//m.rot += 0.1f;
 
-				device.Render(camera, m);
+
+				device.Render(objA);
+				//device.Render(camera, objB);
+
 				//Update the window with changes
 				SDL_UpdateWindowSurface(window);
 				//fpsCounter();
