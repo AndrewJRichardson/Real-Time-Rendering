@@ -6,6 +6,7 @@
 #include <string>
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
+#include <vector>
 
 
 struct REALTIME_API Face {
@@ -17,9 +18,10 @@ struct REALTIME_API Face {
 class Mesh {
 public:
 	//Members
+	int vertCount;
+	int faceCount;
 	std::string name;
 	glm::vec3 position;
-	glm::quat rotation;
 	glm::vec3* vertices;
 	Face* faces;
 

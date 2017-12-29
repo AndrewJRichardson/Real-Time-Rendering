@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <SDL_ttf.h>
 #include <stdio.h>
 #include <glm/vec3.hpp>
 #include <math.h>
@@ -11,6 +12,7 @@
 #include "Mesh.h"
 #include "Device.h"
 #include "Object.h"
+#include "ObjectParser.h"
 
 
 
@@ -22,12 +24,16 @@ const int SCREEN_HEIGHT = 600;
 bool init(SDL_Window** window, SDL_Surface** windowSurface);
 bool loadMedia(SDL_Surface** surface);
 void close(SDL_Window** window);
-void fpsCounter();
+int fpsCounter();
+void renderText(std::string text, TTF_Font* font, SDL_Surface** surface, SDL_Color textColour, SDL_Color backgroundColour);
+
 
 
 
 //SDL requires this main signature for multi platform compatibility
 int main(int argc, char* args[]) {
+
+
 
 	int delay = 0;
 	//The window to render to
@@ -38,36 +44,19 @@ int main(int argc, char* args[]) {
 	SDL_Surface* windowSurface = NULL;
 
 	SDL_Surface* helloWorld = NULL;
+	SDL_Surface* textSurface = NULL;
+
+	Mesh* m = NULL;
+	ObjectParser p = ObjectParser();
+	p.ParseFile("Suz.obj", &m);
+
+	std::cout << m->faceCount << std::endl;
+
+	//Mesh m = Mesh("Cube", 8, 12);
 
 
-	Mesh m = Mesh("Cube", 8, 12);
-	m.position = glm::vec3(0, 0, 0);
-
-	m.vertices[0] = glm::vec3(-1, 1, 1);
-	m.vertices[1] = glm::vec3(1, 1, 1);
-	m.vertices[2] = glm::vec3(-1, -1, 1);
-	m.vertices[3] = glm::vec3(1, -1, 1);
-	m.vertices[4] = glm::vec3(-1, 1, -1);
-	m.vertices[5] = glm::vec3(1, 1, -1);
-	m.vertices[6] = glm::vec3(1, -1, -1);
-	m.vertices[7] = glm::vec3(-1, -1, -1);
-
-	m.faces[0] = Face{ 0, 1, 2 };
-	m.faces[1] = Face{ 1, 2, 3 };
-	m.faces[2] = Face{ 1, 3, 6 };
-	m.faces[3] = Face{ 1, 5, 6 };
-	m.faces[4] = Face{ 0, 1, 4 };
-	m.faces[5] = Face{ 1, 4, 5 };
-
-	m.faces[6] = Face{ 2, 3, 7 };
-	m.faces[7] = Face{ 3, 6, 7 };
-	m.faces[8] = Face{ 0, 2, 7 };
-	m.faces[9] = Face{ 0, 4, 7 };
-	m.faces[10] = Face{ 4, 5, 6 };
-	m.faces[11] = Face{ 4, 6, 7 };
-
-	Object objA = Object(&m, glm::vec3(0, 0, 0));
-	Object objB = Object(&m, glm::vec3(10, 0, -10));
+	Object objA = Object(m, glm::vec3(0, 0, 0));
+	Object objB = Object(m, glm::vec3(10, 0, -10));
 
 
 	int mousePrevX = 0;
@@ -76,6 +65,15 @@ int main(int argc, char* args[]) {
 
 	//Attempt to init the video component of SDL and print an error if it fails
 	if (init(&window, &windowSurface)) {
+		TTF_Init();
+
+		TTF_Font* font = TTF_OpenFont("PT_Sans.ttf", 12);
+		SDL_Color foregroundColor = { 255, 255, 255 };
+		SDL_Color backgroundColor = { 0, 0, 0 };
+		SDL_Rect textLocation = { 0, 0, 0, 0 };
+		SDL_Surface* textSurface = NULL;
+
+
 		float camSpeed = 0.2f;
 		SDL_SetWindowGrab(window, SDL_TRUE);
 		SDL_SetRelativeMouseMode(SDL_TRUE);
@@ -205,8 +203,10 @@ int main(int argc, char* args[]) {
 				//device.Render(camera, objB);
 
 				//Update the window with changes
+				renderText("FPS: " + std::to_string(fpsCounter()), font, &textSurface, foregroundColor, backgroundColor);
+				SDL_BlitSurface(textSurface, NULL, windowSurface, &textLocation);
 				SDL_UpdateWindowSurface(window);
-				//fpsCounter();
+				fpsCounter();
 
 				SDL_Delay(delay);
 			}
@@ -263,6 +263,10 @@ bool loadMedia(SDL_Surface** surface) {
 }
 
 
+void renderText(std::string text, TTF_Font* font, SDL_Surface** surface, SDL_Color textColour, SDL_Color backgroundColour) {
+	*surface = TTF_RenderText_Shaded(font, text.c_str(), textColour, backgroundColour);
+}
+
 
 void close(SDL_Window** window) {
 
@@ -281,7 +285,7 @@ void close(SDL_Window** window) {
 Uint32 framespersecond{ 0 };
 Uint32 lastFrameTicks{ 0 };
 
-void fpsCounter() {
+int fpsCounter() {
 	Uint32 currentFrameTicks = SDL_GetTicks();
 	Uint32 difference = currentFrameTicks - lastFrameTicks;
 	lastFrameTicks = currentFrameTicks;
@@ -290,7 +294,8 @@ void fpsCounter() {
 		framespersecond = 1000 / difference;
 	}
 
-	printf("FPS: %lu\n", framespersecond);
+	//printf("FPS: %lu\n", framespersecond);
+	return framespersecond;
 }
 
 

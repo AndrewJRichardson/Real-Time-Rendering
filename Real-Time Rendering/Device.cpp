@@ -11,7 +11,7 @@ Device::Device(SDL_Surface* surface) {
 void Device::Clear(const Camera& camera) {
 	SDL_FillRect(buffer, NULL, SDL_MapRGB(buffer->format, 0x00, 0x00, 0x00));
 	viewMatrix = camera.LookAt();
-	perspectiveMatrix = glm::perspective(glm::radians(90.f), (float)buffer->w/ buffer->h, 1.f, 100.0f);
+	perspectiveMatrix = glm::perspective(glm::radians(90.f), (float)buffer->w / buffer->h, 1.f, 100.0f);
 }
 
 
@@ -96,8 +96,7 @@ void Device::Render(Object& object) {
 
 
 void Device::RenderPoints(Object& object, glm::mat4& transformMatrix) {
-	for (int i = 0; i < 8; i++) {
-
+	for (int i = 0; i < object.mesh->vertCount; i++) {
 		glm::vec4 project = Project(object.mesh->vertices[i], transformMatrix);
 
 		if (project.z > 0) {
@@ -110,7 +109,7 @@ void Device::RenderPoints(Object& object, glm::mat4& transformMatrix) {
 
 
 void Device::RenderWireframes(Object& object, glm::mat4& transformMatrix) {
-	for (int i = 0; i < 12; i++) {
+	for (int i = 0; i < object.mesh->faceCount; i++) {
 		glm::vec4 point1 = Project(object.mesh->vertices[object.mesh->faces[i].a], transformMatrix);
 		glm::vec4 point2 = Project(object.mesh->vertices[object.mesh->faces[i].b], transformMatrix);
 		glm::vec4 point3 = Project(object.mesh->vertices[object.mesh->faces[i].c], transformMatrix);

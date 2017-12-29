@@ -4,7 +4,8 @@ Mesh::Mesh(std::string name, int vertCount, int faceCount) {
 	this->name = name;
 	vertices = new glm::vec3[vertCount];
 	faces = new Face[faceCount];
-	rotation = glm::quat(glm::vec3(0, 0, 0));
+	this->vertCount = vertCount;
+	this->faceCount = faceCount;
 }
 
 Mesh::~Mesh() {

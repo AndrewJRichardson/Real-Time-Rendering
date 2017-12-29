@@ -171,6 +171,7 @@ copy "$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform)\Real-Time-Renderi
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ObjectParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
@@ -178,6 +179,7 @@ copy "$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform)\Real-Time-Renderi
     <ClInclude Include="Exports.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="ObjectParser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
