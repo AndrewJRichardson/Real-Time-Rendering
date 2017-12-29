@@ -32,7 +32,6 @@ public:
 	REALTIME_API void		DrawPoint		 (glm::vec2& point, int r, int g, int b);
 	REALTIME_API void		DrawLine		 (glm::vec2& start, glm::vec2& end);
 	REALTIME_API void		DrawLineBresenham(glm::vec4& start, glm::vec4& end);
-	//REALTIME_API glm::vec3	Project			 (glm::vec3& point, glm::mat4& model, glm::mat4& proj);
 	REALTIME_API glm::vec4  Project			 (glm::vec3& vert, glm::mat4& transform);
 	REALTIME_API void		Render			 (Object& mesh);
 	REALTIME_API void		RenderPoints	 (Object& object, glm::mat4& transformMatrix);
@@ -43,7 +42,7 @@ public:
 	REALTIME_API float		Interpolate		 (float min, float max, float gradient);
 	REALTIME_API float		Clamp			 (float value, float min = 0, float max = 1);
 	REALTIME_API void		DrawTriangle	 (glm::vec2 pointA, glm::vec2 pointB, glm::vec2 pointC);
-	REALTIME_API void		RenderFill		 (glm::mat4& transformMatrix, Mesh& mesh);
+	REALTIME_API void		RenderFill		 (Object&, glm::mat4&);
 
 };
 

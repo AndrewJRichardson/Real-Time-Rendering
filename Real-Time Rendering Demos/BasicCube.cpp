@@ -24,7 +24,7 @@ const int SCREEN_HEIGHT = 600;
 bool init(SDL_Window** window, SDL_Surface** windowSurface);
 bool loadMedia(SDL_Surface** surface);
 void close(SDL_Window** window);
-int fpsCounter();
+int  fpsCounter();
 void renderText(std::string text, TTF_Font* font, SDL_Surface** surface, SDL_Color textColour, SDL_Color backgroundColour);
 
 
@@ -32,56 +32,56 @@ void renderText(std::string text, TTF_Font* font, SDL_Surface** surface, SDL_Col
 
 //SDL requires this main signature for multi platform compatibility
 int main(int argc, char* args[]) {
-
-
-
+	
+	const int SCREEN_WIDTH = 800;
+	const int SCREEN_HEIGHT = 600;
 	int delay = 0;
+
+
 	//The window to render to
 	SDL_Window* window = NULL;
 
-	//Surface that the window will contain
+	//Surfaces that the window will contain
 	//a surface is just an image, it can be drawn to.
 	SDL_Surface* windowSurface = NULL;
-
-	SDL_Surface* helloWorld = NULL;
 	SDL_Surface* textSurface = NULL;
 
+	//Load a mesh from a .obj file
 	Mesh* m = NULL;
 	ObjectParser p = ObjectParser();
 	p.ParseFile("Suz.obj", &m);
 
-	std::cout << m->faceCount << std::endl;
-
-	//Mesh m = Mesh("Cube", 8, 12);
-
-
+	//Create an object, object allows a single mesh to be reused
 	Object objA = Object(m, glm::vec3(0, 0, 0));
 	Object objB = Object(m, glm::vec3(10, 0, -10));
 
 
-	int mousePrevX = 0;
-	int mousePrevY = 0;
-
-
 	//Attempt to init the video component of SDL and print an error if it fails
 	if (init(&window, &windowSurface)) {
-		TTF_Init();
 
+		//Init SDL_ttf and some variables so that FPS text can be rendered
+		TTF_Init();
 		TTF_Font* font = TTF_OpenFont("PT_Sans.ttf", 12);
 		SDL_Color foregroundColor = { 255, 255, 255 };
 		SDL_Color backgroundColor = { 0, 0, 0 };
 		SDL_Rect textLocation = { 0, 0, 0, 0 };
 		SDL_Surface* textSurface = NULL;
 
-
-		float camSpeed = 0.2f;
 		SDL_SetWindowGrab(window, SDL_TRUE);
 		SDL_SetRelativeMouseMode(SDL_TRUE);
 
+		//Create a camera to view the world with
+		Camera camera = Camera(glm::vec3(0, 0, -10));
+		float camSpeed = 0.2f;
+
+
 		try {
+
+			//TODO: Replace function pointer with functors?
+			//TODO: Better name for device?
+			//Create a device to handle the rendering
 			Device device = Device(windowSurface);
 			device.currentRenderMode = &Device::RenderPoints;
-			Camera camera = Camera(glm::vec3(0, 0, -10));
 			
 			bool quit = false;
 			while (!quit) {
@@ -124,92 +124,54 @@ int main(int argc, char* args[]) {
 							}
 							break;
 						case SDLK_3:
-							/*if (device.currentRenderMode != &Device::RenderFill) {
+							if (device.currentRenderMode != &Device::RenderFill) {
 								device.currentRenderMode = &Device::RenderFill;
 								std::cout << "Render Mode: Fill" << std::endl;
-							}*/
+							}
 							break;
 
 						case SDLK_w:
 							camera.position -= camSpeed * camera.front;
-							//camera.position += (glm::conjugate(camera.dir) * glm::vec3(0.0f, 0.0f, -1.0f) * camSpeed);
 							break;
 						case SDLK_s:
-							//camera.position -= (glm::conjugate(camera.dir) * glm::vec3(0.0f, 0.0f, -1.0f) * camSpeed);
 							camera.position += camera.front * camSpeed;
-
 							break;
-
 						case SDLK_d:
-							//camera.position -= (glm::conjugate(camera.dir) * glm::vec3(-1.0f, 0.0f, 0.f) * camSpeed);
 							camera.position += glm::cross(camera.front, camera.up) * camSpeed;
-
 							break;
 						case SDLK_a:
-							//camera.position += (glm::conjugate(camera.dir) * glm::vec3(-1.0f, 0.0f, 0.f) * camSpeed);
 							camera.position -= glm::cross(camera.front, camera.up) * camSpeed;
-
 							break;
-
 						case SDLK_i:
 							camera.position = glm::vec3(camera.position.x, camera.position.y + camSpeed, camera.position.z);
 							break;
 						case SDLK_k:
 							camera.position = glm::vec3(camera.position.x, camera.position.y - camSpeed, camera.position.z);
 							break;
-						case SDLK_UP:
-						{
-
-							/*glm::quat q = glm::angleAxis(glm::radians(1.f), camera.dir * glm::vec3(-1.0f, 0.0f, 0.0f));
-							camera.dir = q * camera.dir;*/
-						}
-						//camera.target = glm::vec3(camera.target.x, camera.target.y + camSpeed, camera.target.z);
-						break;
-						case SDLK_DOWN:
-						{
-						}
-						//camera.target = glm::vec3(camera.target.x, camera.target.y - camSpeed, camera.target.z);
-						break;
-						case SDLK_LEFT:
-						{
-						}
-						break;
-						case SDLK_RIGHT:
-						{
-
-						}
-						//camera.target = glm::vec3(camera.target.x + camSpeed, camera.target.y, camera.target.z);
-						break;
 
 						default:
 							break;
 						}
 					}
 					else if (event.type == SDL_MOUSEMOTION) {
-
 						camera.Rotate(-event.motion.xrel, event.motion.yrel);
-						/*glm::quat x = glm::angleAxis(glm::radians((float)event.motion.xrel), camera.dir * glm::vec3(0.0f, 1.0f, 0.0f));
-						glm::quat y = glm::angleAxis(glm::radians((float)event.motion.yrel), camera.dir * glm::vec3(1.0f, 0.0f, 0.0f));*/
-						//camera.dir = camera.dir * x;
-						//camera.dir = y * camera.dir;
 
 					}
 
 				}
 
 
-
+				//Tell device to render an object
 				device.Render(objA);
-				//device.Render(camera, objB);
 
 				//Update the window with changes
 				renderText("FPS: " + std::to_string(fpsCounter()), font, &textSurface, foregroundColor, backgroundColor);
 				SDL_BlitSurface(textSurface, NULL, windowSurface, &textLocation);
 				SDL_UpdateWindowSurface(window);
-				fpsCounter();
 
 				SDL_Delay(delay);
 			}
+			TTF_CloseFont(font);
 		}
 		catch (const std::exception & ex) {
 			printf(ex.what());
@@ -217,9 +179,7 @@ int main(int argc, char* args[]) {
 
 
 	}
-
-	SDL_FreeSurface(helloWorld);
-
+	SDL_FreeSurface(textSurface);
 	close(&window);
 
 	return 0;

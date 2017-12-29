@@ -2,20 +2,36 @@
 #include <iostream>
 
 
-
+//Constructors
 Device::Device(SDL_Surface* surface) {
 	buffer = surface;
 	colourFlip = true;
-}
-
-void Device::Clear(const Camera& camera) {
-	SDL_FillRect(buffer, NULL, SDL_MapRGB(buffer->format, 0x00, 0x00, 0x00));
-	viewMatrix = camera.LookAt();
 	perspectiveMatrix = glm::perspective(glm::radians(90.f), (float)buffer->w / buffer->h, 1.f, 100.0f);
 }
 
 
 
+
+//Methods
+
+//Creates a transform matrix and calls the currently set render mode
+void Device::Render(Object& object) {
+
+	glm::mat4 modelMatrix = glm::translate(glm::mat4(), object.mesh->position);
+	glm::mat4 transformMatrix = perspectiveMatrix * viewMatrix * modelMatrix;
+
+	(this->*currentRenderMode) (object, transformMatrix);
+}
+
+//Clears the buffer and recreates the viewMatrix
+void Device::Clear(const Camera& camera) {
+	SDL_FillRect(buffer, NULL, SDL_MapRGB(buffer->format, 0x00, 0x00, 0x00));
+	viewMatrix = camera.LookAt();
+}
+
+
+//Used by Drawpoint to draw into the buffer
+//TODO: Remove?
 void Device::ChangePixel(int x, int y, Uint32 colour) {
 	int index = (x + y * buffer->w);
 	Uint32* pixels = (Uint32*)buffer->pixels;
@@ -24,27 +40,15 @@ void Device::ChangePixel(int x, int y, Uint32 colour) {
 }
 
 
+//Draws a pixel onto the device buffer
 void Device::DrawPoint(glm::vec2& point, int r, int g, int b) {
 	if (point.x >= 0 && point.y >= 0 && point.x < buffer->w && point.y < buffer->h) {
 		ChangePixel((int)point.x, (int)point.y, SDL_MapRGB(buffer->format, r, g, b));
 	}
 }
 
-float Device::Clamp(float value, float min, float max) {
-	return std::fmax(min, std::fmin(value, max));
-}
 
-float Device::Interpolate(float min, float max, float gradient) {
-	return min + (max - min) * Clamp(gradient);
-}
-
-/*glm::vec3 Device::Project(glm::vec3& point, glm::mat4& model, glm::mat4& proj) {
-
-
-	glm::vec4 view = glm::vec4(0, 0, 800, 600);
-	return glm::project(point, model, proj, view);
-}*/
-
+//Projects a vertices into world space and then into clip space
 glm::vec4 Device::Project(glm::vec3& vert, glm::mat4& transform) {
 
 	glm::vec4 projected = transform * glm::vec4(vert, 1);
@@ -54,20 +58,23 @@ glm::vec4 Device::Project(glm::vec3& vert, glm::mat4& transform) {
 	projected.x = (projected.x * buffer->w + buffer->w / 2.0f);
 	projected.y = (projected.y * buffer->h + buffer->h / 2.0f);
 
-
-
 	return projected;
 }
 
 
-float Device::Slope(glm::vec2& start, glm::vec2& end) {
-	return (end.y - start.y) / (end.x - end.y);
+//Renders each vertex as a single pixel
+void Device::RenderPoints(Object& object, glm::mat4& transformMatrix) {
+	for (int i = 0; i < object.mesh->vertCount; i++) {
+		glm::vec4 project = Project(object.mesh->vertices[i], transformMatrix);
+
+		if (project.z > 0) {
+			DrawPoint(glm::vec2(project.x, project.y), 0xff, 0xff, 0xff);
+		}
+	}
 }
 
-float Device::InverseSlope(glm::vec2& start, glm::vec2& end) {
-	return (end.x - start.x) / (end.y - start.y);
-}
 
+//Draws filled triangles using the scan line method
 void Device::DrawScanLine(int currentY, glm::vec2 pointA, glm::vec2 pointB, glm::vec2 pointC, glm::vec2 pointD, int r, int g, int b) {
 	float gradientA = pointA.y != pointB.y ? (currentY - pointA.y) / (pointB.y - pointA.y) : 1;
 	float gradientB = pointC.y != pointD.y ? (currentY - pointC.y) / (pointD.y - pointC.y) : 1;
@@ -81,33 +88,7 @@ void Device::DrawScanLine(int currentY, glm::vec2 pointA, glm::vec2 pointB, glm:
 }
 
 
-void Device::Render(Object& object) {
-
-	glm::mat4 modelMatrix = glm::translate(glm::mat4(), object.mesh->position);
-
-
-	/*glm::mat4 viewMatrix = camera.LookAt();
-	glm::mat4 projectionMatrix = glm::perspective(glm::radians(90.f), 800.f / 600.f, 0.1f, 100.0f);*/
-
-	glm::mat4 transformMatrix = perspectiveMatrix * viewMatrix * modelMatrix;
-
-	(this->*currentRenderMode) (object, transformMatrix);
-}
-
-
-void Device::RenderPoints(Object& object, glm::mat4& transformMatrix) {
-	for (int i = 0; i < object.mesh->vertCount; i++) {
-		glm::vec4 project = Project(object.mesh->vertices[i], transformMatrix);
-
-		if (project.z > 0) {
-			DrawPoint(glm::vec2(project.x, project.y), 0xff, 0xff, 0xff);
-		}
-	}
-}
-
-
-
-
+//Draws triangles as wireframes
 void Device::RenderWireframes(Object& object, glm::mat4& transformMatrix) {
 	for (int i = 0; i < object.mesh->faceCount; i++) {
 		glm::vec4 point1 = Project(object.mesh->vertices[object.mesh->faces[i].a], transformMatrix);
@@ -127,26 +108,30 @@ void Device::RenderWireframes(Object& object, glm::mat4& transformMatrix) {
 	}
 }
 
-void Device::RenderFill(glm::mat4& transformMatrix, Mesh& mesh) {
-	for (int i = 0; i < 12; i++) {
 
-		/*glm::vec3 vert1 = mesh.vertices[mesh.faces[i].a];
-		glm::vec3 vert2 = mesh.vertices[mesh.faces[i].b];
-		glm::vec3 vert3 = mesh.vertices[mesh.faces[i].c];
+//Draws filled triangles
+void Device::RenderFill(Object& object, glm::mat4& transformMatrix) {
+	for (int i = 0; i < object.mesh->faceCount; i++) {
 
-		glm::vec2 point1 = Project(vert1, transformMatrix);
-		glm::vec2 point2 = Project(vert2, transformMatrix);
-		glm::vec2 point3 = Project(vert3, transformMatrix);*/
+		glm::vec3 vert1 = object.mesh->vertices[object.mesh->faces[i].a];
+		glm::vec3 vert2 = object.mesh->vertices[object.mesh->faces[i].b];
+		glm::vec3 vert3 = object.mesh->vertices[object.mesh->faces[i].c];
+
+		glm::vec4 point1 = Project(vert1, transformMatrix);
+		glm::vec4 point2 = Project(vert2, transformMatrix);
+		glm::vec4 point3 = Project(vert3, transformMatrix);
+
 		/*glm::vec2 point1 = vert1, 1);
 		glm::vec2 point2 = transformMatrix * glm::vec4(vert2, 1);
 		glm::vec2 point3 = transformMatrix * glm::vec4(vert3, 1);*/
 
-
-		//DrawTriangle(point1, point2, point3);
+		if (point1.z > 0 && point2.z > 0 && point3.z > 0) {
+			DrawTriangle(point1, point2, point3);
+		}
 	}
 }
 
-
+//Draws lines using the middle point method
 void Device::DrawLine(glm::vec2& start, glm::vec2& end) {
 	glm::vec2 distance = end - start;
 
@@ -161,6 +146,8 @@ void Device::DrawLine(glm::vec2& start, glm::vec2& end) {
 	DrawLine(end, middle);
 }
 
+
+//Draws filled triangles using the draw scanline method
 void Device::DrawTriangle(glm::vec2 pointA, glm::vec2 pointB, glm::vec2 pointC) {
 
 	int r, g, b;
@@ -301,3 +288,22 @@ void Device::DrawLineBresenham(glm::vec4& start, glm::vec4& end) {
 
 }
 
+
+float Device::Slope(glm::vec2& start, glm::vec2& end) {
+	return (end.y - start.y) / (end.x - end.y);
+}
+
+
+float Device::InverseSlope(glm::vec2& start, glm::vec2& end) {
+	return (end.x - start.x) / (end.y - start.y);
+}
+
+
+float Device::Clamp(float value, float min, float max) {
+	return std::fmax(min, std::fmin(value, max));
+}
+
+
+float Device::Interpolate(float min, float max, float gradient) {
+	return min + (max - min) * Clamp(gradient);
+}
