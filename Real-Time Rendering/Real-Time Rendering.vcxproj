@@ -168,6 +168,7 @@ copy "$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform)\Real-Time-Renderi
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="DebugTools.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -175,6 +176,7 @@ copy "$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform)\Real-Time-Renderi
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="DebugTools.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="Exports.h" />
     <ClInclude Include="Mesh.h" />

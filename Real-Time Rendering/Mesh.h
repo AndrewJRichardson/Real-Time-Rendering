@@ -28,7 +28,7 @@ public:
 	float rot = 0.0f;
 
 	//Constructors
-	REALTIME_API Mesh(std::string name, int vertCount, int faceCount);
+	REALTIME_API Mesh(const std::string& name, int vertCount, int faceCount);
 	REALTIME_API ~Mesh();
 };
 

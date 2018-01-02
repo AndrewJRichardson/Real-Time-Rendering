@@ -1,6 +1,7 @@
 #include "Mesh.h"
 
-Mesh::Mesh(std::string name, int vertCount, int faceCount) {
+
+Mesh::Mesh(const std::string& name, int vertCount, int faceCount) {
 	this->name = name;
 	vertices = new glm::vec3[vertCount];
 	faces = new Face[faceCount];

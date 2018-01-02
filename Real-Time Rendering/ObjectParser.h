@@ -21,9 +21,8 @@ public:
 	REALTIME_API ObjectParser();
 	REALTIME_API ~ObjectParser();
 
-
 	//Methods
-	REALTIME_API void ParseFile(std::string, Mesh**);
+	REALTIME_API void ParseFile(std::string file, Mesh** mesh);
 
 };
 

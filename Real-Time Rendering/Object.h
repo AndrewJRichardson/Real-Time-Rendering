@@ -6,9 +6,9 @@
 class Object
 {
 public:
-	const Mesh* mesh;
+	const Mesh& mesh;
 	glm::vec3 position;
-	REALTIME_API Object(Mesh* mesh, glm::vec3 pos);
+	REALTIME_API Object(Mesh& mesh, glm::vec3 pos);
 	REALTIME_API ~Object();
 };
 

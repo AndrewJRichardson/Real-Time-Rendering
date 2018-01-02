@@ -47,13 +47,13 @@ int main(int argc, char* args[]) {
 	SDL_Surface* textSurface = NULL;
 
 	//Load a mesh from a .obj file
-	Mesh* m = NULL;
 	ObjectParser p = ObjectParser();
+	Mesh* m = nullptr;
 	p.ParseFile("Suz.obj", &m);
 
 	//Create an object, object allows a single mesh to be reused
-	Object objA = Object(m, glm::vec3(0, 0, 0));
-	Object objB = Object(m, glm::vec3(10, 0, -10));
+	Object objA = Object(*m, glm::vec3(0, 0, 0));
+	Object objB = Object(*m, glm::vec3(10, 0, -10));
 
 
 	//Attempt to init the video component of SDL and print an error if it fails
@@ -80,7 +80,7 @@ int main(int argc, char* args[]) {
 			//TODO: Replace function pointer with functors?
 			//TODO: Better name for device?
 			//Create a device to handle the rendering
-			Device device = Device(windowSurface);
+			Device device = Device(*windowSurface);
 			device.currentRenderMode = &Device::RenderPoints;
 			
 			bool quit = false;
@@ -167,6 +167,7 @@ int main(int argc, char* args[]) {
 				//Update the window with changes
 				renderText("FPS: " + std::to_string(fpsCounter()), font, &textSurface, foregroundColor, backgroundColor);
 				SDL_BlitSurface(textSurface, NULL, windowSurface, &textLocation);
+				SDL_FreeSurface(textSurface);
 				SDL_UpdateWindowSurface(window);
 
 				SDL_Delay(delay);
@@ -225,6 +226,7 @@ bool loadMedia(SDL_Surface** surface) {
 
 void renderText(std::string text, TTF_Font* font, SDL_Surface** surface, SDL_Color textColour, SDL_Color backgroundColour) {
 	*surface = TTF_RenderText_Shaded(font, text.c_str(), textColour, backgroundColour);
+	
 }
 
 
