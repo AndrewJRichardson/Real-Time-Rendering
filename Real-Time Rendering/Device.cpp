@@ -1,98 +1,96 @@
-#include "Device.h"
 #include <iostream>
+#include <thread>
 
-#include <chrono>
-
+#include "Device.h"
 
 
 //Constructors
-Device::Device(SDL_Surface& surface) : buffer(surface) {
-	colourFlip = true;
-	bufferHeight = buffer.h;
-	bufferWidth = buffer.w;
-	halfWidth = bufferWidth / 2;
-	halfHeight = bufferHeight / 2;
-	screenSize = bufferHeight * bufferWidth;
-	zBuffer = new float[screenSize];
-	zBufferSize = screenSize;
+rtr::Device::Device(SDL_Surface& surface) : buffer(surface) {
+	colourFlip        = true;
+	bufferHeight      = buffer.h;
+	bufferWidth       = buffer.w;
+	halfWidth         = bufferWidth / 2;
+	halfHeight        = bufferHeight / 2;
+	screenSize        = bufferHeight * bufferWidth;
+	zBuffer           = new float[screenSize];
+	zBufferSize       = screenSize;
+	debugTool         = {};
 	perspectiveMatrix = glm::perspective(glm::radians(90.f), (float)bufferWidth / bufferHeight, 1.f, 100.0f);
-
-	debugTool = {};
 }
 
+
+rtr::Device::Device(const Device&& device): buffer(device.buffer) {
+	colourFlip        = device.colourFlip;
+	bufferHeight      = device.bufferHeight;
+	bufferWidth       = device.bufferWidth;
+	halfWidth         = device.halfWidth;
+	halfHeight        = device.halfHeight;
+	screenSize        = device.screenSize;
+	zBufferSize       = device.zBufferSize;
+	perspectiveMatrix = device.perspectiveMatrix;
+	debugTool         = device.debugTool;
+}
+
+
+rtr::Device::Device(const Device& device) : buffer(device.buffer) {
+	std::cout << "copy called" << std::endl;
+}
+
+
 //Destructors
-Device::~Device() {
+rtr::Device::~Device() {
 	delete[] zBuffer;
 }
 
 
 //Methods
-
 //Creates a transform matrix and calls the currently set render mode
-void Device::Render(const Object& object) {
-	debugTool.StartTimeMeasure();
-
-	glm::mat4 modelMatrix = glm::translate(glm::mat4(), object.mesh.position);
-	glm::mat4 transformMatrix = perspectiveMatrix * viewMatrix * modelMatrix;
-
-	debugTool.EndTimeMeasure("Render prep");
-
-
+void rtr::Device::Render(const Object& object) {
+	glm::mat4 modelMatrix      = glm::translate(glm::mat4(), object.mesh.position);
+	glm::mat4 transformMatrix  = perspectiveMatrix * viewMatrix * modelMatrix;
 	(this->*currentRenderMode) (object, transformMatrix);
-
-
 }
 
-//Clears the buffer and recreates the viewMatrix
-void Device::Clear(const Camera& camera) {
-	debugTool.StartTimeMeasure();
 
-	SDL_FillRect(&buffer, NULL, SDL_MapRGB(buffer.format, 0x00, 0x00, 0x00));
-	std::fill(zBuffer, zBuffer + zBufferSize, 3000);
+//Clears the buffer and recreates the viewMatrix
+void rtr::Device::Clear(const Camera& camera) {
+	std::fill    (zBuffer, zBuffer + zBufferSize, 3000);
+	SDL_FillRect (&buffer, NULL, SDL_MapRGB(buffer.format, 0x00, 0x00, 0x00));
+
 	colourFlip = false;
 	viewMatrix = camera.LookAt();
-
-	debugTool.EndTimeMeasure("Clear");
 }
 
 
 //Used by Drawpoint to draw into the buffer
 //TODO: Remove?
-void Device::ChangePixel(int index, Uint32 colour) {
-	//int index = (x + y * bufferWidth);
-	//Uint32* pixels =
+void rtr::Device::ChangePixel(int index, Uint32 colour) {
 	*((Uint32*)buffer.pixels + index) = colour;
-
-	//*pixels = colour;
 }
 
 
 //Draws a pixel onto the device buffer
-void Device::DrawPoint(const glm::vec3& point, int r, int g, int b) {
+void rtr::Device::DrawPoint(const glm::vec3& point, int r, int g, int b) {
 	
 	if (point.x >= 0 && point.y >= 0 && point.x < bufferWidth && point.y < bufferHeight-1) {
-
 		int index = ((int)point.x + ((int)point.y * bufferWidth));
-
-		if (zBuffer[index] < point.z)
-		{
+		if (zBuffer[index] < point.z) {
 			return;
 		}
 		zBuffer[index] = point.z;
-
 		ChangePixel(index, SDL_MapRGB(buffer.format, r, g, b));
 	}
 }
 
 
 //Projects a vertices into world space and then into clip space
-glm::vec3 Device::Project(const glm::vec3& vert, const glm::mat4& transform) {
+glm::vec3 rtr::Device::Project(const glm::vec3& vert, const glm::mat4& transform) {
 
 	glm::vec4 projected = transform * glm::vec4(vert, 1);
 	projected.x /= -projected.w;
 	projected.y /= -projected.w;
 
-	projected.x = (projected.x * bufferWidth + halfWidth);
+	projected.x = (projected.x * bufferWidth  + halfWidth);
 	projected.y = (projected.y * bufferHeight + halfHeight);
 
 	return projected;
@@ -100,7 +98,7 @@ glm::vec3 Device::Project(const glm::vec3& vert, const glm::mat4& transform) {
 
 
 //Renders each vertex as a single pixel
-void Device::RenderPoints(const Object& object, const glm::mat4& transformMatrix) {
+void rtr::Device::RenderPoints(const Object& object, const glm::mat4& transformMatrix) {
 	for (int i = 0; i < object.mesh.vertCount; i++) {
 		glm::vec3 project = Project(object.mesh.vertices[i], transformMatrix);
 
@@ -112,7 +110,7 @@ void Device::RenderPoints(const Object& object, const glm::mat4& transformMatrix
 
 
 //Draws filled triangles using the scan line method
-void Device::DrawScanLine(const int currentY, const glm::vec3 pointA, const glm::vec3 pointB, const glm::vec3 pointC, const glm::vec3 pointD, int r, int g, int b) {
+void rtr::Device::DrawScanLine(const int currentY, const glm::vec3 pointA, const glm::vec3 pointB, const glm::vec3 pointC, const glm::vec3 pointD, int r, int g, int b) {
 	float gradientA = pointA.y != pointB.y ? (currentY - pointA.y) / (pointB.y - pointA.y) : 1;
 	float gradientB = pointC.y != pointD.y ? (currentY - pointC.y) / (pointD.y - pointC.y) : 1;
 
@@ -122,11 +120,9 @@ void Device::DrawScanLine(const int currentY, const glm::vec3 pointA, const glm:
 	float z1 = Interpolate(pointA.z, pointB.z, gradientA);
 	float z2 = Interpolate(pointC.z, pointD.z, gradientB);
 
-
 	for (int x = sx; x < ex; x++) {
 
 		float gradient = (x - sx) / (float)(ex - sx);
-
 		float z = Interpolate(z1, z2, gradient);
 		DrawPoint(glm::vec3(x, currentY, z), r, g, b);
 	}
@@ -134,7 +130,7 @@ void Device::DrawScanLine(const int currentY, const glm::vec3 pointA, const glm:
 
 
 //Draws triangles as wireframes
-void Device::RenderWireframes(const Object& object, const glm::mat4& transformMatrix) {
+void rtr::Device::RenderWireframes(const Object& object, const glm::mat4& transformMatrix) {
 	for (int i = 0; i < object.mesh.faceCount; i++) {
 		glm::vec3 point1 = Project(object.mesh.vertices[object.mesh.faces[i].a], transformMatrix);
 		glm::vec3 point2 = Project(object.mesh.vertices[object.mesh.faces[i].b], transformMatrix);
@@ -155,7 +151,7 @@ void Device::RenderWireframes(const Object& object, const glm::mat4& transformMa
 
 
 //Draws filled triangles
-void Device::RenderFill(const Object& object, const glm::mat4& transformMatrix) {
+void rtr::Device::RenderFill(const Object& object, const glm::mat4& transformMatrix) {
 	for (int i = 0; i < object.mesh.faceCount; i++) {
 
 		glm::vec3 vert1 = object.mesh.vertices[object.mesh.faces[i].a];
@@ -174,7 +170,7 @@ void Device::RenderFill(const Object& object, const glm::mat4& transformMatrix) 
 
 
 //Draws lines using the middle point method
-void Device::DrawLine(const glm::vec3& start, const glm::vec3& end) {
+void rtr::Device::DrawLine(const glm::vec3& start, const glm::vec3& end) {
 	glm::vec3 distance = end - start;
 
 	if (glm::length(distance) < 2) {
@@ -190,7 +186,7 @@ void Device::DrawLine(const glm::vec3& start, const glm::vec3& end) {
 
 
 //Draws filled triangles using the draw scanline method
-void Device::DrawTriangle(glm::vec3& pointA, glm::vec3& pointB, glm::vec3& pointC) {
+void rtr::Device::DrawTriangle(glm::vec3& pointA, glm::vec3& pointB, glm::vec3& pointC) {
 
 	int r, g, b;
 	if (colourFlip) {
@@ -226,20 +222,17 @@ void Device::DrawTriangle(glm::vec3& pointA, glm::vec3& pointB, glm::vec3& point
 
 	if (pointB.y - pointA.y > 0) {
 		invAB = InverseSlope(pointA, pointB);
-	}
-	else {
+	} else {
 		invAB = 0;
 	}
 
 	if (pointC.y - pointA.y > 0) {
 		invAC = InverseSlope(pointA, pointC);
-	}
-	else {
+	} else {
 		invAC = 0;
 	}
 
-	bool right = false;
-	bool left = false;
+	bool right = false, left = false;
 
 	if (pointB.y - pointA.y > 0) {
 		invAB = InverseSlope(pointA, pointB);
@@ -250,8 +243,6 @@ void Device::DrawTriangle(glm::vec3& pointA, glm::vec3& pointB, glm::vec3& point
 	else {
 		left = true;
 	}
-
-	debugTool.StartTimeMeasure();
 
 	if (right || (!left && invAB > invAC)) {
 		for (int y = (int)pointA.y; y <= (int)pointC.y; y++) {
@@ -274,15 +265,13 @@ void Device::DrawTriangle(glm::vec3& pointA, glm::vec3& pointB, glm::vec3& point
 		}
 	}
 
-	debugTool.EndTimeMeasure("Draw triangle");
 	colourFlip = !colourFlip;
-
 }
 
-void Device::DrawLineBresenham(const glm::vec3& start, const glm::vec3& end) {
+void rtr::Device::DrawLineBresenham(const glm::vec3& start, const glm::vec3& end) {
 
-	int x = (int)start.x; //Store both values of both vectors
-	int y = (int)start.y; //so we don't have to cast them repeatedly in the following loop 
+	int x  = (int)start.x; //Store both values of both vectors
+	int y  = (int)start.y; //so we don't have to cast them repeatedly in the following loop 
 	int ex = (int)end.x;
 	int ey = (int)end.y;
 
@@ -334,21 +323,21 @@ void Device::DrawLineBresenham(const glm::vec3& start, const glm::vec3& end) {
 }
 
 
-float Device::Slope(const glm::vec3& start, const glm::vec3& end) {
+float rtr::Device::Slope(const glm::vec3& start, const glm::vec3& end) {
 	return (end.y - start.y) / (end.x - end.y);
 }
 
 
-float Device::InverseSlope(const glm::vec3& start, const glm::vec3& end) {
+float rtr::Device::InverseSlope(const glm::vec3& start, const glm::vec3& end) {
 	return (end.x - start.x) / (end.y - start.y);
 }
 
 
-float Device::Clamp(float value, float min, float max) {
+float rtr::Device::Clamp(float value, float min, float max) {
 	return std::fmax(min, std::fmin(value, max));
 }
 
 
-float Device::Interpolate(float min, float max, float gradient) {
+float rtr::Device::Interpolate(float min, float max, float gradient) {
 	return min + (max - min) * Clamp(gradient);
 }

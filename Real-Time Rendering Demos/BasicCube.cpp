@@ -15,17 +15,18 @@
 #include "ObjectParser.h"
 
 
+using namespace rtr;
 
-//Globals, TODO: remove, globals are bad
-const int SCREEN_WIDTH = 800;
+//Globals, TODO: remove if possible, globals are bad
+const int SCREEN_WIDTH  = 800;
 const int SCREEN_HEIGHT = 600;
 
 
-bool init(SDL_Window** window, SDL_Surface** windowSurface);
-bool loadMedia(SDL_Surface** surface);
-void close(SDL_Window** window);
-int  fpsCounter();
-void renderText(std::string text, TTF_Font* font, SDL_Surface** surface, SDL_Color textColour, SDL_Color backgroundColour);
+bool init       (SDL_Window** window, SDL_Surface** windowSurface);
+bool loadMedia  (SDL_Surface** surface);
+void close      (SDL_Window** window);
+int  fpsCounter ();
+void renderText (std::string text, TTF_Font* font, SDL_Surface** surface, SDL_Color textColour, SDL_Color backgroundColour);
 
 
 
@@ -33,7 +34,7 @@ void renderText(std::string text, TTF_Font* font, SDL_Surface** surface, SDL_Col
 //SDL requires this main signature for multi platform compatibility
 int main(int argc, char* args[]) {
 	
-	const int SCREEN_WIDTH = 800;
+	const int SCREEN_WIDTH  = 800;
 	const int SCREEN_HEIGHT = 600;
 	int delay = 0;
 
@@ -44,11 +45,11 @@ int main(int argc, char* args[]) {
 	//Surfaces that the window will contain
 	//a surface is just an image, it can be drawn to.
 	SDL_Surface* windowSurface = NULL;
-	SDL_Surface* textSurface = NULL;
+	SDL_Surface* textSurface   = NULL;
 
 	//Load a mesh from a .obj file
 	ObjectParser p = ObjectParser();
-	Mesh* m = nullptr;
+	Mesh*        m = nullptr;
 	p.ParseFile("Suz.obj", &m);
 
 	//Create an object, object allows a single mesh to be reused
@@ -61,11 +62,11 @@ int main(int argc, char* args[]) {
 
 		//Init SDL_ttf and some variables so that FPS text can be rendered
 		TTF_Init();
-		TTF_Font* font = TTF_OpenFont("PT_Sans.ttf", 12);
-		SDL_Color foregroundColor = { 255, 255, 255 };
-		SDL_Color backgroundColor = { 0, 0, 0 };
-		SDL_Rect textLocation = { 0, 0, 0, 0 };
-		SDL_Surface* textSurface = NULL;
+		TTF_Font*    font            = TTF_OpenFont("PT_Sans.ttf", 12);
+		SDL_Color    foregroundColor = { 255, 255, 255 };
+		SDL_Color    backgroundColor = { 0, 0, 0 };
+		SDL_Rect     textLocation    = { 0, 0, 0, 0 };
+		SDL_Surface* textSurface     = NULL;
 
 		SDL_SetWindowGrab(window, SDL_TRUE);
 		SDL_SetRelativeMouseMode(SDL_TRUE);
@@ -76,11 +77,14 @@ int main(int argc, char* args[]) {
 
 
 		try {
+			double(*foo)() = []() -> double { std::cout << "This is a lambda" << std::endl; return 2; };
+			double a = foo();
+			std::cout << "the variable from foo() is: " << a << std::endl;
 
 			//TODO: Replace function pointer with functors?
 			//TODO: Better name for device?
 			//Create a device to handle the rendering
-			Device device = Device(*windowSurface);
+			Device device = { *windowSurface };
 			device.currentRenderMode = &Device::RenderPoints;
 			
 			bool quit = false;
@@ -93,6 +97,7 @@ int main(int argc, char* args[]) {
 						quit = true;
 					}
 					else if (event.type == SDL_KEYDOWN) {
+
 						switch (event.key.keysym.sym)
 						{
 
@@ -155,9 +160,7 @@ int main(int argc, char* args[]) {
 					}
 					else if (event.type == SDL_MOUSEMOTION) {
 						camera.Rotate(-event.motion.xrel, event.motion.yrel);
-
 					}
-
 				}
 
 
@@ -210,7 +213,6 @@ bool init(SDL_Window** window, SDL_Surface** windowSurface) {
 }
 
 
-
 bool loadMedia(SDL_Surface** surface) {
 
 	*surface = SDL_LoadBMP("media/hello.bmp");
@@ -226,31 +228,26 @@ bool loadMedia(SDL_Surface** surface) {
 
 void renderText(std::string text, TTF_Font* font, SDL_Surface** surface, SDL_Color textColour, SDL_Color backgroundColour) {
 	*surface = TTF_RenderText_Shaded(font, text.c_str(), textColour, backgroundColour);
-	
 }
 
 
 void close(SDL_Window** window) {
-
-
 	//Destroy the window
 	SDL_DestroyWindow(*window);
 	*window = NULL;
-
-
 	//Quit out of SDL
 	SDL_Quit();
 }
 
 
-
+//TODO: Move to top of file or refactor into funstion somehow
 Uint32 framespersecond{ 0 };
-Uint32 lastFrameTicks{ 0 };
+Uint32 lastFrameTicks { 0 };
 
 int fpsCounter() {
 	Uint32 currentFrameTicks = SDL_GetTicks();
-	Uint32 difference = currentFrameTicks - lastFrameTicks;
-	lastFrameTicks = currentFrameTicks;
+	Uint32 difference        = currentFrameTicks - lastFrameTicks;
+	lastFrameTicks           = currentFrameTicks;
 
 	if (difference != 0) {
 		framespersecond = 1000 / difference;

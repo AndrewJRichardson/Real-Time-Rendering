@@ -1,7 +1,7 @@
 #include "Camera.h"
 
 
-Camera::Camera(glm::vec3 position)
+rtr::Camera::Camera(glm::vec3 position)
 {
 	this->position = position;
 	up = glm::vec3(0, 1, 0);
@@ -11,16 +11,16 @@ Camera::Camera(glm::vec3 position)
 }
 
 
-Camera::~Camera()
+rtr::Camera::~Camera()
 {
 }
 
-glm::mat4 Camera::LookAt() const{
+glm::mat4 rtr::Camera::LookAt() const{
 	return glm::lookAt(position, position - front, up);
 }
 
 
-void Camera::Rotate(float yaw, float pitch) {
+void rtr::Camera::Rotate(float yaw, float pitch) {
 	this->yaw += yaw;
 	this->pitch += pitch;
 
