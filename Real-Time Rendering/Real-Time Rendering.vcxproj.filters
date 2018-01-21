@@ -56,5 +56,8 @@
     <ClInclude Include="DebugTools.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Real-Time-Rendering.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

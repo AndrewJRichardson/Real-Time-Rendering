@@ -16,6 +16,7 @@ rtr::Device::Device(SDL_Surface& surface) : buffer(surface) {
 	zBufferSize       = screenSize;
 	debugTool         = {};
 	perspectiveMatrix = glm::perspective(glm::radians(90.f), (float)bufferWidth / bufferHeight, 1.f, 100.0f);
+	threadLimit       = 4;
 }
 
 
@@ -152,7 +153,27 @@ void rtr::Device::RenderWireframes(const Object& object, const glm::mat4& transf
 
 //Draws filled triangles
 void rtr::Device::RenderFill(const Object& object, const glm::mat4& transformMatrix) {
-	for (int i = 0; i < object.mesh.faceCount; i++) {
+	int facesPerThread = object.mesh.faceCount / threadLimit;
+	int facesRemaining = object.mesh.faceCount % threadLimit;
+
+	std::vector<std::thread> threads(threadLimit);
+	int marker = 0;
+	for (int i = 0; i < threadLimit; i++) {
+
+		if (i == threadLimit - 1) {
+			marker += facesRemaining;
+		}
+		threads[i] = (std::thread(&rtr::Device::RenderTriangle,
+			this, facesPerThread, marker, std::ref(object.mesh), std::ref(transformMatrix)));
+		marker += facesPerThread;
+	}
+
+	//threads[0].join();
+
+	std::for_each(threads.begin(), threads.end(), []( std::thread& t ) { t.join(); });
+
+	
+	/*for (int i = 0; i < object.mesh.faceCount; i++) {
 
 		glm::vec3 vert1 = object.mesh.vertices[object.mesh.faces[i].a];
 		glm::vec3 vert2 = object.mesh.vertices[object.mesh.faces[i].b];
@@ -161,6 +182,24 @@ void rtr::Device::RenderFill(const Object& object, const glm::mat4& transformMat
 		glm::vec3 point1 = Project(vert1, transformMatrix);
 		glm::vec3 point2 = Project(vert2, transformMatrix);
 		glm::vec3 point3 = Project(vert3, transformMatrix);
+
+		if (point1.z > 0 && point2.z > 0 && point3.z > 0) {
+			DrawTriangle(point1, point2, point3);
+		}
+	}*/
+}
+
+void rtr::Device::RenderTriangle(int count, int begin, const Mesh& mesh, const glm::mat4& transformMatrix) {
+	int end = begin + count;
+	for (int i = begin; i < end; i++) {
+
+		/*glm::vec3 vert1 = mesh.vertices[mesh.faces[i].a];
+		glm::vec3 vert2 = mesh.vertices[mesh.faces[i].b];
+		glm::vec3 vert3 = mesh.vertices[mesh.faces[i].c];*/
+
+		glm::vec3 point1 = Project(mesh.vertices[mesh.faces[i].a], transformMatrix);
+		glm::vec3 point2 = Project(mesh.vertices[mesh.faces[i].b], transformMatrix);
+		glm::vec3 point3 = Project(mesh.vertices[mesh.faces[i].c], transformMatrix);
 
 		if (point1.z > 0 && point2.z > 0 && point3.z > 0) {
 			DrawTriangle(point1, point2, point3);
@@ -188,8 +227,8 @@ void rtr::Device::DrawLine(const glm::vec3& start, const glm::vec3& end) {
 //Draws filled triangles using the draw scanline method
 void rtr::Device::DrawTriangle(glm::vec3& pointA, glm::vec3& pointB, glm::vec3& pointC) {
 
-	int r, g, b;
-	if (colourFlip) {
+	int r = 0xFF, g = 0xFF, b = 0xFF;
+/*	if (colourFlip) {
 		r = 0xff;
 		g = 0xff;
 		b = 0xff;
@@ -198,7 +237,7 @@ void rtr::Device::DrawTriangle(glm::vec3& pointA, glm::vec3& pointB, glm::vec3& 
 		r = 0xff;
 		g = 0x00;
 		b = 0x00;
-	}
+	}*/
 
 	if (pointA.y > pointB.y) {
 		glm::vec3 tPoint = pointB;

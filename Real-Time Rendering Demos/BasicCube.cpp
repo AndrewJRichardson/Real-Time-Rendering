@@ -8,32 +8,25 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/quaternion.hpp>
 
-#include "Camera.h"
-#include "Mesh.h"
-#include "Device.h"
-#include "Object.h"
-#include "ObjectParser.h"
-
+#include "Real-Time-Rendering.h"
 
 using namespace rtr;
 
 //Globals, TODO: remove if possible, globals are bad
-const int SCREEN_WIDTH  = 800;
+const int SCREEN_WIDTH	= 800;
 const int SCREEN_HEIGHT = 600;
 
 
-bool init       (SDL_Window** window, SDL_Surface** windowSurface);
-bool loadMedia  (SDL_Surface** surface);
-void close      (SDL_Window** window);
-int  fpsCounter ();
-void renderText (std::string text, TTF_Font* font, SDL_Surface** surface, SDL_Color textColour, SDL_Color backgroundColour);
-
-
-
+bool init				(SDL_Window** window, SDL_Surface** windowSurface);
+bool loadMedia			(SDL_Surface** surface);
+void close				(SDL_Window** window);
+int  fpsCounter			();
+void renderText			(std::string text, TTF_Font* font, SDL_Surface** surface, SDL_Color textColour, SDL_Color backgroundColour);
+void RegisterController (int ContId, SDL_GameController** controller);
 
 //SDL requires this main signature for multi platform compatibility
 int main(int argc, char* args[]) {
-	
+
 	const int SCREEN_WIDTH  = 800;
 	const int SCREEN_HEIGHT = 600;
 	int delay = 0;
@@ -57,19 +50,22 @@ int main(int argc, char* args[]) {
 	Object objB = Object(*m, glm::vec3(10, 0, -10));
 
 
+
 	//Attempt to init the video component of SDL and print an error if it fails
 	if (init(&window, &windowSurface)) {
 
 		//Init SDL_ttf and some variables so that FPS text can be rendered
 		TTF_Init();
-		TTF_Font*    font            = TTF_OpenFont("PT_Sans.ttf", 12);
-		SDL_Color    foregroundColor = { 255, 255, 255 };
-		SDL_Color    backgroundColor = { 0, 0, 0 };
-		SDL_Rect     textLocation    = { 0, 0, 0, 0 };
-		SDL_Surface* textSurface     = NULL;
+		TTF_Font*			font			 = TTF_OpenFont("PT_Sans.ttf", 12);
+		SDL_Color			foregroundColor  = { 255, 255, 255 };
+		SDL_Color			backgroundColor  = { 0, 0, 0 };
+		SDL_Rect			textLocation	 = { 0, 0, 0, 0 };
+		SDL_Surface*		textSurface		 = NULL;
+		SDL_GameController* controller		 = NULL;
+		int					controllerSwitch = 0;
 
-		SDL_SetWindowGrab(window, SDL_TRUE);
-		SDL_SetRelativeMouseMode(SDL_TRUE);
+		SDL_SetWindowGrab		 (window, SDL_TRUE);
+		SDL_SetRelativeMouseMode (SDL_TRUE);
 
 		//Create a camera to view the world with
 		Camera camera = Camera(glm::vec3(0, 0, -10));
@@ -77,24 +73,53 @@ int main(int argc, char* args[]) {
 
 
 		try {
-			double(*foo)() = []() -> double { std::cout << "This is a lambda" << std::endl; return 2; };
-			double a = foo();
-			std::cout << "the variable from foo() is: " << a << std::endl;
-
 			//TODO: Replace function pointer with functors?
 			//TODO: Better name for device?
+
 			//Create a device to handle the rendering
-			Device device = { *windowSurface };
+			Device device			 = { *windowSurface };
 			device.currentRenderMode = &Device::RenderPoints;
-			
+
 			bool quit = false;
 			while (!quit) {
 				device.Clear(camera);
 				SDL_Event event;
-				if (SDL_PollEvent(&event))
+
+				while (SDL_PollEvent(&event))
 				{
 					if (event.type == SDL_QUIT) {
 						quit = true;
+					}
+					else if (event.type == SDL_CONTROLLERDEVICEADDED) {
+						RegisterController(event.cdevice.which, &controller);
+					}
+					else if (event.type == SDL_CONTROLLERBUTTONDOWN) {
+						if (event.cbutton.button == SDL_CONTROLLER_BUTTON_LEFTSHOULDER) {
+							controllerSwitch++;
+
+							switch (controllerSwitch) {
+							case 0:
+								if (device.currentRenderMode != &Device::RenderPoints) {
+									device.currentRenderMode = &Device::RenderPoints;
+									std::cout << "Render Mode: Point" << std::endl;
+								}
+								break;
+							case 1:
+								if (device.currentRenderMode != &Device::RenderWireframes) {
+									device.currentRenderMode = &Device::RenderWireframes;
+									std::cout << "Render Mode: Wireframe" << std::endl;
+								}
+								break;
+							case 2:
+								if (device.currentRenderMode != &Device::RenderFill) {
+									device.currentRenderMode = &Device::RenderFill;
+									std::cout << "Render Mode: Fill" << std::endl;
+								}
+								controllerSwitch = -1;
+								break;
+							}
+						}
+
 					}
 					else if (event.type == SDL_KEYDOWN) {
 
@@ -162,7 +187,23 @@ int main(int argc, char* args[]) {
 						camera.Rotate(-event.motion.xrel, event.motion.yrel);
 					}
 				}
+				if (controller) {
+					Sint16 rX = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_RIGHTX);
+					Sint16 rY = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_RIGHTY);
+					Sint16 lX = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_LEFTX);
+					Sint16 lY = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_LEFTY);
 
+					int deadZone = 3000;
+
+					if (rX > deadZone || rX < -deadZone || rY > deadZone || rY < -deadZone) {
+						camera.Rotate(-rX * 0.00001, rY*0.00001);
+					}
+					if (lY > deadZone || lY < -deadZone) {
+						camera.position += camera.front * (float)(lY * 0.000001);
+					}if (lX > deadZone || lX < -deadZone) {
+						camera.position += glm::cross(camera.front, camera.up) * (float)(lX * 0.000001);
+					}
+				}
 
 				//Tell device to render an object
 				device.Render(objA);
@@ -197,12 +238,12 @@ int main(int argc, char* args[]) {
 bool init(SDL_Window** window, SDL_Surface** windowSurface) {
 
 	//Attempt to init the video component of SDL and print an error if it fails
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER) < 0) {
 		printf("SDL did not init! Error: %s\n", SDL_GetError());
 		return false;
 	}
 	else {
-		*window = SDL_CreateWindow("SDL Test", 300, 300, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		*window = SDL_CreateWindow("SDL Test", 300, 300, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_MAXIMIZED);
 		if (*window == NULL) {
 			printf("SDL window error! Error: %s\n", SDL_GetError());
 			return false;
@@ -242,12 +283,12 @@ void close(SDL_Window** window) {
 
 //TODO: Move to top of file or refactor into funstion somehow
 Uint32 framespersecond{ 0 };
-Uint32 lastFrameTicks { 0 };
+Uint32 lastFrameTicks{ 0 };
 
 int fpsCounter() {
 	Uint32 currentFrameTicks = SDL_GetTicks();
-	Uint32 difference        = currentFrameTicks - lastFrameTicks;
-	lastFrameTicks           = currentFrameTicks;
+	Uint32 difference = currentFrameTicks - lastFrameTicks;
+	lastFrameTicks = currentFrameTicks;
 
 	if (difference != 0) {
 		framespersecond = 1000 / difference;
@@ -258,3 +299,11 @@ int fpsCounter() {
 }
 
 
+void RegisterController(int ContId, SDL_GameController** controller) {
+	if (SDL_IsGameController(ContId)) {
+		*controller = SDL_GameControllerOpen(ContId);
+		if (controller) {
+			std::cout << "Controller Registered" << std::endl;
+		}
+	}
+}

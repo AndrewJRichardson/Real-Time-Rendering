@@ -23,6 +23,7 @@
     <ProjectGuid>{8DF6AFB4-F65B-41D5-8570-DFCC1EF94274}</ProjectGuid>
     <RootNamespace>RealTimeRenderingDemos</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <ProjectName>Real-Time-Rendering-Demos</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

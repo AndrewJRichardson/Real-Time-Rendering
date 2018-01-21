@@ -1,5 +1,5 @@
 #include "ObjectParser.h"
-
+#include <SDL.h>
 
 void ObjectParser::ParseFile(std::string filename, Mesh** mesh) {
 	std::ifstream file;
@@ -67,6 +67,8 @@ void ObjectParser::ParseFile(std::string filename, Mesh** mesh) {
 				int a, b, c;
 				int current = 0;
 				std::string tempLine = line;
+				int r = 0xFF;
+				
 
 				while (current != 4) {
 					pos = tempLine.find(' ');

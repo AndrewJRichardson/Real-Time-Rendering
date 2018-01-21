@@ -7,6 +7,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
+#include <thread>
+#include <algorithm>
 
 #include "Camera.h"
 #include "Mesh.h"
@@ -17,9 +19,7 @@
 namespace rtr {
 
 	class Device {
-
 	public:
-
 		//Members
 		SDL_Surface& buffer;
 		float*       zBuffer;
@@ -33,15 +33,15 @@ namespace rtr {
 		glm::mat4    viewMatrix;
 		glm::mat4    perspectiveMatrix;
 		int          screenSize;
+		int          threadLimit;
+		DebugTools   debugTool;
 
-		DebugTools debugTool;
-
-		//Consructors
+		//Consructors and Destructors
 		REALTIME_API Device  (SDL_Surface& surface);
-		REALTIME_API ~Device ();
 		REALTIME_API Device  (const Device&);
 		REALTIME_API Device  (const Device&& device);
-
+		REALTIME_API ~Device();
+		
 		//Methods
 		REALTIME_API void		Clear(const Camera& camera);
 		REALTIME_API void		ChangePixel(int index, Uint32 colour);
@@ -59,9 +59,8 @@ namespace rtr {
 		REALTIME_API float		Clamp(float value, float min = 0, float max = 1);
 		REALTIME_API void		DrawTriangle(glm::vec3& pointA, glm::vec3& pointB, glm::vec3& pointC);
 		REALTIME_API void		RenderFill(const Object& object, const glm::mat4& transformMatrix);
-
+		REALTIME_API void		RenderTriangle(int count, int start, const Mesh& mesh, const glm::mat4& transformMatrix);
 	};
-
 }
 
 #endif // !DEVICE_H

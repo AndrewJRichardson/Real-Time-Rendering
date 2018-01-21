@@ -8,6 +8,8 @@
 #include <glm/gtc/quaternion.hpp>
 #include <vector>
 
+#include <SDL.h>
+
 
 struct REALTIME_API Face {
 	int a;
