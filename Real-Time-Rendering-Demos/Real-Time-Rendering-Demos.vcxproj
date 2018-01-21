@@ -89,7 +89,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)/Libs/glm/;$(SolutionDir)/Libs/SDL2-2.0.6/include/;$(SolutionDir)/Real-Time Rendering;$(SolutionDir)/Libs/SDL2_ttf-2.0.14/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/Libs/glm/;$(SolutionDir)/Libs/SDL2-2.0.6/include/;$(SolutionDir)/Real-Time-Rendering;$(SolutionDir)/Libs/SDL2_ttf-2.0.14/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -107,7 +107,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)/Libs/glm/;$(SolutionDir)/Libs/SDL2-2.0.6/include/;$(SolutionDir)/Real-Time Rendering;$(SolutionDir)/Libs/SDL2_ttf-2.0.14/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/Libs/glm/;$(SolutionDir)/Libs/SDL2-2.0.6/include/;$(SolutionDir)/Real-Time-Rendering;$(SolutionDir)/Libs/SDL2_ttf-2.0.14/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll" /Y</Command>
@@ -122,7 +122,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)/Libs/glm/;$(SolutionDir)/Libs/SDL2-2.0.6/include/;$(SolutionDir)/Real-Time Rendering;$(SolutionDir)/Libs/SDL2_ttf-2.0.14/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/Libs/glm/;$(SolutionDir)/Libs/SDL2-2.0.6/include/;$(SolutionDir)/Real-Time-Rendering;$(SolutionDir)/Libs/SDL2_ttf-2.0.14/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDIr)Libs\SDL2-2.0.6\Lib\$(Platform);$(SolutionDir)Libs\SDL2_ttf-2.0.14\lib\$(Platform);$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -140,7 +140,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)/Libs/glm/;$(SolutionDir)/Libs/SDL2-2.0.6/include/;$(SolutionDir)/Real-Time Rendering;$(SolutionDir)/Libs/SDL2_ttf-2.0.14/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/Libs/glm/;$(SolutionDir)/Libs/SDL2-2.0.6/include/;$(SolutionDir)/Real-Time-Rendering;$(SolutionDir)/Libs/SDL2_ttf-2.0.14/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -156,7 +156,7 @@
     <ClCompile Include="BasicCube.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Real-Time Rendering\Real-Time Rendering.vcxproj">
+    <ProjectReference Include="..\Real-Time-Rendering\Real-Time-Rendering.vcxproj">
       <Project>{67d65653-17c1-48c1-8951-b731acd7fc5c}</Project>
     </ProjectReference>
   </ItemGroup>

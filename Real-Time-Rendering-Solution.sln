@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Real-Time Rendering", "Real-Time Rendering\Real-Time Rendering.vcxproj", "{67D65653-17C1-48C1-8951-B731ACD7FC5C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Real-Time-Rendering", "Real-Time-Rendering\Real-Time-Rendering.vcxproj", "{67D65653-17C1-48C1-8951-B731ACD7FC5C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Real-Time Rendering Demos", "Real-Time Rendering Demos\Real-Time Rendering Demos.vcxproj", "{8DF6AFB4-F65B-41D5-8570-DFCC1EF94274}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Real-Time-Rendering-Demos", "Real-Time-Rendering-Demos\Real-Time-Rendering-Demos.vcxproj", "{8DF6AFB4-F65B-41D5-8570-DFCC1EF94274}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

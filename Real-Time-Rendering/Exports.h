@@ -6,6 +6,7 @@
 
 #ifndef EXPORTS_H
 
+
 #if defined REALTIME_EXPORTS && !defined STATICLIB
 #define REALTIME_API __declspec(dllexport)
 #elif !defined REALTIME_EXPORTS && !defined STATICLIB

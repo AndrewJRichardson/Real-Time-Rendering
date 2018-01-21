@@ -1,0 +1,7 @@
+{
+    "cmake.generator": "Visual Studio 15 2017 Win64",
+    "cmake.buildDirectory": "${workspaceRoot}/cmakeBuilds",
+    "cmake.configureSettings": {
+        "BUILD_SHARED_LIBS":true
+    },
+}

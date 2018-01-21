@@ -1,12 +1,12 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <stdio.h>
-#include <glm/vec3.hpp>
 #include <math.h>
 #include <string>
 #include <iostream>
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/quaternion.hpp>
+#include <glm/vec3.hpp>
 
 #include "Real-Time-Rendering.h"
 
@@ -43,7 +43,7 @@ int main(int argc, char* args[]) {
 	//Load a mesh from a .obj file
 	ObjectParser p = ObjectParser();
 	Mesh*        m = nullptr;
-	p.ParseFile("Suz.obj", &m);
+	p.ParseFile("resources/Suz.obj", &m);
 
 	//Create an object, object allows a single mesh to be reused
 	Object objA = Object(*m, glm::vec3(0, 0, 0));
@@ -56,7 +56,7 @@ int main(int argc, char* args[]) {
 
 		//Init SDL_ttf and some variables so that FPS text can be rendered
 		TTF_Init();
-		TTF_Font*			font			 = TTF_OpenFont("PT_Sans.ttf", 12);
+		TTF_Font*			font			 = TTF_OpenFont("resources/PT_Sans.ttf", 12);
 		SDL_Color			foregroundColor  = { 255, 255, 255 };
 		SDL_Color			backgroundColor  = { 0, 0, 0 };
 		SDL_Rect			textLocation	 = { 0, 0, 0, 0 };
