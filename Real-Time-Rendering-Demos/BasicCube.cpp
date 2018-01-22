@@ -21,7 +21,8 @@ bool init				(SDL_Window** window, SDL_Surface** windowSurface);
 bool loadMedia			(SDL_Surface** surface);
 void close				(SDL_Window** window);
 int  fpsCounter			();
-void renderText			(std::string text, TTF_Font* font, SDL_Surface** surface, SDL_Color textColour, SDL_Color backgroundColour);
+void renderText			(std::string text, TTF_Font* font, SDL_Surface** surface,
+						 SDL_Color textColour, SDL_Color backgroundColour);
 void RegisterController (int ContId, SDL_GameController** controller);
 
 //SDL requires this main signature for multi platform compatibility
@@ -173,10 +174,12 @@ int main(int argc, char* args[]) {
 							camera.position -= glm::cross(camera.front, camera.up) * camSpeed;
 							break;
 						case SDLK_i:
-							camera.position = glm::vec3(camera.position.x, camera.position.y + camSpeed, camera.position.z);
+							camera.position = glm::vec3(camera.position.x, camera.position.y + camSpeed, 
+														camera.position.z);
 							break;
 						case SDLK_k:
-							camera.position = glm::vec3(camera.position.x, camera.position.y - camSpeed, camera.position.z);
+							camera.position = glm::vec3(camera.position.x, camera.position.y - camSpeed,
+														camera.position.z);
 							break;
 
 						default:
@@ -209,7 +212,8 @@ int main(int argc, char* args[]) {
 				device.Render(objA);
 
 				//Update the window with changes
-				renderText("FPS: " + std::to_string(fpsCounter()), font, &textSurface, foregroundColor, backgroundColor);
+				renderText("FPS: " + std::to_string(fpsCounter()), font, &textSurface, foregroundColor,
+						   backgroundColor);
 				SDL_BlitSurface(textSurface, NULL, windowSurface, &textLocation);
 				SDL_FreeSurface(textSurface);
 				SDL_UpdateWindowSurface(window);
@@ -243,7 +247,8 @@ bool init(SDL_Window** window, SDL_Surface** windowSurface) {
 		return false;
 	}
 	else {
-		*window = SDL_CreateWindow("SDL Test", 300, 300, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_MAXIMIZED);
+		*window = SDL_CreateWindow("SDL Test", 300, 300, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN
+                                   | SDL_WINDOW_RESIZABLE | SDL_WINDOW_MAXIMIZED);
 		if (*window == NULL) {
 			printf("SDL window error! Error: %s\n", SDL_GetError());
 			return false;
