@@ -1,4 +1,5 @@
 #ifndef DEVICE_H
+#define DEVICE_H
 
 #include "Exports.h"
 

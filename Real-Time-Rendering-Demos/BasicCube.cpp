@@ -16,7 +16,6 @@ using namespace rtr;
 const int SCREEN_WIDTH	= 800;
 const int SCREEN_HEIGHT = 600;
 
-
 bool init				(SDL_Window** window, SDL_Surface** windowSurface);
 bool loadMedia			(SDL_Surface** surface);
 void close				(SDL_Window** window);
@@ -31,8 +30,8 @@ int main(int argc, char* args[]) {
 	const int SCREEN_WIDTH  = 800;
 	const int SCREEN_HEIGHT = 600;
 	int delay = 0;
-
-
+		
+	
 	//The window to render to
 	SDL_Window* window = NULL;
 
@@ -79,11 +78,15 @@ int main(int argc, char* args[]) {
 
 			//Create a device to handle the rendering
 			Device device			 = { *windowSurface };
-			device.currentRenderMode = &Device::RenderPoints;
 
+
+			//device.currentRenderMode = &Device::RenderPoints;
+
+			Pipeline pipeline= {RasterizeVertex(), Perspective(), device};
 			bool quit = false;
 			while (!quit) {
-				device.Clear(camera);
+				//device.Clear(camera);
+				pipeline.device.Clear(camera);
 				SDL_Event event;
 
 				while (SDL_PollEvent(&event))
@@ -99,23 +102,23 @@ int main(int argc, char* args[]) {
 							controllerSwitch++;
 
 							switch (controllerSwitch) {
-							case 0:
-								if (device.currentRenderMode != &Device::RenderPoints) {
-									device.currentRenderMode = &Device::RenderPoints;
-									std::cout << "Render Mode: Point" << std::endl;
-								}
-								break;
-							case 1:
-								if (device.currentRenderMode != &Device::RenderWireframes) {
-									device.currentRenderMode = &Device::RenderWireframes;
-									std::cout << "Render Mode: Wireframe" << std::endl;
-								}
-								break;
-							case 2:
-								if (device.currentRenderMode != &Device::RenderFill) {
-									device.currentRenderMode = &Device::RenderFill;
-									std::cout << "Render Mode: Fill" << std::endl;
-								}
+							// case 0:
+							// 	if (device.currentRenderMode != &Device::RenderPoints) {
+							// 		device.currentRenderMode = &Device::RenderPoints;
+							// 		std::cout << "Render Mode: Point" << std::endl;
+							// 	}
+							// 	break;
+							// case 1:
+							// 	if (device.currentRenderMode != &Device::RenderWireframes) {
+							// 		device.currentRenderMode = &Device::RenderWireframes;
+							// 		std::cout << "Render Mode: Wireframe" << std::endl;
+							// 	}
+							// 	break;
+							// case 2:
+							// 	if (device.currentRenderMode != &Device::RenderFill) {
+							// 		device.currentRenderMode = &Device::RenderFill;
+							// 		std::cout << "Render Mode: Fill" << std::endl;
+							// 	}
 								controllerSwitch = -1;
 								break;
 							}
@@ -142,23 +145,23 @@ int main(int argc, char* args[]) {
 								std::cout << "Delay: " << delay << std::endl;
 							}
 							break;
-						case SDLK_1:
-							if (device.currentRenderMode != &Device::RenderPoints) {
-								device.currentRenderMode = &Device::RenderPoints;
-								std::cout << "Render Mode: Point" << std::endl;
-							}
-							break;
-						case SDLK_2:
-							if (device.currentRenderMode != &Device::RenderWireframes) {
-								device.currentRenderMode = &Device::RenderWireframes;
-								std::cout << "Render Mode: Wireframe" << std::endl;
-							}
-							break;
-						case SDLK_3:
-							if (device.currentRenderMode != &Device::RenderFill) {
-								device.currentRenderMode = &Device::RenderFill;
-								std::cout << "Render Mode: Fill" << std::endl;
-							}
+						// case SDLK_1:
+						// 	if (device.currentRenderMode != &Device::RenderPoints) {
+						// 		device.currentRenderMode = &Device::RenderPoints;
+						// 		std::cout << "Render Mode: Point" << std::endl;
+						// 	}
+						// 	break;
+						// case SDLK_2:
+						// 	if (device.currentRenderMode != &Device::RenderWireframes) {
+						// 		device.currentRenderMode = &Device::RenderWireframes;
+						// 		std::cout << "Render Mode: Wireframe" << std::endl;
+						// 	}
+						// 	break;
+						// case SDLK_3:
+						// 	if (device.currentRenderMode != &Device::RenderFill) {
+						// 		device.currentRenderMode = &Device::RenderFill;
+						// 		std::cout << "Render Mode: Fill" << std::endl;
+						// 	}
 							break;
 
 						case SDLK_w:
@@ -209,8 +212,8 @@ int main(int argc, char* args[]) {
 				}
 
 				//Tell device to render an object
-				device.Render(objA);
-
+				//device.Render(objA);
+				pipeline.Render(objA);
 				//Update the window with changes
 				renderText("FPS: " + std::to_string(fpsCounter()), font, &textSurface, foregroundColor,
 						   backgroundColor);

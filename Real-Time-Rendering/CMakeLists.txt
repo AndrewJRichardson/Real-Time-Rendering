@@ -5,6 +5,10 @@ set(headers     Device.h;
                 Camera.h;
                 Object.h;
                 Mesh.h;
+                Pipeline.h;
+                Perspective.h;
+                RasterizeVertex.h;
+                Project.h;
                 ObjectParser.h;
                 DebugTools.h;
                 Exports.h)
@@ -12,6 +16,10 @@ set(headers     Device.h;
 set(sourceFiles Device.cpp;
                 Camera.cpp;
                 Object.cpp;
+                Pipeline.cpp;
+                Perspective.cpp;
+                RasterizeVertex.cpp;
+                Project.cpp;
                 Mesh.cpp;
                 ObjectParser.cpp;
                 DebugTools.cpp)

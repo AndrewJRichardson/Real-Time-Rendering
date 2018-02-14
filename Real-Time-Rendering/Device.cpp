@@ -4,6 +4,7 @@
 #include "Device.h"
 
 
+
 //Constructors
 rtr::Device::Device(SDL_Surface& surface) : buffer(surface) {
 	colourFlip        = true;
@@ -56,9 +57,9 @@ void rtr::Device::Render(const Object& object) {
 //Clears the buffer and recreates the viewMatrix
 void rtr::Device::Clear(const Camera& camera) {
 	std::fill    (zBuffer, zBuffer + zBufferSize, 3000);
-	SDL_FillRect (&buffer, NULL, SDL_MapRGB(buffer.format, 0x00, 0x00, 0x00));
+	//SDL_FillRect (&buffer, NULL, SDL_MapRGB(buffer.format, 0x00, 0x00, 0x00));
 
-	colourFlip = false;
+	//colourFlip = false;
 	viewMatrix = camera.LookAt();
 }
 
@@ -79,6 +80,8 @@ void rtr::Device::DrawPoint(const glm::vec3& point, int r, int g, int b) {
 			return;
 		}
 		zBuffer[index] = point.z;
+
+		//*((Uint32*)buffer.pixels + index) = SDL_MapRGB(buffer.format, r, g, b);
 		ChangePixel(index, SDL_MapRGB(buffer.format, r, g, b));
 	}
 }
@@ -93,7 +96,7 @@ glm::vec3 rtr::Device::Project(const glm::vec3& vert, const glm::mat4& transform
 
 	projected.x = (projected.x * bufferWidth  + halfWidth);
 	projected.y = (projected.y * bufferHeight + halfHeight);
-
+	
 	return projected;
 }
 

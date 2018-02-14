@@ -8,5 +8,10 @@
 #include "Mesh.h"
 #include "Object.h"
 #include "ObjectParser.h"
+#include "Pipeline.h"
+#include "RasterizerMode.h"
+#include "RasterizeVertex.h"
+#include "ViewMode.h"
+#include "Perspective.h"
 
 #endif // !REALTIME_RENDERING_H
