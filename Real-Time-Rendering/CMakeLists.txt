@@ -6,9 +6,10 @@ set(headers     Device.h;
                 Object.h;
                 Mesh.h;
                 Pipeline.h;
-                Perspective.h;
+                ViewPerspective.h;
+                ViewOrthogonal.h;
                 RasterizeVertex.h;
-                Project.h;
+                RasterizeWireframe.h;
                 ObjectParser.h;
                 DebugTools.h;
                 Exports.h)
@@ -17,9 +18,10 @@ set(sourceFiles Device.cpp;
                 Camera.cpp;
                 Object.cpp;
                 Pipeline.cpp;
-                Perspective.cpp;
+                ViewPerspective.cpp;
+                ViewOrthogonal.cpp;
                 RasterizeVertex.cpp;
-                Project.cpp;
+                RasterizeWireframe.cpp;
                 Mesh.cpp;
                 ObjectParser.cpp;
                 DebugTools.cpp)

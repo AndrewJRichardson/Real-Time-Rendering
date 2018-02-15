@@ -8,7 +8,7 @@ namespace rtr{
 
     class ViewMode {
         public:
-        REALTIME_API virtual glm::vec3 operator()(glm::vec4& vert) = 0;
+        REALTIME_API virtual glm::vec3 operator()(glm::vec3& vert) const = 0;
     };
 
 }

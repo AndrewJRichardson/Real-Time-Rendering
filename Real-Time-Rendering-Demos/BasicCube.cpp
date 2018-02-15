@@ -82,7 +82,7 @@ int main(int argc, char* args[]) {
 
 			//device.currentRenderMode = &Device::RenderPoints;
 
-			Pipeline pipeline= {RasterizeVertex(), Perspective(), device};
+			Pipeline pipeline = {RasterizeWireframe(), ViewOrthogonal(), device};
 			bool quit = false;
 			while (!quit) {
 				//device.Clear(camera);

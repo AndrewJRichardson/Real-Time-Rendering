@@ -11,7 +11,9 @@
 #include "Pipeline.h"
 #include "RasterizerMode.h"
 #include "RasterizeVertex.h"
+#include "RasterizeWireframe.h"
 #include "ViewMode.h"
-#include "Perspective.h"
+#include "ViewPerspective.h"
+#include "ViewOrthogonal.h"
 
 #endif // !REALTIME_RENDERING_H

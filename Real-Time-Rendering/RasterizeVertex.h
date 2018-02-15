@@ -2,7 +2,6 @@
 #define RASTERIZEVERTEX_H
 
 #include "RasterizerMode.h"
-#include "Project.h"
 #include <glm/glm.hpp>
 
 namespace rtr {
@@ -10,10 +9,15 @@ namespace rtr {
 class RasterizeVertex : public RasterizerMode {
 
     private:
-    REALTIME_API void DrawVertex(Device&, glm::vec3& vert) const;
+    REALTIME_API void DrawVertex(Device&, const Object&, const ViewMode&,
+                                 const glm::mat4&) const;
+
     public:
-    REALTIME_API void operator()(Device&, glm::vec3& vert) const;
+    REALTIME_API void operator()(Device&, const Object&, const ViewMode&,
+                                 const glm::mat4&) const;
 };
 
 }
+
+
 #endif

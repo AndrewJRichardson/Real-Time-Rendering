@@ -5,7 +5,6 @@
 #include "RasterizerMode.h"
 #include "ViewMode.h"
 #include "Device.h"
-#include "Project.h"
 #include "Object.h"
 
 namespace rtr {
@@ -13,13 +12,12 @@ namespace rtr {
 class Pipeline {
 
     private:
-    RasterizerMode&  rasterizer;
-    ViewMode&        viewmode;
-    Project&         project;
+    const RasterizerMode&  rasterizer;
+    const ViewMode&        viewmode;
 
     public:
     Device&          device;
-    REALTIME_API Pipeline(RasterizerMode&, ViewMode&,
+    REALTIME_API Pipeline(const RasterizerMode&, const ViewMode&,
                           Device& device);
     //REALTIME_API ~Pipeline();
     REALTIME_API void Render(const Object&);

@@ -46,6 +46,7 @@ rtr::Device::~Device() {
 
 
 //Methods
+//TODO: Should be removable once pipeline is finished
 //Creates a transform matrix and calls the currently set render mode
 void rtr::Device::Render(const Object& object) {
 	glm::mat4 modelMatrix      = glm::translate(glm::mat4(), object.mesh.position);
@@ -64,12 +65,6 @@ void rtr::Device::Clear(const Camera& camera) {
 }
 
 
-//Used by Drawpoint to draw into the buffer
-//TODO: Remove?
-void rtr::Device::ChangePixel(int index, Uint32 colour) {
-	*((Uint32*)buffer.pixels + index) = colour;
-}
-
 
 //Draws a pixel onto the device buffer
 void rtr::Device::DrawPoint(const glm::vec3& point, int r, int g, int b) {
@@ -81,32 +76,23 @@ void rtr::Device::DrawPoint(const glm::vec3& point, int r, int g, int b) {
 		}
 		zBuffer[index] = point.z;
 
-		//*((Uint32*)buffer.pixels + index) = SDL_MapRGB(buffer.format, r, g, b);
-		ChangePixel(index, SDL_MapRGB(buffer.format, r, g, b));
+		*((Uint32*)buffer.pixels + index) = SDL_MapRGB(buffer.format, r, g, b);
 	}
 }
 
-
-//Projects a vertices into world space and then into clip space
-glm::vec4 rtr::Device::Project(const glm::vec3& vert, const glm::mat4& transform) {
-
-	glm::vec4 projected = transform * glm::vec4(vert, 1);
-	//projected.x /= -projected.w;
-	//projected.y /= -projected.w;
-
-	//projected.x = (projected.x * bufferWidth  + halfWidth);
-	//projected.y = (projected.y * bufferHeight + halfHeight);
-	
-	return projected;
+//Projects a vertices into clip space
+glm::vec3 rtr::Device::Project(const glm::vec3& vert, const glm::mat4& transform) {
+	return transform * glm::vec4(vert, 1);
 }
 
+//Takes clip space coords and maps them to screen space
 glm::vec3 rtr::Device::MapToScreen(glm::vec3& vert){
 	vert.x = (vert.x * bufferWidth  + halfWidth);
 	vert.y = (vert.y * bufferHeight + halfHeight);
 	return vert;
 }
 
-
+//TODO: remove once pipeline is finished
 //Renders each vertex as a single pixel
 void rtr::Device::RenderPoints(const Object& object, const glm::mat4& transformMatrix) {
 	for (int i = 0; i < object.mesh.vertCount; i++) {
@@ -119,6 +105,7 @@ void rtr::Device::RenderPoints(const Object& object, const glm::mat4& transformM
 }
 
 
+//TODO: remove once pipeline is finished
 //Draws filled triangles using the scan line method
 void rtr::Device::DrawScanLine(const int currentY, const glm::vec3 pointA, const glm::vec3 pointB, const glm::vec3 pointC, const glm::vec3 pointD, int r, int g, int b) {
 	float gradientA = pointA.y != pointB.y ? (currentY - pointA.y) / (pointB.y - pointA.y) : 1;
@@ -139,6 +126,7 @@ void rtr::Device::DrawScanLine(const int currentY, const glm::vec3 pointA, const
 }
 
 
+//TODO: remove once pipeline is finished
 //Draws triangles as wireframes
 void rtr::Device::RenderWireframes(const Object& object, const glm::mat4& transformMatrix) {
 	for (int i = 0; i < object.mesh.faceCount; i++) {
@@ -155,11 +143,11 @@ void rtr::Device::RenderWireframes(const Object& object, const glm::mat4& transf
 		if (point1.z > 0 && point3.z > 0) {
 			DrawLineBresenham(point3, point1);
 		}
-
 	}
 }
 
 
+//TODO: remove once pipeline is finished
 //Draws filled triangles
 void rtr::Device::RenderFill(const Object& object, const glm::mat4& transformMatrix) {
 	int facesPerThread = object.mesh.faceCount / threadLimit;
@@ -198,6 +186,7 @@ void rtr::Device::RenderFill(const Object& object, const glm::mat4& transformMat
 	}*/
 }
 
+//TODO: remove once pipeline is finished
 void rtr::Device::RenderTriangle(int count, int begin, const Mesh& mesh, const glm::mat4& transformMatrix) {
 	int end = begin + count;
 	for (int i = begin; i < end; i++) {
@@ -217,6 +206,7 @@ void rtr::Device::RenderTriangle(int count, int begin, const Mesh& mesh, const g
 }
 
 
+//TODO: remove once pipeline is finished
 //Draws lines using the middle point method
 void rtr::Device::DrawLine(const glm::vec3& start, const glm::vec3& end) {
 	glm::vec3 distance = end - start;
@@ -233,6 +223,7 @@ void rtr::Device::DrawLine(const glm::vec3& start, const glm::vec3& end) {
 }
 
 
+//TODO: remove once pipeline is finished
 //Draws filled triangles using the draw scanline method
 void rtr::Device::DrawTriangle(glm::vec3& pointA, glm::vec3& pointB, glm::vec3& pointC) {
 
@@ -316,6 +307,7 @@ void rtr::Device::DrawTriangle(glm::vec3& pointA, glm::vec3& pointB, glm::vec3& 
 	colourFlip = !colourFlip;
 }
 
+//TODO: remove once pipeline is finished
 void rtr::Device::DrawLineBresenham(const glm::vec3& start, const glm::vec3& end) {
 
 	int x  = (int)start.x; //Store both values of both vectors
@@ -370,7 +362,10 @@ void rtr::Device::DrawLineBresenham(const glm::vec3& start, const glm::vec3& end
 	}
 }
 
-
+//TODO: These math functions may need removing once pipeline is finished, 
+//or possibly moving to a more relevant class if they are used by more than 
+//one rendering method
+//remove unused math functions
 float rtr::Device::Slope(const glm::vec3& start, const glm::vec3& end) {
 	return (end.y - start.y) / (end.x - end.y);
 }
