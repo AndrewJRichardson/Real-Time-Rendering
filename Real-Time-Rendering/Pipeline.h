@@ -13,13 +13,13 @@ namespace rtr {
 class Pipeline {
 
     private:
-    const RasterizerMode&  rasterizer;
-    const ViewMode&        viewmode;
-    const Project&         project;
+    RasterizerMode&  rasterizer;
+    ViewMode&        viewmode;
+    Project&         project;
 
     public:
     Device&          device;
-    REALTIME_API Pipeline(const RasterizerMode&, const ViewMode&,
+    REALTIME_API Pipeline(RasterizerMode&, ViewMode&,
                           Device& device);
     //REALTIME_API ~Pipeline();
     REALTIME_API void Render(const Object&);

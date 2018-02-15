@@ -57,7 +57,7 @@ void rtr::Device::Render(const Object& object) {
 //Clears the buffer and recreates the viewMatrix
 void rtr::Device::Clear(const Camera& camera) {
 	std::fill    (zBuffer, zBuffer + zBufferSize, 3000);
-	//SDL_FillRect (&buffer, NULL, SDL_MapRGB(buffer.format, 0x00, 0x00, 0x00));
+	SDL_FillRect (&buffer, NULL, SDL_MapRGB(buffer.format, 0x00, 0x00, 0x00));
 
 	//colourFlip = false;
 	viewMatrix = camera.LookAt();
@@ -88,16 +88,22 @@ void rtr::Device::DrawPoint(const glm::vec3& point, int r, int g, int b) {
 
 
 //Projects a vertices into world space and then into clip space
-glm::vec3 rtr::Device::Project(const glm::vec3& vert, const glm::mat4& transform) {
+glm::vec4 rtr::Device::Project(const glm::vec3& vert, const glm::mat4& transform) {
 
 	glm::vec4 projected = transform * glm::vec4(vert, 1);
-	projected.x /= -projected.w;
-	projected.y /= -projected.w;
+	//projected.x /= -projected.w;
+	//projected.y /= -projected.w;
 
-	projected.x = (projected.x * bufferWidth  + halfWidth);
-	projected.y = (projected.y * bufferHeight + halfHeight);
+	//projected.x = (projected.x * bufferWidth  + halfWidth);
+	//projected.y = (projected.y * bufferHeight + halfHeight);
 	
 	return projected;
+}
+
+glm::vec3 rtr::Device::MapToScreen(glm::vec3& vert){
+	vert.x = (vert.x * bufferWidth  + halfWidth);
+	vert.y = (vert.y * bufferHeight + halfHeight);
+	return vert;
 }
 
 

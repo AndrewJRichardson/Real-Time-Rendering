@@ -49,7 +49,8 @@ namespace rtr {
 		REALTIME_API void		DrawPoint(const glm::vec3& point, int r, int g, int b);
 		REALTIME_API void		DrawLine(const glm::vec3& start, const glm::vec3& end);
 		REALTIME_API void		DrawLineBresenham(const glm::vec3& start, const glm::vec3& end);
-		REALTIME_API glm::vec3  Project(const glm::vec3& vert, const glm::mat4& transform);
+		REALTIME_API glm::vec4  Project(const glm::vec3& vert, const glm::mat4& transform);
+		REALTIME_API glm::vec3  MapToScreen(glm::vec3& vert);
 		REALTIME_API void		Render(const Object& mesh);
 		REALTIME_API void		RenderPoints(const Object& object, const glm::mat4& transformMatrix);
 		REALTIME_API void		RenderWireframes(const Object& object, const glm::mat4& transformMatrix);

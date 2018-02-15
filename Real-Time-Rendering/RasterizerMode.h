@@ -12,8 +12,7 @@ namespace rtr {
 
     class RasterizerMode {
         public:
-        REALTIME_API virtual void operator()(const Object&, const glm::mat4&,
-                                             Device&, const Project&) const = 0;
+        REALTIME_API virtual void operator()(Device&, glm::vec3&) const = 0;
     }; 
 }
 
