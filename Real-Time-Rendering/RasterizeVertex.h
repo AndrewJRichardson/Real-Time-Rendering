@@ -8,13 +8,9 @@ namespace rtr {
 
 class RasterizeVertex : public RasterizerMode {
 
-    private:
-    REALTIME_API void DrawVertex(Device&, const Object&, const ViewMode&,
-                                 const glm::mat4&) const;
-
     public:
-    REALTIME_API void operator()(Device&, const Object&, const ViewMode&,
-                                 const glm::mat4&) const;
+    REALTIME_API void operator()(glm::vec3&, glm::vec3&, glm::vec3&,
+                                 Device&) const;
 };
 
 }

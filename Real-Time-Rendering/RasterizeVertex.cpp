@@ -1,19 +1,14 @@
 #include "RasterizeVertex.h"
-#include <iostream>
 
-void rtr::RasterizeVertex::operator()(Device& device, const Object& object,
-                                      const ViewMode& viewmode,
-                                      const glm::mat4& transformMatrix) const{
-
-    for (int i = 0; i < object.mesh.vertCount; i++){
-
-        glm::vec3 vert = device.Project(object.mesh.vertices[i],
-                             transformMatrix);
-        vert           = viewmode(vert);
-
-        if (vert.z > 0){
-            vert = device.MapToScreen(vert);
-            device.DrawPoint(vert, 0xff, 0xff, 0xff);
-        }
+void rtr::RasterizeVertex::operator()(glm::vec3& point1, glm::vec3& point2,
+                                      glm::vec3& point3, Device& device) const{
+    if (point1.z >= 0){
+        device.DrawPoint(point1, 0xff, 0xff, 0xff);
+    }
+    if (point2.z >= 0){
+        device.DrawPoint(point2, 0xff, 0xff, 0xff);
+    }
+    if (point3.z >= 0){
+        device.DrawPoint(point3, 0xff, 0xff, 0xff);
     }
 }

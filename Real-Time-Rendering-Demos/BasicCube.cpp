@@ -12,6 +12,7 @@
 
 using namespace rtr;
 
+//TODO: Try to clean up this file if time permits
 //Globals, TODO: remove if possible, globals are bad
 const int SCREEN_WIDTH	= 800;
 const int SCREEN_HEIGHT = 600;
@@ -46,15 +47,15 @@ int main(int argc, char* args[]) {
 	p.ParseFile("resources/Suz.obj", &m);
 
 	//Create an object, object allows a single mesh to be reused
-	Object objA = Object(*m, glm::vec3(0, 0, 0));
-	Object objB = Object(*m, glm::vec3(10, 0, -10));
-
+	VertexShader v = {};
+	Object objA = Object(*m, glm::vec3(0, 0, 0), v);
+	Object objB = Object(*m, glm::vec3(10, 0, -10), v);
 
 
 	//Attempt to init the video component of SDL and print an error if it fails
 	if (init(&window, &windowSurface)) {
 
-		//Init SDL_ttf and some variables so that FPS text can be rendered
+		// Init SDL_ttf and some variables so that FPS text can be rendered
 		TTF_Init();
 		TTF_Font*			font			 = TTF_OpenFont("resources/PT_Sans.ttf", 12);
 		SDL_Color			foregroundColor  = { 255, 255, 255 };
@@ -63,7 +64,7 @@ int main(int argc, char* args[]) {
 		SDL_Surface*		textSurface		 = NULL;
 		SDL_GameController* controller		 = NULL;
 		int					controllerSwitch = 0;
-
+		
 		SDL_SetWindowGrab		 (window, SDL_TRUE);
 		SDL_SetRelativeMouseMode (SDL_TRUE);
 
@@ -79,14 +80,13 @@ int main(int argc, char* args[]) {
 			//Create a device to handle the rendering
 			Device device			 = { *windowSurface };
 
-
 			//device.currentRenderMode = &Device::RenderPoints;
 
-			Pipeline pipeline = {RasterizeWireframe(), ViewOrthogonal(), device};
+			Pipeline* pipeline = new Pipeline {RasterizeFilled(), ViewPerspective(), device};
 			bool quit = false;
 			while (!quit) {
 				//device.Clear(camera);
-				pipeline.device.Clear(camera);
+				(*pipeline).device.Clear(camera);
 				SDL_Event event;
 
 				while (SDL_PollEvent(&event))
@@ -100,7 +100,8 @@ int main(int argc, char* args[]) {
 					else if (event.type == SDL_CONTROLLERBUTTONDOWN) {
 						if (event.cbutton.button == SDL_CONTROLLER_BUTTON_LEFTSHOULDER) {
 							controllerSwitch++;
-
+							
+							//! Fix this once pipeline redesign is finished
 							switch (controllerSwitch) {
 							// case 0:
 							// 	if (device.currentRenderMode != &Device::RenderPoints) {
@@ -145,12 +146,11 @@ int main(int argc, char* args[]) {
 								std::cout << "Delay: " << delay << std::endl;
 							}
 							break;
-						// case SDLK_1:
-						// 	if (device.currentRenderMode != &Device::RenderPoints) {
-						// 		device.currentRenderMode = &Device::RenderPoints;
-						// 		std::cout << "Render Mode: Point" << std::endl;
-						// 	}
-						// 	break;
+						case SDLK_1:
+							delete pipeline;
+							pipeline = new Pipeline{RasterizeVertex{}, ViewPerspective{}, device};
+							// pipeline.rasterizer = RasterizeVertex();
+							break;
 						// case SDLK_2:
 						// 	if (device.currentRenderMode != &Device::RenderWireframes) {
 						// 		device.currentRenderMode = &Device::RenderWireframes;
@@ -162,7 +162,7 @@ int main(int argc, char* args[]) {
 						// 		device.currentRenderMode = &Device::RenderFill;
 						// 		std::cout << "Render Mode: Fill" << std::endl;
 						// 	}
-							break;
+						// 	break;
 
 						case SDLK_w:
 							camera.position -= camSpeed * camera.front;
@@ -213,7 +213,7 @@ int main(int argc, char* args[]) {
 
 				//Tell device to render an object
 				//device.Render(objA);
-				pipeline.Render(objA);
+				pipeline->RenderThreaded(objA);
 				//Update the window with changes
 				renderText("FPS: " + std::to_string(fpsCounter()), font, &textSurface, foregroundColor,
 						   backgroundColor);

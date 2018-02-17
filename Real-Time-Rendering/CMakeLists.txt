@@ -10,6 +10,9 @@ set(headers     Device.h;
                 ViewOrthogonal.h;
                 RasterizeVertex.h;
                 RasterizeWireframe.h;
+                RasterizeFilled.h;
+                VertexProcessor.h;
+                VertexShader.h;
                 ObjectParser.h;
                 DebugTools.h;
                 Exports.h)
@@ -22,6 +25,9 @@ set(sourceFiles Device.cpp;
                 ViewOrthogonal.cpp;
                 RasterizeVertex.cpp;
                 RasterizeWireframe.cpp;
+                RasterizeFilled.cpp;
+                VertexProcessor.cpp;
+                VertexShader.cpp;
                 Mesh.cpp;
                 ObjectParser.cpp;
                 DebugTools.cpp)

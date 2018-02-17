@@ -20,7 +20,7 @@ rtr::Device::Device(SDL_Surface& surface) : buffer(surface) {
 	threadLimit       = 4;
 }
 
-
+//Move constructor
 rtr::Device::Device(const Device&& device): buffer(device.buffer) {
 	colourFlip        = device.colourFlip;
 	bufferHeight      = device.bufferHeight;
@@ -34,9 +34,11 @@ rtr::Device::Device(const Device&& device): buffer(device.buffer) {
 }
 
 
+//TODO implement copy constructor, most copies are elided but just in case
 rtr::Device::Device(const Device& device) : buffer(device.buffer) {
 	std::cout << "copy called" << std::endl;
 }
+
 
 
 //Destructors
@@ -48,11 +50,11 @@ rtr::Device::~Device() {
 //Methods
 //TODO: Should be removable once pipeline is finished
 //Creates a transform matrix and calls the currently set render mode
-void rtr::Device::Render(const Object& object) {
-	glm::mat4 modelMatrix      = glm::translate(glm::mat4(), object.mesh.position);
-	glm::mat4 transformMatrix  = perspectiveMatrix * viewMatrix * modelMatrix;
-	(this->*currentRenderMode) (object, transformMatrix);
-}
+// void rtr::Device::Render(const Object& object) {
+// 	glm::mat4 modelMatrix      = glm::translate(glm::mat4(), object.mesh.position);
+// 	glm::mat4 transformMatrix  = perspectiveMatrix * viewMatrix * modelMatrix;
+// 	(this->*currentRenderMode) (object, transformMatrix);
+// }
 
 
 //Clears the buffer and recreates the viewMatrix
@@ -92,18 +94,6 @@ glm::vec3 rtr::Device::MapToScreen(glm::vec3& vert){
 	return vert;
 }
 
-//TODO: remove once pipeline is finished
-//Renders each vertex as a single pixel
-void rtr::Device::RenderPoints(const Object& object, const glm::mat4& transformMatrix) {
-	for (int i = 0; i < object.mesh.vertCount; i++) {
-		glm::vec3 project = Project(object.mesh.vertices[i], transformMatrix);
-
-		if (project.z > 0) {
-			DrawPoint(project, 0xff, 0xff, 0xff);
-		}
-	}
-}
-
 
 //TODO: remove once pipeline is finished
 //Draws filled triangles using the scan line method
@@ -126,82 +116,11 @@ void rtr::Device::DrawScanLine(const int currentY, const glm::vec3 pointA, const
 }
 
 
-//TODO: remove once pipeline is finished
-//Draws triangles as wireframes
-void rtr::Device::RenderWireframes(const Object& object, const glm::mat4& transformMatrix) {
-	for (int i = 0; i < object.mesh.faceCount; i++) {
-		glm::vec3 point1 = Project(object.mesh.vertices[object.mesh.faces[i].a], transformMatrix);
-		glm::vec3 point2 = Project(object.mesh.vertices[object.mesh.faces[i].b], transformMatrix);
-		glm::vec3 point3 = Project(object.mesh.vertices[object.mesh.faces[i].c], transformMatrix);
 
-		if (point1.z > 0 && point2.z > 0) {
-			DrawLineBresenham(point1, point2);
-		}
-		if (point2.z > 0 && point3.z > 0) {
-			DrawLineBresenham(point2, point3);
-		}
-		if (point1.z > 0 && point3.z > 0) {
-			DrawLineBresenham(point3, point1);
-		}
-	}
-}
-
-
-//TODO: remove once pipeline is finished
-//Draws filled triangles
-void rtr::Device::RenderFill(const Object& object, const glm::mat4& transformMatrix) {
-	int facesPerThread = object.mesh.faceCount / threadLimit;
-	int facesRemaining = object.mesh.faceCount % threadLimit;
-
-	std::vector<std::thread> threads(threadLimit);
-	int marker = 0;
-	for (int i = 0; i < threadLimit; i++) {
-
-		if (i == threadLimit - 1) {
-			marker += facesRemaining;
-		}
-		threads[i] = (std::thread(&rtr::Device::RenderTriangle,
-			this, facesPerThread, marker, std::ref(object.mesh), std::ref(transformMatrix)));
-		marker += facesPerThread;
-	}
-
-	//threads[0].join();
-
-	std::for_each(threads.begin(), threads.end(), []( std::thread& t ) { t.join(); });
-
-	
-	/*for (int i = 0; i < object.mesh.faceCount; i++) {
-
-		glm::vec3 vert1 = object.mesh.vertices[object.mesh.faces[i].a];
-		glm::vec3 vert2 = object.mesh.vertices[object.mesh.faces[i].b];
-		glm::vec3 vert3 = object.mesh.vertices[object.mesh.faces[i].c];
-
-		glm::vec3 point1 = Project(vert1, transformMatrix);
-		glm::vec3 point2 = Project(vert2, transformMatrix);
-		glm::vec3 point3 = Project(vert3, transformMatrix);
-
-		if (point1.z > 0 && point2.z > 0 && point3.z > 0) {
-			DrawTriangle(point1, point2, point3);
-		}
-	}*/
-}
-
-//TODO: remove once pipeline is finished
-void rtr::Device::RenderTriangle(int count, int begin, const Mesh& mesh, const glm::mat4& transformMatrix) {
-	int end = begin + count;
-	for (int i = begin; i < end; i++) {
-
-		/*glm::vec3 vert1 = mesh.vertices[mesh.faces[i].a];
-		glm::vec3 vert2 = mesh.vertices[mesh.faces[i].b];
-		glm::vec3 vert3 = mesh.vertices[mesh.faces[i].c];*/
-
-		glm::vec3 point1 = Project(mesh.vertices[mesh.faces[i].a], transformMatrix);
-		glm::vec3 point2 = Project(mesh.vertices[mesh.faces[i].b], transformMatrix);
-		glm::vec3 point3 = Project(mesh.vertices[mesh.faces[i].c], transformMatrix);
-
-		if (point1.z > 0 && point2.z > 0 && point3.z > 0) {
-			DrawTriangle(point1, point2, point3);
-		}
+void rtr::Device::RenderTriangle(glm::vec3& point1, glm::vec3& point2,
+								 glm::vec3& point3) {
+	if (point1.z > 0 && point2.z > 0 && point3.z > 0) {
+		DrawTriangle(point1, point2, point3);
 	}
 }
 

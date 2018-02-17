@@ -1,11 +1,13 @@
 #include "Object.h"
 
 
-Object::Object(Mesh& mesh, glm::vec3 pos) : mesh(mesh) {
+rtr::Object::Object(const Mesh& mesh, glm::vec3 pos,
+					const VertexShader& vertexShader) 
+					: mesh(mesh), vertShader(vertexShader) {
 	position = pos;
 }
 
 
-Object::~Object()
+rtr::Object::~Object()
 {
 }
