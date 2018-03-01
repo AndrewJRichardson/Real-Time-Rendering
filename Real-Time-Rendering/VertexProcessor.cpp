@@ -11,17 +11,19 @@ glm::mat4 rtr::VertexProcessor::CreateMVPMatrix(const Object& object,
 
 void rtr::VertexProcessor::operator()(const Object& object,
                                       const ViewMode& viewmode,
-                                      const RasterizerMode& rasterizer,
+                                      RasterizerMode& rasterizer,
                                       const glm::mat4& transformMatrix,
                                       Device& device,
-                                      glm::vec3& point1,
-                                      glm::vec3& point2,
-                                      glm::vec3& point3) const {
+                                      const Face& face) const {
+
+    glm::vec3 point1 = face.vertSets[0].v; 
+    glm::vec3 point2 = face.vertSets[1].v;
+    glm::vec3 point3 = face.vertSets[2].v;
 
     point1 = device.Project(point1, transformMatrix);
     point2 = device.Project(point2, transformMatrix);
     point3 = device.Project(point3, transformMatrix);
-        
+
     point1 = object.vertShader(point1);
     point2 = object.vertShader(point2);
     point3 = object.vertShader(point3);

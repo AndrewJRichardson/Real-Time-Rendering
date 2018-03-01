@@ -9,7 +9,7 @@ namespace rtr {
 
         public:
         REALTIME_API void operator()(glm::vec3&, glm::vec3&, glm::vec3&,
-                                     Device&) const;
+                                     Device&);
     };
 }
 

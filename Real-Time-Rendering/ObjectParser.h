@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <vector>
 
 #include "Mesh.h"
 
@@ -14,20 +15,20 @@ class ObjectParser
 {
 
 private:
-	void ProcessLine(std::string&);
+    std::vector<glm::vec3> vertStore;
+    std::vector<glm::vec2> textStore;
+    std::vector<glm::vec3> normStore;
 
 public:
-	//Contrustors
-	REALTIME_API ObjectParser();
-	REALTIME_API ~ObjectParser();
+    //Contrustors
+    REALTIME_API ObjectParser();
+    REALTIME_API ~ObjectParser();
 
-	//Methods
-	REALTIME_API void ParseFile(std::string file, Mesh** mesh);
+    //Methods
+    REALTIME_API void ParseFile(std::string file, Mesh** mesh);
+    REALTIME_API void ProcessFaceChunk(std::string&, Face&, int);
 
 };
-
-
-
 
 #endif // !OBJECTPARSER_H
 

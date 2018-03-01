@@ -1,7 +1,7 @@
 #include "Pipeline.h"
 
 
-rtr::Pipeline::Pipeline(const RasterizerMode& rasterizer, 
+rtr::Pipeline::Pipeline(RasterizerMode& rasterizer, 
                         const ViewMode& viewmode,
                         Device& device) : device (device),
                         rasterizer(rasterizer),
@@ -31,12 +31,8 @@ void rtr::Pipeline::RenderThreaded(const Object& object){
        
                 int end = begin + count;
                 for (int i = begin; i < end; i++){
-                    glm::vec3 point1 = mesh.vertices[mesh.faces[i].a];
-                    glm::vec3 point2 = mesh.vertices[mesh.faces[i].b];
-                    glm::vec3 point3 = mesh.vertices[mesh.faces[i].c];
-
                     vertexProcessor(object, viewmode, rasterizer, transformMatrix,
-                                    device, point1, point2, point3);
+                                    device, object.mesh.faces[i]);
                 }
             }, facesPerThread, marker, std::ref(object.mesh)));
 
@@ -50,11 +46,7 @@ void rtr::Pipeline::RenderThreaded(const Object& object){
 void rtr::Pipeline::Render(const Object& object){
     glm::mat4 transformMatrix = vertexProcessor.CreateMVPMatrix(object, device);
     for (int i = 0; i < object.mesh.faceCount; i++){
-            glm::vec3 point1 = object.mesh.vertices[object.mesh.faces[i].a];
-            glm::vec3 point2 = object.mesh.vertices[object.mesh.faces[i].b];
-            glm::vec3 point3 = object.mesh.vertices[object.mesh.faces[i].c];
-
             vertexProcessor(object, viewmode, rasterizer, transformMatrix, 
-                            device, point1, point2, point3);
+                            device, object.mesh.faces[i]);
     }
 }

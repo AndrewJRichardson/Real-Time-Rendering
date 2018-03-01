@@ -47,6 +47,7 @@ namespace rtr {
         REALTIME_API void		Clear(const Camera& camera);
         REALTIME_API void		ChangePixel(int index, Uint32 colour);
         REALTIME_API void		DrawPoint(const glm::vec3& point, int r, int g, int b);
+        REALTIME_API void       DebugDraw(const glm::vec3& point, int r, int g, int b, SDL_Window& window);
         REALTIME_API void		DrawLine(const glm::vec3& start, const glm::vec3& end);
         REALTIME_API void		DrawLineBresenham(const glm::vec3& start, const glm::vec3& end);
         REALTIME_API glm::vec3  Project(const glm::vec3& vert, const glm::mat4& transform);
@@ -55,9 +56,12 @@ namespace rtr {
         // REALTIME_API void		RenderPoints(const Object& object, const glm::mat4& transformMatrix);
         // REALTIME_API void		RenderWireframes(const Object& object, const glm::mat4& transformMatrix);
         REALTIME_API void		DrawScanLine(int currentY, const glm::vec3 pointA, const glm::vec3 pointB, const glm::vec3 pointC, const glm::vec3 pointD, int r, int g, int b);
+        REALTIME_API void       DrawScanLine(int, int, int, float, float, float, int, int, int);
         REALTIME_API float		InverseSlope(const glm::vec3& start, const glm::vec3& end);
         REALTIME_API float		Slope(const glm::vec3& start, const glm::vec3& end);
         REALTIME_API float		Interpolate(float min, float max, float gradient);
+        REALTIME_API float      ZXslope(const glm::vec3& start, const glm::vec3& end);
+        REALTIME_API float      ZYslope(const glm::vec3& start, const glm::vec3& end);
         REALTIME_API float		Clamp(float value, float min = 0, float max = 1);
         // REALTIME_API void		DrawTriangle(glm::vec3& pointA, glm::vec3& pointB, glm::vec3& pointC);
         REALTIME_API void		DrawTriangle(glm::vec3&,glm::vec3&,glm::vec3&);

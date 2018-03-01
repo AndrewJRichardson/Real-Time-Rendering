@@ -18,10 +18,9 @@ namespace rtr {
         public:
         REALTIME_API glm::mat4 CreateMVPMatrix(const Object&, const Device&) const;
         REALTIME_API void      operator()(const Object&, const ViewMode&, 
-                                          const RasterizerMode&,
+                                          RasterizerMode&,
                                           const glm::mat4&,
-                                          Device&, glm::vec3&,
-                                          glm::vec3&, glm::vec3&) const;
+                                          Device&, const Face&) const;
     };
 }
 
