@@ -3,17 +3,17 @@
 //? Decide where to place bresenham method
 //Renders objects in a wireframe mode (a line is drawn between vertexes)
 //Currently uses bresenham line method
-void rtr::RasterizeWireframe::operator()(glm::vec3& point1, glm::vec3& point2,
-                                         glm::vec3& point3, Device& device){
+void rtr::RasterizeWireframe::operator()(FaceVertSet point1, FaceVertSet point2,
+                                         FaceVertSet point3, Device& device){
 
-		if (point1.z >= 0 && point2.z >= 0) {
-			device.DrawLineBresenham(point1, point2);
+		if (point1.v.z >= 0 && point2.v.z >= 0) {
+			device.DrawLineBresenham(point1.v, point2.v);
 		}
-		if (point2.z >= 0 && point3.z >= 0) {
-			device.DrawLineBresenham(point2, point3);
+		if (point2.v.z >= 0 && point3.v.z >= 0) {
+			device.DrawLineBresenham(point2.v, point3.v);
 		}
-		if (point1.z >= 0 && point3.z >= 0) {
-			device.DrawLineBresenham(point3, point1);
+		if (point1.v.z >= 0 && point3.v.z >= 0) {
+			device.DrawLineBresenham(point3.v, point1.v);
 		}
 }
 

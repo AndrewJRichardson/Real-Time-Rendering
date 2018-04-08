@@ -8,7 +8,7 @@ namespace rtr {
     class RasterizeWireframe: public RasterizerMode {
 
         public:
-        REALTIME_API void operator()(glm::vec3&, glm::vec3&, glm::vec3&,
+        REALTIME_API void operator()(FaceVertSet, FaceVertSet, FaceVertSet,
                                      Device&);
     };
 }

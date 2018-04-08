@@ -1,14 +1,14 @@
 #include "RasterizeVertex.h"
 
-void rtr::RasterizeVertex::operator()(glm::vec3& point1, glm::vec3& point2,
-                                      glm::vec3& point3, Device& device){
-    if (point1.z >= 0){
-        device.DrawPoint(point1, 0xff, 0xff, 0xff);
+void rtr::RasterizeVertex::operator()(FaceVertSet point1, FaceVertSet point2,
+                                      FaceVertSet point3, Device& device){
+    if (point1.v.z >= 0){
+        device.DrawPoint(point1.v, 0xff, 0xff, 0xff);
     }
-    if (point2.z >= 0){
-        device.DrawPoint(point2, 0xff, 0xff, 0xff);
+    if (point2.v.z >= 0){
+        device.DrawPoint(point2.v, 0xff, 0xff, 0xff);
     }
-    if (point3.z >= 0){
-        device.DrawPoint(point3, 0xff, 0xff, 0xff);
+    if (point3.v.z >= 0){
+        device.DrawPoint(point3.v, 0xff, 0xff, 0xff);
     }
 }

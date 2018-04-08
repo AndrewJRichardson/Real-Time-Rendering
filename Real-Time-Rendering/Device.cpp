@@ -75,14 +75,11 @@ void rtr::Device::DrawPoint(const glm::vec3& point, int r, int g, int b) {
     
     if (point.x >= 0 && point.y >= 0 && point.x < bufferWidth && point.y < bufferHeight-1) {
         int index = ((int)point.x + ((int)point.y * bufferWidth));
-        if (zBuffer[index] == index)
-            int a = 1;
         if (zBuffer[index] < (int)point.z) {
-        //    return;
+            return;
         }
 
-        // zBuffer[index] = point.z;
-        zBuffer[index] = index;
+         zBuffer[index] = point.z;
         *((Uint32*)buffer.pixels + index) = SDL_MapRGB(buffer.format, (Uint8)r, (Uint8)g, (Uint8)b);
     }
 }
@@ -108,7 +105,8 @@ void rtr::Device::DebugDraw(const glm::vec3& point, int r, int g, int b, SDL_Win
 
 //Projects a vertices into clip space
 glm::vec3 rtr::Device::Project(const glm::vec3& vert, const glm::mat4& transform) {
-    return transform * glm::vec4(vert, 1);
+	glm::vec4 t{ vert, 1 };
+    return transform * t;
 }
 
 //Takes clip space coords and maps them to screen space
@@ -383,7 +381,7 @@ float rtr::Device::ZYslope(const glm::vec3&start, const glm::vec3& end) {
 }
 
 float rtr::Device::Clamp(float value, float min, float max) {
-    return std::fmax(min, std::fmin(value, max));
+    return std::max(min, std::min(value, max));
 }
 
 

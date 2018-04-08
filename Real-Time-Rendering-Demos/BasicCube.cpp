@@ -219,11 +219,11 @@ int main(int argc, char* args[]) {
                 // pipeline->Render(objA);
                 pipeline->Render(objB);
                 //Update the window with changes
-                //renderText("FPS: " + std::to_string(fpsCounter()), font, &textSurface, foregroundColor,
-                //          backgroundColor);
-                //SDL_BlitSurface(textSurface, NULL, windowSurface, &textLocation);
-                //SDL_FreeSurface(textSurface);
-                SDL_BlitSurface(objTex, NULL, windowSurface, &textLocation);
+                renderText("FPS: " + std::to_string(fpsCounter()), font, &textSurface, foregroundColor,
+                         backgroundColor);
+                SDL_BlitSurface(textSurface, NULL, windowSurface, &textLocation);
+                SDL_FreeSurface(textSurface);
+                //SDL_BlitSurface(objTex, NULL, windowSurface, &textLocation);
                 SDL_UpdateWindowSurface(window);
 
                 SDL_Delay(delay);

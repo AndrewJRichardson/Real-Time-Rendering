@@ -60,7 +60,7 @@ void rtr::VertexProcessor::operator()(const Object& object,
     point2.v = device.MapToScreen(point2.v);
     point3.v = device.MapToScreen(point3.v);
 
-    RasterizeTextured r{};
+    //RasterizeTextured r{};
     //r.Render(point1, point2, point3, device, object);
     
     rasterizer(point1, point2, point3, device);
