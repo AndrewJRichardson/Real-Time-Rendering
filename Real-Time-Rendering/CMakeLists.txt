@@ -10,6 +10,7 @@ set(headers     Device.h;
                 ViewOrthogonal.h;
                 RasterizeVertex.h;
                 RasterizeWireframe.h;
+                RasterizeTextured.h;
                 RasterizeFilled.h;
                 VertexProcessor.h;
                 VertexShader.h;
@@ -25,6 +26,7 @@ set(sourceFiles Device.cpp;
                 ViewOrthogonal.cpp;
                 RasterizeVertex.cpp;
                 RasterizeWireframe.cpp;
+                RasterizeTextured.cpp;
                 RasterizeFilled.cpp;
                 VertexProcessor.cpp;
                 VertexShader.cpp;
@@ -33,7 +35,7 @@ set(sourceFiles Device.cpp;
                 DebugTools.cpp)
 
 add_library(Real-Time-Rendering-Lib ${sourceFiles} ${headers})
-target_link_libraries(Real-Time-Rendering-Lib ${SDL2} ${SDL2main})
+target_link_libraries(Real-Time-Rendering-Lib ${SDL2} ${SDL2main} ${SDL2image})
 
 if(BUILD_SHARED_LIBS)
     target_compile_definitions(Real-Time-Rendering-Lib PRIVATE REALTIME_EXPORTS)

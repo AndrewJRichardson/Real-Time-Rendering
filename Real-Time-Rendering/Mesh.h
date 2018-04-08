@@ -10,7 +10,6 @@
 #include <memory>
 #include <iostream>
 
-#include <SDL.h>
 
 // struct REALTIME_API MemCount{
 //     int refcount = 0;
@@ -20,7 +19,6 @@ struct FaceVertSet {
     public:
     glm::vec3 v;
     glm::vec2 vt;
-    glm::vec3 vn;
 };
 
 class Face {
@@ -28,7 +26,9 @@ class Face {
     // MemCount* refCount; 
     public:
     int vertCount;
+    glm::vec3 surfaceNormal;
     FaceVertSet* vertSets;
+
 
     public:
     REALTIME_API Face();

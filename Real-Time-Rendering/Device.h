@@ -23,6 +23,7 @@ namespace rtr {
     public:
         //Members
         SDL_Surface& buffer;
+        Camera&      camera;
         float*       zBuffer;
         int          zBufferSize;
         int          bufferWidth;
@@ -38,15 +39,16 @@ namespace rtr {
         DebugTools   debugTool;
 
         //Consructors and Destructors
-        REALTIME_API Device  (SDL_Surface& surface);
+        REALTIME_API Device  (SDL_Surface& surface, Camera& camera);
         REALTIME_API Device  (const Device&);
         REALTIME_API Device  (const Device&& device);
         REALTIME_API ~Device ();
         
         //Methods
-        REALTIME_API void		Clear(const Camera& camera);
+        REALTIME_API void		Clear();
         REALTIME_API void		ChangePixel(int index, Uint32 colour);
         REALTIME_API void		DrawPoint(const glm::vec3& point, int r, int g, int b);
+        REALTIME_API void		DrawPoint(const glm::vec3& point, Uint8 r, Uint8 g, Uint8 b);
         REALTIME_API void       DebugDraw(const glm::vec3& point, int r, int g, int b, SDL_Window& window);
         REALTIME_API void		DrawLine(const glm::vec3& start, const glm::vec3& end);
         REALTIME_API void		DrawLineBresenham(const glm::vec3& start, const glm::vec3& end);
@@ -68,6 +70,13 @@ namespace rtr {
         // REALTIME_API void		RenderFill(const Object& object, const glm::mat4& transformMatrix);
         // REALTIME_API void		RenderTriangle(int count, int start, const Mesh& mesh, const glm::mat4& transformMatrix);
         REALTIME_API void		RenderTriangle(glm::vec3&, glm::vec3&, glm::vec3&);
+        REALTIME_API void       DrawScanLineTexture(const int currentY, const FaceVertSet&,
+                                                    const FaceVertSet&, const FaceVertSet&,
+                                                    const FaceVertSet&, const Object&);
+        REALTIME_API float      SignedArea(glm::vec3&, glm::vec3&, glm::vec3&);
+        REALTIME_API float      XInterpolant(glm::vec3&, glm::vec3&, glm::vec3&, float, float, float);
+        REALTIME_API float      YInterpolant(glm::vec3&, glm::vec3&, glm::vec3&, float, float, float);
+
     };
 }
 

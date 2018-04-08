@@ -1,14 +1,15 @@
 #include "RasterizeFilled.h"
+#include <cmath>
 
 rtr::RasterizeFilled::RasterizeFilled() {}
 
 rtr::RasterizeFilled::RasterizeFilled(SDL_Window& window) : window (&window){colour = true; c = 0;}
 
 
-void rtr::RasterizeFilled::operator()(glm::vec3& pointA, glm::vec3& pointB,
-                                      glm::vec3& pointC, Device& device) {
+// void rtr::RasterizeFilled::operator()(glm::vec3& pointA, glm::vec3& pointB,
+//                                       glm::vec3& pointC, Device& device) {
     
-    device.RenderTriangle(pointA, pointB, pointC);
+//    device.RenderTriangle(pointA, pointB, pointC);
 // int r = 0x00, g = 0x00, b = 0x00;
 
 // c++;
@@ -179,5 +180,82 @@ void rtr::RasterizeFilled::operator()(glm::vec3& pointA, glm::vec3& pointB,
     //         ACx += invAC;
     //     }
     // }
+// }
+
+void rtr::RasterizeFilled::operator()(FaceVertSet faceA, FaceVertSet faceB,
+                                      FaceVertSet faceC, Device& device) {
+
+    glm::vec3 pointA = faceA.v;
+    glm::vec3 pointB = faceB.v;
+    glm::vec3 pointC = faceC.v;
+    
+     if (pointA.y > pointB.y) {
+        glm::vec3 tPoint = pointB;
+        pointB = pointA;
+        pointA = tPoint;
+    }
+
+    if (pointB.y > pointC.y) {
+        glm::vec3 tPoint = pointC;
+        pointC = pointB;
+        pointB = tPoint;
+    }
+
+    if (pointA.y > pointB.y) {
+        glm::vec3 tPoint = pointB;
+        pointB = pointA;
+        pointA = tPoint;
+    }
+    
+    float invAB = device.InverseSlope(pointA, pointB);
+    float invAC = device.InverseSlope(pointA, pointC);
+    float invBC = device.InverseSlope(pointB, pointC);
+
+    float ABx = pointA.x;
+    float ACx = pointA.x;
+    float BCx = pointB.x;
+    float ABz = pointA.z;
+    float ACz = pointA.z;
+    float BCz = pointB.z;
+
+    glm::vec3 a{1,2,4};
+    glm::vec3 t{2,4,2};
+    glm::vec3 c{0,6,1};
+
+    float testt = device.XInterpolant(a, t, c, a.z, t.z, c.z);
+    float t2    = device.YInterpolant(a, t, c, a.z, t.z, c.z);
+    float zXinc = device.XInterpolant(pointA, pointB, pointC, 
+                            pointA.z, pointB.z, pointC.z);
+    
+    float zTest = device.YInterpolant(pointA, pointB, pointC, pointA.z, pointB.z, pointC.z);
+    float zYinc = -zXinc;
+
+
+    bool leftB = false;
+    if(device.SignedArea(pointA, pointB, pointC) < 0)
+        leftB = true;
+
+    for (int i = (int)pointA.y; i < (int)pointC.y -1 ; i++){
+            if(i < pointB.y - 1){
+                if(leftB){
+                    device.DrawScanLine(i, (int)ABx, (int)ACx, ABz, zXinc, 0, 0xff, 0xff, 0xff);
+                    ABz += zYinc;
+                }else{
+                    device.DrawScanLine(i, (int)ACx, (int)ABx, ACz, -zXinc, 0, 0xff, 0, 0);
+                    ACz += zYinc;
+                }
+                ABx += invAB;
+            }else{
+                if(leftB){
+                    device.DrawScanLine(i, (int)BCx, (int)ACx, BCz, zXinc, 0, 0, 0xff, 0);
+                    BCz += zYinc;
+                }else{
+                    device.DrawScanLine(i, (int)ACx, (int)BCx, ACz, -zXinc, 0, 0, 0, 0xff);
+                    ACz += zYinc;
+                }
+                BCx += invBC;
+            }
+            ACx += invAC;
+    }
 }
 

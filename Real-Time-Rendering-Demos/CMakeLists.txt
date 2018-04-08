@@ -25,7 +25,7 @@ add_custom_command(
 #TODO: Find a cleaner way to do this
 add_custom_command(TARGET Demo POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy
-                   "${CMAKE_SOURCE_DIR}/Libs/SDL2-2.0.6/lib/${ARCHITECTURE}/SDL2.dll"
+                   "${CMAKE_SOURCE_DIR}/Libs/SDL2-2.0.8/lib/${ARCHITECTURE}/SDL2.dll"
                    "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/SDL2.dll")
 
 add_custom_command(TARGET Demo POST_BUILD
@@ -35,13 +35,19 @@ add_custom_command(TARGET Demo POST_BUILD
 
 add_custom_command(TARGET Demo POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy
-                   "${CMAKE_SOURCE_DIR}/Libs/SDL2_ttf-2.0.14/lib/${ARCHITECTURE}/zlib1.dll"
+                   "${CMAKE_SOURCE_DIR}/Libs/SDL2_image-2.0.3/lib/${ARCHITECTURE}/zlib1.dll"
                    "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/zlib1.dll")
 
 add_custom_command(TARGET Demo POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy
                    "${CMAKE_SOURCE_DIR}/Libs/SDL2_ttf-2.0.14/lib/${ARCHITECTURE}/libfreetype-6.dll"
                    "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/libfreetype-6.dll")
+
+add_custom_command(TARGET Demo POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy
+                   "${CMAKE_SOURCE_DIR}/Libs/SDL2_image-2.0.3/lib/${ARCHITECTURE}/SDL2_image.dll"
+                   "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/SDL2_image.dll")
+
 
 add_custom_command(TARGET Demo POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy

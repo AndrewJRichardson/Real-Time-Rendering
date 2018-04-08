@@ -1,5 +1,6 @@
 #include "ObjectParser.h"
 
+//TODO: This needs some serious clean up
 void ObjectParser::ParseFile(std::string filename, Mesh** mesh) {
     std::ifstream file;
     file.open(filename);
@@ -37,7 +38,7 @@ void ObjectParser::ParseFile(std::string filename, Mesh** mesh) {
 
 
 
-        //Faces in obj files point to indexes of previously preocesses elements
+        //Faces in obj files point to indexes of previously preocessed elements
         //so need the store verts, tex coords and normals so faces can be created later
         *mesh = new Mesh(name, facecount);
         vertStore = std::vector<glm::vec3>(vertcount);
@@ -58,7 +59,6 @@ void ObjectParser::ParseFile(std::string filename, Mesh** mesh) {
                     float x, y, z;
                     int current = 0;
                     std::string tempLine = line;
-                    std::cout << "vert" << std::endl;
                     while (current != 4) {
                         pos = tempLine.find(' ');
 
@@ -86,7 +86,6 @@ void ObjectParser::ParseFile(std::string filename, Mesh** mesh) {
                     float u,v;
                     int current = 0;
                     std::string tempLine = line;
-                    std::cout << "VT" << std::endl;
                     while (current != 3){
                         pos = tempLine.find(' ');
                         std::string coord = tempLine.substr(0,pos);
@@ -111,7 +110,6 @@ void ObjectParser::ParseFile(std::string filename, Mesh** mesh) {
                     float x,y,z;
                     int current = 0;
                     std::string tempLine = line;
-                    std::cout << "VN" << std::endl;
                     while (current != 4){
                         pos = tempLine.find(' ');
                         std::string coord = tempLine.substr(0,pos);
@@ -121,8 +119,7 @@ void ObjectParser::ParseFile(std::string filename, Mesh** mesh) {
                             break;
                         case 1:
                             x = std::stof(coord.c_str());
-                            break;
-                        case 2:
+                            break; case 2:
                             y = std::stof(coord.c_str());
                             break;
                         case 3:
@@ -143,7 +140,6 @@ void ObjectParser::ParseFile(std::string filename, Mesh** mesh) {
                 std::string tempLine = line;
                 Face* face = &((*mesh)->faces[facecount++]);
 
-                std::cout << "face" << std::endl;
                 while (current != 4) {
                     pos = tempLine.find(' ');
                     std::string facePart = tempLine.substr(0, pos);
@@ -194,7 +190,7 @@ void ObjectParser::ProcessFaceChunk(std::string& chunk, Face& face, int setNum){
     // f v, f v/vt, f v/vt/vn, f v//vn
 
 
-    size_t    slashPos = 0;
+    size_t slashPos  = 0;
     FaceVertSet& set = face.vertSets[setNum];
 
     //npos is returned when nothing is found
@@ -215,10 +211,11 @@ void ObjectParser::ProcessFaceChunk(std::string& chunk, Face& face, int setNum){
             }
             chunk.erase(0, slashPos+1);
             if (chunk.size() > 0){
-                set.vn = vertStore[std::atoi(chunk.c_str()) -1];
+                face.surfaceNormal = normStore[std::atoi(chunk.c_str()) -1];
             }
         }
     }
+
 }
 
 

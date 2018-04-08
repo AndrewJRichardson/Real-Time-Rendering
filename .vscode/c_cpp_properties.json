@@ -54,8 +54,9 @@
                 "${workspaceRoot}",
                 "${workspaceRoot}/Real-Time-Rendering",
                 "${workspaceRoot}/Libs/glm",
-                "${workspaceRoot}/Libs/SDL2-2.0.6/include",
-                "${workspaceRoot}/Libs/SDL2_ttf-2.0.14/include"
+                "${workspaceRoot}/Libs/SDL2-2.0.8/include",
+                "${workspaceRoot}/Libs/SDL2_ttf-2.0.14/include",
+                "${workspaceRoot}/Libs/SDL2_image-2.0.3/include"
             ],
             "defines": [
                 "_DEBUG",
@@ -74,7 +75,9 @@
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
-            }
+            },
+            "cStandard": "c11",
+            "cppStandard": "c++17"
         }
     ],
     "version": 3

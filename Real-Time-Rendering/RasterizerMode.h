@@ -4,12 +4,13 @@
 #include <glm/glm.hpp>
 #include "Exports.h"
 #include "Device.h"
+#include "Mesh.h"
 
 namespace rtr {
 
     class RasterizerMode {
         public:
-        REALTIME_API virtual void operator()(glm::vec3&, glm::vec3&, glm::vec3&,
+        REALTIME_API virtual void operator()(FaceVertSet, FaceVertSet, FaceVertSet,
                                              Device&) = 0;
     }; 
 }

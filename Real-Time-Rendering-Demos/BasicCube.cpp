@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
+#include <SDL_image.h>
 #include <memory>
 #include <stdio.h>
 #include <math.h>
@@ -15,19 +16,20 @@
 using namespace rtr;
 
 //TODO: Try to clean up this file if time permits
+//TODO: Seperate object loading and handling from setting up and rendering code
 //Globals, TODO: remove if possible, globals are bad
 const int SCREEN_WIDTH	= 800;
 const int SCREEN_HEIGHT = 600;
 
 bool init				(SDL_Window** window, SDL_Surface** windowSurface);
-bool loadMedia			(SDL_Surface** surface);
+bool loadMedia			(SDL_Surface** surface, std::string name);
 void close				(SDL_Window** window);
 int  fpsCounter			();
 void renderText			(std::string text, TTF_Font* font, SDL_Surface** surface,
                          SDL_Color textColour, SDL_Color backgroundColour);
 void RegisterController (int ContId, SDL_GameController** controller);
 
-//SDL requires this main signature for multi platform compatibility
+//SDL requires this signature for main
 int main(int argc, char* args[]) {
 
     const int SCREEN_WIDTH  = 800;
@@ -46,17 +48,21 @@ int main(int argc, char* args[]) {
     //Load a mesh from a .obj file
     ObjectParser p = ObjectParser();
     Mesh*        m = nullptr;
-    p.ParseFile("resources/cube.obj", &m);
+    p.ParseFile("resources/suz.obj", &m);
 
     //Create an object, object allows a single mesh to be reused
     VertexShader v = {};
-    Object objA = Object(*m, glm::vec3(0, 0, 0), v);
-    Object objB = Object(*m, glm::vec3(10, 0, -10), v);
+    Object objA = Object(*m, glm::vec3(0, 0, 10), v);
+    Object objB = Object(*m, glm::vec3(10, 0, 10), v);
 
 
     //Attempt to init the video component of SDL and print an error if it fails
     if (init(&window, &windowSurface)) {
 
+        //TODO: These inits should be added to init
+        //Init SDL_image for PNGs 
+        IMG_Init(IMG_INIT_PNG);
+       
         // Init SDL_ttf and some variables so that FPS text can be rendered
         TTF_Init();
         TTF_Font*			font			 = TTF_OpenFont("resources/PT_Sans.ttf", 12);
@@ -78,7 +84,13 @@ int main(int argc, char* args[]) {
         //TODO: Don't think this try is needed anyore, test
         try {
             //Create a device to handle the rendering
-            Device device			 = { *windowSurface };
+            Device device		 = { *windowSurface, camera};
+            SDL_Surface* objTex = IMG_Load("resources/tex.png");
+            objA.texture = objTex;
+			objB.texture = objTex;
+            if(objTex == nullptr){
+                std::cout << "error loading texture: " << IMG_GetError() << std::endl;
+            }
             
             //device.currentRenderMode = &Device::RenderPoints;
             RasterizeFilled r(*window);
@@ -86,7 +98,7 @@ int main(int argc, char* args[]) {
             bool quit = false;
             while (!quit) {
                 //device.Clear(camera);
-                (*pipeline).device.Clear(camera);
+                (*pipeline).device.Clear();
                 SDL_Event event;
 
                 while (SDL_PollEvent(&event))
@@ -105,11 +117,11 @@ int main(int argc, char* args[]) {
                             switch (controllerSwitch) {
                                 case 0:
                                     delete pipeline;
-                                    pipeline = new Pipeline{RasterizeVertex{}, ViewPerspective{}, device};
+                                    // pipeline = new Pipeline{RasterizeVertex{}, ViewPerspective{}, device};
                                     break;
                                 case 1:
                                     delete pipeline;
-                                    pipeline = new Pipeline{RasterizeWireframe{}, ViewPerspective{}, device};
+                                    // pipeline = new Pipeline{RasterizeWireframe{}, ViewPerspective{}, device};
                                     break;
                                 case 2:
                                     delete pipeline;
@@ -142,37 +154,38 @@ int main(int argc, char* args[]) {
                             break;
                         case SDLK_1:
                             delete pipeline;
-                            pipeline = new Pipeline{RasterizeVertex{}, ViewPerspective{}, device};
+                            // pipeline = new Pipeline{RasterizeVertex{}, ViewPerspective{}, device};
                             // pipeline.rasterizer = RasterizeVertex();
                             break;
                         case SDLK_2:
                         	delete pipeline;
-                            pipeline = new Pipeline{RasterizeWireframe{}, ViewPerspective{}, device};
+                            // pipeline = new Pipeline{RasterizeWireframe{}, ViewPerspective{}, device};
                         	break;
                         case SDLK_3:
                         	delete pipeline;
                             pipeline = new Pipeline{RasterizeFilled{}, ViewPerspective{}, device};
                         	break;
 
+                            //TODO; camera class should probably handle these calculations
                         case SDLK_w:
-                            camera.position -= camSpeed * camera.front;
+                            device.camera.position -= camSpeed * device.camera.front;
                             break;
                         case SDLK_s:
-                            camera.position += camera.front * camSpeed;
+                            device.camera.position += device.camera.front * camSpeed;
                             break;
                         case SDLK_d:
-                            camera.position += glm::cross(camera.front, camera.up) * camSpeed;
+                            device.camera.position += glm::cross(device.camera.front, device.camera.up) * camSpeed;
                             break;
                         case SDLK_a:
-                            camera.position -= glm::cross(camera.front, camera.up) * camSpeed;
+                            device.camera.position -= glm::cross(device.camera.front, device.camera.up) * camSpeed;
                             break;
                         case SDLK_i:
-                            camera.position = glm::vec3(camera.position.x, camera.position.y + camSpeed, 
-                                                        camera.position.z);
+                            device.camera.position = glm::vec3(device.camera.position.x, device.camera.position.y + camSpeed, 
+                                                        device.camera.position.z);
                             break;
                         case SDLK_k:
-                            camera.position = glm::vec3(camera.position.x, camera.position.y - camSpeed,
-                                                        camera.position.z);
+                            device.camera.position = glm::vec3(device.camera.position.x, device.camera.position.y - camSpeed,
+                                                        device.camera.position.z);
                             break;
 
                         default:
@@ -180,7 +193,7 @@ int main(int argc, char* args[]) {
                         }
                     }
                     else if (event.type == SDL_MOUSEMOTION) {
-                        camera.Rotate((float)-event.motion.xrel, (float)event.motion.yrel);
+                        device.camera.Rotate((float)-event.motion.xrel, (float)event.motion.yrel);
                     }
                 }
                 if (controller) {
@@ -192,28 +205,30 @@ int main(int argc, char* args[]) {
                     int deadZone = 3000;
 
                     if (rX > deadZone || rX < -deadZone || rY > deadZone || rY < -deadZone) {
-                        camera.Rotate((float)(-rX * 0.00001), (float)(rY*0.00001));
+                        device.camera.Rotate((float)(-rX * 0.00001), (float)(rY*0.00001));
                     }
                     if (lY > deadZone || lY < -deadZone) {
-                        camera.position += camera.front * (float)(lY * 0.000001);
+                        device.camera.position += device.camera.front * (float)(lY * 0.000001);
                     }if (lX > deadZone || lX < -deadZone) {
-                        camera.position += glm::cross(camera.front, camera.up) * (float)(lX * 0.000001);
+                        device.camera.position += glm::cross(device.camera.front, device.camera.up) * (float)(lX * 0.000001);
                     }
                 }
 
                 //Tell device to render an object
-                // device.Render(objA);
+                //device.Render(objA);
+                // pipeline->Render(objA);
                 pipeline->Render(objB);
                 //Update the window with changes
-                renderText("FPS: " + std::to_string(fpsCounter()), font, &textSurface, foregroundColor,
-                          backgroundColor);
-                SDL_BlitSurface(textSurface, NULL, windowSurface, &textLocation);
-                SDL_FreeSurface(textSurface);
+                //renderText("FPS: " + std::to_string(fpsCounter()), font, &textSurface, foregroundColor,
+                //          backgroundColor);
+                //SDL_BlitSurface(textSurface, NULL, windowSurface, &textLocation);
+                //SDL_FreeSurface(textSurface);
+                SDL_BlitSurface(objTex, NULL, windowSurface, &textLocation);
                 SDL_UpdateWindowSurface(window);
 
                 SDL_Delay(delay);
             }
-            TTF_CloseFont(font);
+            //TTF_CloseFont(font);
         }
         catch (const std::exception & ex) {
             printf(ex.what());
@@ -252,9 +267,9 @@ bool init(SDL_Window** window, SDL_Surface** windowSurface) {
 }
 
 
-bool loadMedia(SDL_Surface** surface) {
+bool loadMedia(SDL_Surface** surface, std::string name) {
 
-    *surface = SDL_LoadBMP("media/hello.bmp");
+    *surface = SDL_LoadBMP(name.c_str());
 
     if (*surface == NULL) {
         printf("SDL could not load surface! Error: %s\n", SDL_GetError());
@@ -275,6 +290,7 @@ void close(SDL_Window** window) {
     SDL_DestroyWindow(*window);
     *window = NULL;
     //Quit out of SDL
+    IMG_Quit();
     SDL_Quit();
 }
 

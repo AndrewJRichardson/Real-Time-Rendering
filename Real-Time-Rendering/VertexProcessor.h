@@ -9,6 +9,7 @@
 #include "RasterizerMode.h"
 #include "VertexShader.h"
 #include "ViewMode.h"
+#include "RasterizeTextured.h"
 
 
 namespace rtr {
