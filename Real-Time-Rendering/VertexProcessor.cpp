@@ -44,7 +44,7 @@ void rtr::VertexProcessor::operator()(const Object& object,
     // normal = device.Project(normal, transformMatrix);
     float angle = glm::dot(norm, point1.v);
     if (angle <= 0){
-        return;
+          return;
     }    
 
     point1.v = object.vertShader(point1.v);
@@ -60,8 +60,8 @@ void rtr::VertexProcessor::operator()(const Object& object,
     point2.v = device.MapToScreen(point2.v);
     point3.v = device.MapToScreen(point3.v);
 
-    //RasterizeTextured r{};
-    //r.Render(point1, point2, point3, device, object);
+    RasterizeTextured r{};
+    r.Render(point1, point2, point3, device, object);
     
-    rasterizer(point1, point2, point3, device);
+    //rasterizer(point1, point2, point3, device);
 }

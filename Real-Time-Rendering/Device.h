@@ -30,8 +30,8 @@ namespace rtr {
         int          bufferHeight;
         int          halfWidth;
         int          halfHeight;
-        void         (Device::*currentRenderMode)(const Object& object, const glm::mat4& transformMatrix);
-        bool         colourFlip;
+        // void         (Device::*currentRenderMode)(const Object& object, const glm::mat4& transformMatrix);
+        // bool         colourFlip;
         glm::mat4    viewMatrix;
         glm::mat4    perspectiveMatrix;
         int          screenSize;
@@ -54,28 +54,29 @@ namespace rtr {
         REALTIME_API void		DrawLineBresenham(const glm::vec3& start, const glm::vec3& end);
         REALTIME_API glm::vec3  Project(const glm::vec3& vert, const glm::mat4& transform);
         REALTIME_API glm::vec3  MapToScreen(glm::vec3& vert);
-        // REALTIME_API void		Render(const Object& mesh);
-        // REALTIME_API void		RenderPoints(const Object& object, const glm::mat4& transformMatrix);
-        // REALTIME_API void		RenderWireframes(const Object& object, const glm::mat4& transformMatrix);
-        REALTIME_API void		DrawScanLine(int currentY, const glm::vec3 pointA, const glm::vec3 pointB, const glm::vec3 pointC, const glm::vec3 pointD, int r, int g, int b);
+        REALTIME_API void		DrawScanLine(int currentY, const glm::vec3 pointA, 
+                                    const glm::vec3 pointB, const glm::vec3 pointC, 
+                                    const glm::vec3 pointD, int r, int g, int b);
         REALTIME_API void       DrawScanLine(int, int, int, float, float, float, int, int, int);
+        REALTIME_API void       DrawScanLine(int y, int startX, int endX, 
+                                    float startZ, float endZ, int r, int g, int b);
         REALTIME_API float		InverseSlope(const glm::vec3& start, const glm::vec3& end);
         REALTIME_API float		Slope(const glm::vec3& start, const glm::vec3& end);
         REALTIME_API float		Interpolate(float min, float max, float gradient);
-        REALTIME_API float      ZXslope(const glm::vec3& start, const glm::vec3& end);
-        REALTIME_API float      ZYslope(const glm::vec3& start, const glm::vec3& end);
-        REALTIME_API float		Clamp(float value, float min = 0, float max = 1);
-        // REALTIME_API void		DrawTriangle(glm::vec3& pointA, glm::vec3& pointB, glm::vec3& pointC);
+        REALTIME_API float		Clamp(float value);
         REALTIME_API void		DrawTriangle(glm::vec3&,glm::vec3&,glm::vec3&);
-        // REALTIME_API void		RenderFill(const Object& object, const glm::mat4& transformMatrix);
-        // REALTIME_API void		RenderTriangle(int count, int start, const Mesh& mesh, const glm::mat4& transformMatrix);
         REALTIME_API void		RenderTriangle(glm::vec3&, glm::vec3&, glm::vec3&);
         REALTIME_API void       DrawScanLineTexture(const int currentY, const FaceVertSet&,
-                                                    const FaceVertSet&, const FaceVertSet&,
-                                                    const FaceVertSet&, const Object&);
+                                    const FaceVertSet&, const FaceVertSet&,
+                                    const FaceVertSet&, const Object&,
+                                    const float, const float, const float);
         REALTIME_API float      SignedArea(glm::vec3&, glm::vec3&, glm::vec3&);
-        REALTIME_API float      XInterpolant(glm::vec3&, glm::vec3&, glm::vec3&, float, float, float);
-        REALTIME_API float      YInterpolant(glm::vec3&, glm::vec3&, glm::vec3&, float, float, float);
+        // REALTIME_API float      InterpolateX(glm::vec3&, glm::vec3&, glm::vec3&, float, float, float);
+        // REALTIME_API float      InterpolateY(glm::vec3&, glm::vec3&, glm::vec3&, float, float, float);
+        //Used for testing only
+        // REALTIME_API float      DrawScanLineTextureOld(const int currentY, const FaceVertSet& a,
+        //                             const FaceVertSet& b, const FaceVertSet& c,
+        //                             const FaceVertSet& d, const Object& object);
 
     };
 }

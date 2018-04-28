@@ -36,6 +36,12 @@ int main(int argc, char* args[]) {
     const int SCREEN_HEIGHT = 600;
     int delay = 0;
 
+    #define FPS_INTERVAL 1.0 //seconds.
+
+    Uint32 fps_lasttime = SDL_GetTicks(); //the last recorded time.
+    Uint32 fps_current; //the current FPS.
+    Uint32 fps_frames = 0; //frames passed since the last recorded fps.
+
     std::unique_ptr<float[]> blah = std::make_unique<float[]>(10);        
     //The window to render to
     SDL_Window* window = NULL;
@@ -48,7 +54,7 @@ int main(int argc, char* args[]) {
     //Load a mesh from a .obj file
     ObjectParser p = ObjectParser();
     Mesh*        m = nullptr;
-    p.ParseFile("resources/suz.obj", &m);
+    p.ParseFile("resources/cube2.obj", &m);
 
     //Create an object, object allows a single mesh to be reused
     VertexShader v = {};
@@ -117,11 +123,11 @@ int main(int argc, char* args[]) {
                             switch (controllerSwitch) {
                                 case 0:
                                     delete pipeline;
-                                    // pipeline = new Pipeline{RasterizeVertex{}, ViewPerspective{}, device};
+                                    pipeline = new Pipeline{RasterizeVertex{}, ViewPerspective{}, device};
                                     break;
                                 case 1:
                                     delete pipeline;
-                                    // pipeline = new Pipeline{RasterizeWireframe{}, ViewPerspective{}, device};
+                                    pipeline = new Pipeline{RasterizeWireframe{}, ViewPerspective{}, device};
                                     break;
                                 case 2:
                                     delete pipeline;
@@ -154,12 +160,12 @@ int main(int argc, char* args[]) {
                             break;
                         case SDLK_1:
                             delete pipeline;
-                            // pipeline = new Pipeline{RasterizeVertex{}, ViewPerspective{}, device};
+                            pipeline = new Pipeline{RasterizeVertex{}, ViewPerspective{}, device};
                             // pipeline.rasterizer = RasterizeVertex();
                             break;
                         case SDLK_2:
                         	delete pipeline;
-                            // pipeline = new Pipeline{RasterizeWireframe{}, ViewPerspective{}, device};
+                            pipeline = new Pipeline{RasterizeWireframe{}, ViewPerspective{}, device};
                         	break;
                         case SDLK_3:
                         	delete pipeline;
@@ -219,7 +225,14 @@ int main(int argc, char* args[]) {
                 // pipeline->Render(objA);
                 pipeline->Render(objB);
                 //Update the window with changes
-                renderText("FPS: " + std::to_string(fpsCounter()), font, &textSurface, foregroundColor,
+                fps_frames++;
+                if (fps_lasttime < SDL_GetTicks() - FPS_INTERVAL*1000)
+                {
+                    fps_lasttime = SDL_GetTicks();
+                    fps_current = fps_frames;
+                    fps_frames = 0;
+                }
+                renderText("FPS: " + std::to_string(fps_current), font, &textSurface, foregroundColor,
                          backgroundColor);
                 SDL_BlitSurface(textSurface, NULL, windowSurface, &textLocation);
                 SDL_FreeSurface(textSurface);

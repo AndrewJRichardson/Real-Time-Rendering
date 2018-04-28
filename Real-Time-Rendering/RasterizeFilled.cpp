@@ -6,11 +6,12 @@ rtr::RasterizeFilled::RasterizeFilled() {}
 rtr::RasterizeFilled::RasterizeFilled(SDL_Window& window) : window (&window){colour = true; c = 0;}
 
 
-void rtr::RasterizeFilled::operator()(FaceVertSet pointA, FaceVertSet pointB,
-                                      FaceVertSet pointC, Device& device) {
+ void rtr::RasterizeFilled::operator()(FaceVertSet pointA, FaceVertSet pointB,
+                                       FaceVertSet pointC, Device& device) {
     
-   device.RenderTriangle(pointA.v, pointB.v, pointC.v);
+    device.RenderTriangle(pointA.v, pointB.v, pointC.v);
 }
+// }
 // int r = 0x00, g = 0x00, b = 0x00;
 
 // c++;
@@ -183,6 +184,9 @@ void rtr::RasterizeFilled::operator()(FaceVertSet pointA, FaceVertSet pointB,
     // }
 // }
 
+
+
+
 // void rtr::RasterizeFilled::operator()(FaceVertSet faceA, FaceVertSet faceB,
 //                                       FaceVertSet faceC, Device& device) {
 
@@ -208,54 +212,105 @@ void rtr::RasterizeFilled::operator()(FaceVertSet pointA, FaceVertSet pointB,
 //         pointA = tPoint;
 //     }
     
-//     float invAB = device.InverseSlope(pointA, pointB);
-//     float invAC = device.InverseSlope(pointA, pointC);
-//     float invBC = device.InverseSlope(pointB, pointC);
+
+//     float invAB;
+//     float invAC;
+//     float invBC;
+
+//     if (pointB.y - pointA.y <= 0)
+//         invAB = 0;
+//     else
+//         invAB = device.InverseSlope(pointA, pointB);
+
+//     if (pointC.y - pointA.y <= 0)
+//         invAC = 0;
+//     else
+//         invAC = device.InverseSlope(pointA, pointC);
+
+//     if (pointC.y - pointB.y <= 0)
+//         invBC = 0;
+//     else
+//         invBC = device.InverseSlope(pointB, pointC);
+
+
+
+//     glm::vec3 t1 {1, 1, 1};
+//     glm::vec3 t2 {1, 7, 2};
+//     glm::vec3 t3 {7, 9, 3};
+
+//     float X  = device.InterpolateX(pointA, pointB, pointC, pointA.x, pointB.x, pointC.x);
+//     float Y  = device.InterpolateY(pointA, pointB, pointC, pointA.y, pointB.y, pointC.y);
+//     float xZ = device.InterpolateX(pointA, pointB, pointC, pointA.z, pointB.z, pointC.z);
+//     float yZ = device.InterpolateY(pointA, pointB, pointC, pointA.z, pointB.z, pointC.z);
+
+//     float xZinc;
+//     if (X == 0)
+//         xZinc = 0;
+//     else
+//         xZinc = xZ/X;
+//     float yZinc = yZ/Y;
+
+//     float zYAB = yZinc + xZinc * invAB;
+//     float zYAC = yZinc + xZinc * invAC;
+//     float zYBC = yZinc + xZinc * invBC;
 
 //     float ABx = pointA.x;
 //     float ACx = pointA.x;
 //     float BCx = pointB.x;
-//     float ABz = pointA.z;
-//     float ACz = pointA.z;
-//     float BCz = pointB.z;
 
-//     glm::vec3 a{1,2,4};
-//     glm::vec3 t{2,4,2};
-//     glm::vec3 c{0,6,1};
+//     float ABz = pointA.z; //+ xZinc + yZinc;
+//     float ACz = pointA.z; // + xZinc + yZinc;
+//     float BCz = pointB.z; //+ xZinc + yZinc;    
 
-//     float testt = device.XInterpolant(a, t, c, a.z, t.z, c.z);
-//     float t2    = device.YInterpolant(a, t, c, a.z, t.z, c.z);
-//     float zXinc = device.XInterpolant(pointA, pointB, pointC, 
-//                             pointA.z, pointB.z, pointC.z);
     
-//     float zTest = device.YInterpolant(pointA, pointB, pointC, pointA.z, pointB.z, pointC.z);
-//     float zYinc = -zXinc;
 
 
 //     bool leftB = false;
 //     if(device.SignedArea(pointA, pointB, pointC) < 0)
 //         leftB = true;
 
-//     for (int i = (int)pointA.y; i < (int)pointC.y -1 ; i++){
+//     // for (int i = (int)pointA.y; i < (int)pointC.y -1 ; i++){
+//     //         if(i < pointB.y - 1){
+//     //             if(leftB){
+//     //                 device.DrawScanLine(i, (int)ABx, (int)ACx, ABz, depStepAB, 0, 0xff, 0xff, 0xff);
+//     //                 ABz += depStepAB;
+//     //             }else{
+//     //                 device.DrawScanLine(i, (int)ACx, (int)ABx, ACz, depStepAC, 0, 0xff, 0, 0);
+//     //                 ACz += depStepAC;
+//     //             }
+//     //             ABx += invAB;
+//     //         }else{
+//     //             if(leftB){
+//     //                 device.DrawScanLine(i, (int)BCx, (int)ACx, BCz, zXinc, 0, 0xff, 0xff, 0xff);
+//     //                 BCz += depStepBC;
+//     //             }else{
+//     //                 device.DrawScanLine(i, (int)ACx, (int)BCx, ACz, zXinc, 0, 0xff, 0, 0);
+//     //                 ACz += depStepAC;
+//     //             }
+//     //             BCx += invBC;
+//     //         }
+//     //         ACx += invAC;
+//     // }
+
+//     for (int i = (int)pointA.y; i < (int)pointC.y -1; i++){
 //             if(i < pointB.y - 1){
 //                 if(leftB){
-//                     device.DrawScanLine(i, (int)ABx, (int)ACx, ABz, zXinc, 0, 0xff, 0xff, 0xff);
-//                     ABz += zYinc;
+//                     device.DrawScanLine(i, (int)ABx, (int)ACx, ABz, ACz, 0xff, 0xff, 0xff);
 //                 }else{
-//                     device.DrawScanLine(i, (int)ACx, (int)ABx, ACz, -zXinc, 0, 0xff, 0, 0);
-//                     ACz += zYinc;
+//                     device.DrawScanLine(i, (int)ACx, (int)ABx, ACz, ABz, 0, 0, 0xff);
 //                 }
+//                 ABz += zYAB;
 //                 ABx += invAB;
 //             }else{
 //                 if(leftB){
-//                     device.DrawScanLine(i, (int)BCx, (int)ACx, BCz, zXinc, 0, 0, 0xff, 0);
-//                     BCz += zYinc;
+//                     device.DrawScanLine(i, (int)BCx, (int)ACx, BCz, ACz, 0, 0xff, 0);
 //                 }else{
-//                     device.DrawScanLine(i, (int)ACx, (int)BCx, ACz, -zXinc, 0, 0, 0, 0xff);
-//                     ACz += zYinc;
+//                     device.DrawScanLine(i, (int)ACx, (int)BCx, ACz, BCz, 0xff, 0, 0);
 //                 }
+//                 BCz += zYBC;
 //                 BCx += invBC;
 //             }
+//             ACz += zYAC;
 //             ACx += invAC;
 //     }
 // }

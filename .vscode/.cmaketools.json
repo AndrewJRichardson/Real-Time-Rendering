@@ -14,6 +14,8 @@
         "projects": [
           {
             "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds",
+            "hasInstallRule": false,
+            "minimumCMakeVersion": "3.10",
             "name": "Real-Time-Rendering",
             "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering",
             "targets": [
@@ -49,15 +51,10 @@
                     "sources": [
                       "BasicCube.cpp"
                     ]
-                  },
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
                   }
                 ],
                 "fullName": "Demo.exe",
+                "isGeneratorProvided": false,
                 "linkFlags": "/machine:x64 /debug /INCREMENTAL  /subsystem:console",
                 "linkLanguageFlags": "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1",
                 "linkLibraries": "..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2_ttf-2.0.14\\lib\\x64\\SDL2_ttf.lib ..\\Real-Time-Rendering\\Debug\\Real-Time-Rendering-Lib.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2main.lib ..\\..\\Libs\\SDL2_image-2.0.3\\lib\\x64\\SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
@@ -67,33 +64,35 @@
                 "type": "EXECUTABLE"
               },
               {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds",
-                "fileGroups": [
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
-                  }
-                ],
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
                 "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
+                "name": "ALL_BUILD",
+                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
+                "type": "UTILITY"
+              },
+              {
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds",
+                "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
                 "name": "ALL_BUILD",
                 "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering",
                 "type": "UTILITY"
               },
               {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds",
                 "fileGroups": [
                   {
-                    "isGenerated": false,
+                    "isGenerated": true,
                     "sources": [
-                      "CMakeLists.txt"
+                      "cmakeBuilds/CMakeFiles/53779e34ba7ba853d98797a0cee11da2/generate.stamp.rule"
                     ]
                   }
                 ],
-                "fullName": "ALL_BUILD",
-                "name": "ALL_BUILD",
-                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
+                "fullName": "ZERO_CHECK",
+                "isGeneratorProvided": true,
+                "name": "ZERO_CHECK",
+                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering",
                 "type": "UTILITY"
               },
               {
@@ -165,12 +164,12 @@
                       "VertexShader.h",
                       "ObjectParser.h",
                       "DebugTools.h",
-                      "Exports.h",
-                      "CMakeLists.txt"
+                      "Exports.h"
                     ]
                   }
                 ],
                 "fullName": "Real-Time-Rendering-Lib.dll",
+                "isGeneratorProvided": false,
                 "linkFlags": "/machine:x64 /debug /INCREMENTAL",
                 "linkLibraries": "..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2main.lib ..\\..\\Libs\\SDL2_image-2.0.3\\lib\\x64\\SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
                 "linkerLanguage": "CXX",
@@ -179,39 +178,19 @@
                 "type": "SHARED_LIBRARY"
               },
               {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds",
-                "fileGroups": [
-                  {
-                    "isGenerated": true,
-                    "sources": [
-                      "cmakeBuilds/CMakeFiles/53779e34ba7ba853d98797a0cee11da2/generate.stamp.rule"
-                    ]
-                  }
-                ],
-                "fullName": "ZERO_CHECK",
-                "name": "ZERO_CHECK",
-                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering",
-                "type": "UTILITY"
-              },
-              {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
-                "fileGroups": [
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
-                  }
-                ],
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
                 "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
                 "name": "ALL_BUILD",
-                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
+                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
                 "type": "UTILITY"
               }
             ]
           },
           {
             "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
+            "hasInstallRule": false,
+            "minimumCMakeVersion": "3.10",
             "name": "Real-Time-Rendering-Demo",
             "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
             "targets": [
@@ -247,15 +226,10 @@
                     "sources": [
                       "BasicCube.cpp"
                     ]
-                  },
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
                   }
                 ],
                 "fullName": "Demo.exe",
+                "isGeneratorProvided": false,
                 "linkFlags": "/machine:x64 /debug /INCREMENTAL  /subsystem:console",
                 "linkLanguageFlags": "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1",
                 "linkLibraries": "..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2_ttf-2.0.14\\lib\\x64\\SDL2_ttf.lib ..\\Real-Time-Rendering\\Debug\\Real-Time-Rendering-Lib.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2main.lib ..\\..\\Libs\\SDL2_image-2.0.3\\lib\\x64\\SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
@@ -266,15 +240,8 @@
               },
               {
                 "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
-                "fileGroups": [
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
-                  }
-                ],
                 "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
                 "name": "ALL_BUILD",
                 "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
                 "type": "UTILITY"
@@ -283,24 +250,11 @@
           },
           {
             "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
+            "hasInstallRule": false,
+            "minimumCMakeVersion": "3.10",
             "name": "Real-Time-Rendering-Lib",
             "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
             "targets": [
-              {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
-                "fileGroups": [
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
-                  }
-                ],
-                "fullName": "ALL_BUILD",
-                "name": "ALL_BUILD",
-                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
-                "type": "UTILITY"
-              },
               {
                 "artifacts": [
                   "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering/Debug/Real-Time-Rendering-Lib.dll",
@@ -370,18 +324,26 @@
                       "VertexShader.h",
                       "ObjectParser.h",
                       "DebugTools.h",
-                      "Exports.h",
-                      "CMakeLists.txt"
+                      "Exports.h"
                     ]
                   }
                 ],
                 "fullName": "Real-Time-Rendering-Lib.dll",
+                "isGeneratorProvided": false,
                 "linkFlags": "/machine:x64 /debug /INCREMENTAL",
                 "linkLibraries": "..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2main.lib ..\\..\\Libs\\SDL2_image-2.0.3\\lib\\x64\\SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
                 "linkerLanguage": "CXX",
                 "name": "Real-Time-Rendering-Lib",
                 "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
                 "type": "SHARED_LIBRARY"
+              },
+              {
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
+                "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
+                "name": "ALL_BUILD",
+                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
+                "type": "UTILITY"
               }
             ]
           }
@@ -392,6 +354,8 @@
         "projects": [
           {
             "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds",
+            "hasInstallRule": false,
+            "minimumCMakeVersion": "3.10",
             "name": "Real-Time-Rendering",
             "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering",
             "targets": [
@@ -427,15 +391,10 @@
                     "sources": [
                       "BasicCube.cpp"
                     ]
-                  },
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
                   }
                 ],
                 "fullName": "Demo.exe",
+                "isGeneratorProvided": false,
                 "linkFlags": "/machine:x64 /INCREMENTAL:NO  /subsystem:console",
                 "linkLanguageFlags": "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O2 /Ob2 /DNDEBUG",
                 "linkLibraries": "..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2_ttf-2.0.14\\lib\\x64\\SDL2_ttf.lib ..\\Real-Time-Rendering\\Release\\Real-Time-Rendering-Lib.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2main.lib ..\\..\\Libs\\SDL2_image-2.0.3\\lib\\x64\\SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
@@ -445,33 +404,35 @@
                 "type": "EXECUTABLE"
               },
               {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds",
-                "fileGroups": [
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
-                  }
-                ],
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
                 "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
+                "name": "ALL_BUILD",
+                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
+                "type": "UTILITY"
+              },
+              {
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds",
+                "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
                 "name": "ALL_BUILD",
                 "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering",
                 "type": "UTILITY"
               },
               {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds",
                 "fileGroups": [
                   {
-                    "isGenerated": false,
+                    "isGenerated": true,
                     "sources": [
-                      "CMakeLists.txt"
+                      "cmakeBuilds/CMakeFiles/53779e34ba7ba853d98797a0cee11da2/generate.stamp.rule"
                     ]
                   }
                 ],
-                "fullName": "ALL_BUILD",
-                "name": "ALL_BUILD",
-                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
+                "fullName": "ZERO_CHECK",
+                "isGeneratorProvided": true,
+                "name": "ZERO_CHECK",
+                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering",
                 "type": "UTILITY"
               },
               {
@@ -543,12 +504,12 @@
                       "VertexShader.h",
                       "ObjectParser.h",
                       "DebugTools.h",
-                      "Exports.h",
-                      "CMakeLists.txt"
+                      "Exports.h"
                     ]
                   }
                 ],
                 "fullName": "Real-Time-Rendering-Lib.dll",
+                "isGeneratorProvided": false,
                 "linkFlags": "/machine:x64 /INCREMENTAL:NO",
                 "linkLibraries": "..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2main.lib ..\\..\\Libs\\SDL2_image-2.0.3\\lib\\x64\\SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
                 "linkerLanguage": "CXX",
@@ -557,39 +518,19 @@
                 "type": "SHARED_LIBRARY"
               },
               {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds",
-                "fileGroups": [
-                  {
-                    "isGenerated": true,
-                    "sources": [
-                      "cmakeBuilds/CMakeFiles/53779e34ba7ba853d98797a0cee11da2/generate.stamp.rule"
-                    ]
-                  }
-                ],
-                "fullName": "ZERO_CHECK",
-                "name": "ZERO_CHECK",
-                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering",
-                "type": "UTILITY"
-              },
-              {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
-                "fileGroups": [
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
-                  }
-                ],
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
                 "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
                 "name": "ALL_BUILD",
-                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
+                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
                 "type": "UTILITY"
               }
             ]
           },
           {
             "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
+            "hasInstallRule": false,
+            "minimumCMakeVersion": "3.10",
             "name": "Real-Time-Rendering-Demo",
             "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
             "targets": [
@@ -625,15 +566,10 @@
                     "sources": [
                       "BasicCube.cpp"
                     ]
-                  },
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
                   }
                 ],
                 "fullName": "Demo.exe",
+                "isGeneratorProvided": false,
                 "linkFlags": "/machine:x64 /INCREMENTAL:NO  /subsystem:console",
                 "linkLanguageFlags": "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O2 /Ob2 /DNDEBUG",
                 "linkLibraries": "..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2_ttf-2.0.14\\lib\\x64\\SDL2_ttf.lib ..\\Real-Time-Rendering\\Release\\Real-Time-Rendering-Lib.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2main.lib ..\\..\\Libs\\SDL2_image-2.0.3\\lib\\x64\\SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
@@ -644,15 +580,8 @@
               },
               {
                 "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
-                "fileGroups": [
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
-                  }
-                ],
                 "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
                 "name": "ALL_BUILD",
                 "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
                 "type": "UTILITY"
@@ -661,24 +590,11 @@
           },
           {
             "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
+            "hasInstallRule": false,
+            "minimumCMakeVersion": "3.10",
             "name": "Real-Time-Rendering-Lib",
             "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
             "targets": [
-              {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
-                "fileGroups": [
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
-                  }
-                ],
-                "fullName": "ALL_BUILD",
-                "name": "ALL_BUILD",
-                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
-                "type": "UTILITY"
-              },
               {
                 "artifacts": [
                   "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering/Release/Real-Time-Rendering-Lib.dll",
@@ -748,18 +664,26 @@
                       "VertexShader.h",
                       "ObjectParser.h",
                       "DebugTools.h",
-                      "Exports.h",
-                      "CMakeLists.txt"
+                      "Exports.h"
                     ]
                   }
                 ],
                 "fullName": "Real-Time-Rendering-Lib.dll",
+                "isGeneratorProvided": false,
                 "linkFlags": "/machine:x64 /INCREMENTAL:NO",
                 "linkLibraries": "..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2main.lib ..\\..\\Libs\\SDL2_image-2.0.3\\lib\\x64\\SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
                 "linkerLanguage": "CXX",
                 "name": "Real-Time-Rendering-Lib",
                 "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
                 "type": "SHARED_LIBRARY"
+              },
+              {
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
+                "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
+                "name": "ALL_BUILD",
+                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
+                "type": "UTILITY"
               }
             ]
           }
@@ -770,6 +694,8 @@
         "projects": [
           {
             "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds",
+            "hasInstallRule": false,
+            "minimumCMakeVersion": "3.10",
             "name": "Real-Time-Rendering",
             "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering",
             "targets": [
@@ -782,12 +708,6 @@
                 "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
                 "fileGroups": [
                   {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
-                  },
-                  {
                     "compileFlags": "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O1 /Ob1 /DNDEBUG  ",
                     "includePath": [
                       {
@@ -814,6 +734,7 @@
                   }
                 ],
                 "fullName": "Demo.exe",
+                "isGeneratorProvided": false,
                 "linkFlags": "/machine:x64 /INCREMENTAL:NO  /subsystem:console",
                 "linkLanguageFlags": "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O1 /Ob1 /DNDEBUG",
                 "linkLibraries": "..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2_ttf-2.0.14\\lib\\x64\\SDL2_ttf.lib ..\\Real-Time-Rendering\\MinSizeRel\\Real-Time-Rendering-Lib.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2main.lib ..\\..\\Libs\\SDL2_image-2.0.3\\lib\\x64\\SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
@@ -823,116 +744,20 @@
                 "type": "EXECUTABLE"
               },
               {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds",
-                "fileGroups": [
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
-                  }
-                ],
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
                 "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
+                "name": "ALL_BUILD",
+                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
+                "type": "UTILITY"
+              },
+              {
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds",
+                "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
                 "name": "ALL_BUILD",
                 "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering",
                 "type": "UTILITY"
-              },
-              {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
-                "fileGroups": [
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
-                  }
-                ],
-                "fullName": "ALL_BUILD",
-                "name": "ALL_BUILD",
-                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
-                "type": "UTILITY"
-              },
-              {
-                "artifacts": [
-                  "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering/MinSizeRel/Real-Time-Rendering-Lib.dll",
-                  "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering/MinSizeRel/Real-Time-Rendering-Lib.lib",
-                  "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering/MinSizeRel/Real-Time-Rendering-Lib.pdb"
-                ],
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
-                "fileGroups": [
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "Device.h",
-                      "Camera.h",
-                      "Object.h",
-                      "Mesh.h",
-                      "Pipeline.h",
-                      "ViewPerspective.h",
-                      "ViewOrthogonal.h",
-                      "RasterizeVertex.h",
-                      "RasterizeWireframe.h",
-                      "RasterizeTextured.h",
-                      "RasterizeFilled.h",
-                      "VertexProcessor.h",
-                      "VertexShader.h",
-                      "ObjectParser.h",
-                      "DebugTools.h",
-                      "Exports.h",
-                      "CMakeLists.txt"
-                    ]
-                  },
-                  {
-                    "compileFlags": "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O1 /Ob1 /DNDEBUG  ",
-                    "defines": [
-                      "REALTIME_EXPORTS",
-                      "Real_Time_Rendering_Lib_EXPORTS"
-                    ],
-                    "includePath": [
-                      {
-                        "path": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Libs/glm"
-                      },
-                      {
-                        "path": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Libs/SDL2-2.0.8/include"
-                      },
-                      {
-                        "path": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Libs/SDL2_ttf-2.0.14/include"
-                      },
-                      {
-                        "path": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Libs/SDL2_image-2.0.3/include"
-                      },
-                      {
-                        "path": "c:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering/Real-Time-Rendering"
-                      }
-                    ],
-                    "isGenerated": false,
-                    "language": "CXX",
-                    "sources": [
-                      "Device.cpp",
-                      "Camera.cpp",
-                      "Object.cpp",
-                      "Pipeline.cpp",
-                      "ViewPerspective.cpp",
-                      "ViewOrthogonal.cpp",
-                      "RasterizeVertex.cpp",
-                      "RasterizeWireframe.cpp",
-                      "RasterizeTextured.cpp",
-                      "RasterizeFilled.cpp",
-                      "VertexProcessor.cpp",
-                      "VertexShader.cpp",
-                      "Mesh.cpp",
-                      "ObjectParser.cpp",
-                      "DebugTools.cpp"
-                    ]
-                  }
-                ],
-                "fullName": "Real-Time-Rendering-Lib.dll",
-                "linkFlags": "/machine:x64 /INCREMENTAL:NO",
-                "linkLibraries": "..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2main.lib ..\\..\\Libs\\SDL2_image-2.0.3\\lib\\x64\\SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
-                "linkerLanguage": "CXX",
-                "name": "Real-Time-Rendering-Lib",
-                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
-                "type": "SHARED_LIBRARY"
               },
               {
                 "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds",
@@ -945,116 +770,9 @@
                   }
                 ],
                 "fullName": "ZERO_CHECK",
+                "isGeneratorProvided": true,
                 "name": "ZERO_CHECK",
                 "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering",
-                "type": "UTILITY"
-              },
-              {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
-                "fileGroups": [
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
-                  }
-                ],
-                "fullName": "ALL_BUILD",
-                "name": "ALL_BUILD",
-                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
-                "type": "UTILITY"
-              }
-            ]
-          },
-          {
-            "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
-            "name": "Real-Time-Rendering-Demo",
-            "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
-            "targets": [
-              {
-                "artifacts": [
-                  "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos/MinSizeRel/Demo.exe",
-                  "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos/MinSizeRel/Demo.lib",
-                  "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos/MinSizeRel/Demo.pdb"
-                ],
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
-                "fileGroups": [
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
-                  },
-                  {
-                    "compileFlags": "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O1 /Ob1 /DNDEBUG  ",
-                    "includePath": [
-                      {
-                        "path": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Libs/glm"
-                      },
-                      {
-                        "path": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Libs/SDL2-2.0.8/include"
-                      },
-                      {
-                        "path": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Libs/SDL2_ttf-2.0.14/include"
-                      },
-                      {
-                        "path": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Libs/SDL2_image-2.0.3/include"
-                      },
-                      {
-                        "path": "c:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering/Real-Time-Rendering"
-                      }
-                    ],
-                    "isGenerated": false,
-                    "language": "CXX",
-                    "sources": [
-                      "BasicCube.cpp"
-                    ]
-                  }
-                ],
-                "fullName": "Demo.exe",
-                "linkFlags": "/machine:x64 /INCREMENTAL:NO  /subsystem:console",
-                "linkLanguageFlags": "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O1 /Ob1 /DNDEBUG",
-                "linkLibraries": "..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2_ttf-2.0.14\\lib\\x64\\SDL2_ttf.lib ..\\Real-Time-Rendering\\MinSizeRel\\Real-Time-Rendering-Lib.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2main.lib ..\\..\\Libs\\SDL2_image-2.0.3\\lib\\x64\\SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
-                "linkerLanguage": "CXX",
-                "name": "Demo",
-                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
-                "type": "EXECUTABLE"
-              },
-              {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
-                "fileGroups": [
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
-                  }
-                ],
-                "fullName": "ALL_BUILD",
-                "name": "ALL_BUILD",
-                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
-                "type": "UTILITY"
-              }
-            ]
-          },
-          {
-            "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
-            "name": "Real-Time-Rendering-Lib",
-            "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
-            "targets": [
-              {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
-                "fileGroups": [
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
-                  }
-                ],
-                "fullName": "ALL_BUILD",
-                "name": "ALL_BUILD",
-                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
                 "type": "UTILITY"
               },
               {
@@ -1083,8 +801,7 @@
                       "VertexShader.h",
                       "ObjectParser.h",
                       "DebugTools.h",
-                      "Exports.h",
-                      "CMakeLists.txt"
+                      "Exports.h"
                     ]
                   },
                   {
@@ -1132,12 +849,181 @@
                   }
                 ],
                 "fullName": "Real-Time-Rendering-Lib.dll",
+                "isGeneratorProvided": false,
                 "linkFlags": "/machine:x64 /INCREMENTAL:NO",
                 "linkLibraries": "..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2main.lib ..\\..\\Libs\\SDL2_image-2.0.3\\lib\\x64\\SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
                 "linkerLanguage": "CXX",
                 "name": "Real-Time-Rendering-Lib",
                 "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
                 "type": "SHARED_LIBRARY"
+              },
+              {
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
+                "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
+                "name": "ALL_BUILD",
+                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
+                "type": "UTILITY"
+              }
+            ]
+          },
+          {
+            "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
+            "hasInstallRule": false,
+            "minimumCMakeVersion": "3.10",
+            "name": "Real-Time-Rendering-Demo",
+            "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
+            "targets": [
+              {
+                "artifacts": [
+                  "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos/MinSizeRel/Demo.exe",
+                  "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos/MinSizeRel/Demo.lib",
+                  "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos/MinSizeRel/Demo.pdb"
+                ],
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
+                "fileGroups": [
+                  {
+                    "compileFlags": "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O1 /Ob1 /DNDEBUG  ",
+                    "includePath": [
+                      {
+                        "path": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Libs/glm"
+                      },
+                      {
+                        "path": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Libs/SDL2-2.0.8/include"
+                      },
+                      {
+                        "path": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Libs/SDL2_ttf-2.0.14/include"
+                      },
+                      {
+                        "path": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Libs/SDL2_image-2.0.3/include"
+                      },
+                      {
+                        "path": "c:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering/Real-Time-Rendering"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "BasicCube.cpp"
+                    ]
+                  }
+                ],
+                "fullName": "Demo.exe",
+                "isGeneratorProvided": false,
+                "linkFlags": "/machine:x64 /INCREMENTAL:NO  /subsystem:console",
+                "linkLanguageFlags": "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O1 /Ob1 /DNDEBUG",
+                "linkLibraries": "..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2_ttf-2.0.14\\lib\\x64\\SDL2_ttf.lib ..\\Real-Time-Rendering\\MinSizeRel\\Real-Time-Rendering-Lib.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2main.lib ..\\..\\Libs\\SDL2_image-2.0.3\\lib\\x64\\SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
+                "linkerLanguage": "CXX",
+                "name": "Demo",
+                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
+                "type": "EXECUTABLE"
+              },
+              {
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
+                "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
+                "name": "ALL_BUILD",
+                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
+                "type": "UTILITY"
+              }
+            ]
+          },
+          {
+            "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
+            "hasInstallRule": false,
+            "minimumCMakeVersion": "3.10",
+            "name": "Real-Time-Rendering-Lib",
+            "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
+            "targets": [
+              {
+                "artifacts": [
+                  "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering/MinSizeRel/Real-Time-Rendering-Lib.dll",
+                  "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering/MinSizeRel/Real-Time-Rendering-Lib.lib",
+                  "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering/MinSizeRel/Real-Time-Rendering-Lib.pdb"
+                ],
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
+                "fileGroups": [
+                  {
+                    "isGenerated": false,
+                    "sources": [
+                      "Device.h",
+                      "Camera.h",
+                      "Object.h",
+                      "Mesh.h",
+                      "Pipeline.h",
+                      "ViewPerspective.h",
+                      "ViewOrthogonal.h",
+                      "RasterizeVertex.h",
+                      "RasterizeWireframe.h",
+                      "RasterizeTextured.h",
+                      "RasterizeFilled.h",
+                      "VertexProcessor.h",
+                      "VertexShader.h",
+                      "ObjectParser.h",
+                      "DebugTools.h",
+                      "Exports.h"
+                    ]
+                  },
+                  {
+                    "compileFlags": "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O1 /Ob1 /DNDEBUG  ",
+                    "defines": [
+                      "REALTIME_EXPORTS",
+                      "Real_Time_Rendering_Lib_EXPORTS"
+                    ],
+                    "includePath": [
+                      {
+                        "path": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Libs/glm"
+                      },
+                      {
+                        "path": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Libs/SDL2-2.0.8/include"
+                      },
+                      {
+                        "path": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Libs/SDL2_ttf-2.0.14/include"
+                      },
+                      {
+                        "path": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Libs/SDL2_image-2.0.3/include"
+                      },
+                      {
+                        "path": "c:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering/Real-Time-Rendering"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "Device.cpp",
+                      "Camera.cpp",
+                      "Object.cpp",
+                      "Pipeline.cpp",
+                      "ViewPerspective.cpp",
+                      "ViewOrthogonal.cpp",
+                      "RasterizeVertex.cpp",
+                      "RasterizeWireframe.cpp",
+                      "RasterizeTextured.cpp",
+                      "RasterizeFilled.cpp",
+                      "VertexProcessor.cpp",
+                      "VertexShader.cpp",
+                      "Mesh.cpp",
+                      "ObjectParser.cpp",
+                      "DebugTools.cpp"
+                    ]
+                  }
+                ],
+                "fullName": "Real-Time-Rendering-Lib.dll",
+                "isGeneratorProvided": false,
+                "linkFlags": "/machine:x64 /INCREMENTAL:NO",
+                "linkLibraries": "..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2main.lib ..\\..\\Libs\\SDL2_image-2.0.3\\lib\\x64\\SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
+                "linkerLanguage": "CXX",
+                "name": "Real-Time-Rendering-Lib",
+                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
+                "type": "SHARED_LIBRARY"
+              },
+              {
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
+                "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
+                "name": "ALL_BUILD",
+                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
+                "type": "UTILITY"
               }
             ]
           }
@@ -1148,6 +1034,8 @@
         "projects": [
           {
             "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds",
+            "hasInstallRule": false,
+            "minimumCMakeVersion": "3.10",
             "name": "Real-Time-Rendering",
             "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering",
             "targets": [
@@ -1183,15 +1071,10 @@
                     "sources": [
                       "BasicCube.cpp"
                     ]
-                  },
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
                   }
                 ],
                 "fullName": "Demo.exe",
+                "isGeneratorProvided": false,
                 "linkFlags": "/machine:x64 /debug /INCREMENTAL  /subsystem:console",
                 "linkLanguageFlags": "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /Zi /O2 /Ob1 /DNDEBUG",
                 "linkLibraries": "..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2_ttf-2.0.14\\lib\\x64\\SDL2_ttf.lib ..\\Real-Time-Rendering\\RelWithDebInfo\\Real-Time-Rendering-Lib.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2main.lib ..\\..\\Libs\\SDL2_image-2.0.3\\lib\\x64\\SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
@@ -1201,33 +1084,35 @@
                 "type": "EXECUTABLE"
               },
               {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds",
-                "fileGroups": [
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
-                  }
-                ],
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
                 "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
+                "name": "ALL_BUILD",
+                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
+                "type": "UTILITY"
+              },
+              {
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds",
+                "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
                 "name": "ALL_BUILD",
                 "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering",
                 "type": "UTILITY"
               },
               {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds",
                 "fileGroups": [
                   {
-                    "isGenerated": false,
+                    "isGenerated": true,
                     "sources": [
-                      "CMakeLists.txt"
+                      "cmakeBuilds/CMakeFiles/53779e34ba7ba853d98797a0cee11da2/generate.stamp.rule"
                     ]
                   }
                 ],
-                "fullName": "ALL_BUILD",
-                "name": "ALL_BUILD",
-                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
+                "fullName": "ZERO_CHECK",
+                "isGeneratorProvided": true,
+                "name": "ZERO_CHECK",
+                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering",
                 "type": "UTILITY"
               },
               {
@@ -1299,12 +1184,12 @@
                       "VertexShader.h",
                       "ObjectParser.h",
                       "DebugTools.h",
-                      "Exports.h",
-                      "CMakeLists.txt"
+                      "Exports.h"
                     ]
                   }
                 ],
                 "fullName": "Real-Time-Rendering-Lib.dll",
+                "isGeneratorProvided": false,
                 "linkFlags": "/machine:x64 /debug /INCREMENTAL",
                 "linkLibraries": "..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2main.lib ..\\..\\Libs\\SDL2_image-2.0.3\\lib\\x64\\SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
                 "linkerLanguage": "CXX",
@@ -1313,39 +1198,19 @@
                 "type": "SHARED_LIBRARY"
               },
               {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds",
-                "fileGroups": [
-                  {
-                    "isGenerated": true,
-                    "sources": [
-                      "cmakeBuilds/CMakeFiles/53779e34ba7ba853d98797a0cee11da2/generate.stamp.rule"
-                    ]
-                  }
-                ],
-                "fullName": "ZERO_CHECK",
-                "name": "ZERO_CHECK",
-                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering",
-                "type": "UTILITY"
-              },
-              {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
-                "fileGroups": [
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
-                  }
-                ],
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
                 "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
                 "name": "ALL_BUILD",
-                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
+                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
                 "type": "UTILITY"
               }
             ]
           },
           {
             "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
+            "hasInstallRule": false,
+            "minimumCMakeVersion": "3.10",
             "name": "Real-Time-Rendering-Demo",
             "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
             "targets": [
@@ -1381,15 +1246,10 @@
                     "sources": [
                       "BasicCube.cpp"
                     ]
-                  },
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
                   }
                 ],
                 "fullName": "Demo.exe",
+                "isGeneratorProvided": false,
                 "linkFlags": "/machine:x64 /debug /INCREMENTAL  /subsystem:console",
                 "linkLanguageFlags": "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /Zi /O2 /Ob1 /DNDEBUG",
                 "linkLibraries": "..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2_ttf-2.0.14\\lib\\x64\\SDL2_ttf.lib ..\\Real-Time-Rendering\\RelWithDebInfo\\Real-Time-Rendering-Lib.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2main.lib ..\\..\\Libs\\SDL2_image-2.0.3\\lib\\x64\\SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
@@ -1400,15 +1260,8 @@
               },
               {
                 "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos",
-                "fileGroups": [
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
-                  }
-                ],
                 "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
                 "name": "ALL_BUILD",
                 "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos",
                 "type": "UTILITY"
@@ -1417,24 +1270,11 @@
           },
           {
             "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
+            "hasInstallRule": false,
+            "minimumCMakeVersion": "3.10",
             "name": "Real-Time-Rendering-Lib",
             "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
             "targets": [
-              {
-                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
-                "fileGroups": [
-                  {
-                    "isGenerated": false,
-                    "sources": [
-                      "CMakeLists.txt"
-                    ]
-                  }
-                ],
-                "fullName": "ALL_BUILD",
-                "name": "ALL_BUILD",
-                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
-                "type": "UTILITY"
-              },
               {
                 "artifacts": [
                   "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering/RelWithDebInfo/Real-Time-Rendering-Lib.dll",
@@ -1504,25 +1344,33 @@
                       "VertexShader.h",
                       "ObjectParser.h",
                       "DebugTools.h",
-                      "Exports.h",
-                      "CMakeLists.txt"
+                      "Exports.h"
                     ]
                   }
                 ],
                 "fullName": "Real-Time-Rendering-Lib.dll",
+                "isGeneratorProvided": false,
                 "linkFlags": "/machine:x64 /debug /INCREMENTAL",
                 "linkLibraries": "..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2.lib ..\\..\\Libs\\SDL2-2.0.8\\lib\\x64\\SDL2main.lib ..\\..\\Libs\\SDL2_image-2.0.3\\lib\\x64\\SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
                 "linkerLanguage": "CXX",
                 "name": "Real-Time-Rendering-Lib",
                 "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
                 "type": "SHARED_LIBRARY"
+              },
+              {
+                "buildDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering",
+                "fullName": "ALL_BUILD",
+                "isGeneratorProvided": true,
+                "name": "ALL_BUILD",
+                "sourceDirectory": "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering",
+                "type": "UTILITY"
               }
             ]
           }
         ]
       }
     ],
-    "cookie": "0.11224251100689453",
+    "cookie": "0.9450778613187822",
     "inReplyTo": "codemodel",
     "type": "reply"
   }
