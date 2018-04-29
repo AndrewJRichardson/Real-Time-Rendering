@@ -1,11 +1,6 @@
 #include "RasterizeFilled.h"
 #include <cmath>
 
-rtr::RasterizeFilled::RasterizeFilled() {}
-
-rtr::RasterizeFilled::RasterizeFilled(SDL_Window& window) : window (&window){colour = true; c = 0;}
-
-
  void rtr::RasterizeFilled::operator()(FaceVertSet pointA, FaceVertSet pointB,
                                        FaceVertSet pointC, Device& device,
                                        const Object& object) {

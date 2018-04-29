@@ -89,17 +89,17 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)/Libs/glm/;$(SolutionDir)/Libs/SDL2-2.0.6/include/;$(SolutionDir)/Real-Time-Rendering;$(SolutionDir)/Libs/SDL2_ttf-2.0.14/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/Libs/glm/;$(SolutionDir)/Libs/SDL2_image-2.0.3/include/;$(SolutionDir)/Libs/SDL2-2.0.8/include/;$(SolutionDir)/Real-Time-Rendering;$(SolutionDir)/Libs/SDL2_ttf-2.0.14/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDIr)Libs\SDL2-2.0.6\Lib\$(Platform);$(SolutionDir)Libs\SDL2_ttf-2.0.14\lib\$(Platform);$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDIr)Libs\SDL2_image-2.0.3\Lib\$(Platform);$(SolutionDIr)Libs\SDL2-2.0.8\Lib\$(Platform);$(SolutionDir)Libs\SDL2_ttf-2.0.14\lib\$(Platform);$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;Real-Time-Rendering.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;Real-Time-Rendering.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll" /Y</Command>
+      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.8\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -107,14 +107,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)/Libs/glm/;$(SolutionDir)/Libs/SDL2-2.0.6/include/;$(SolutionDir)/Real-Time-Rendering;$(SolutionDir)/Libs/SDL2_ttf-2.0.14/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/Libs/glm/;$(SolutionDir)/Libs/SDL2_image-2.0.3/include/;$(SolutionDir)/Libs/SDL2-2.0.8/include/;$(SolutionDir)/Real-Time-Rendering;$(SolutionDir)/Libs/SDL2_ttf-2.0.14/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll" /Y</Command>
+      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.8\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll" /Y</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDIr)Libs\SDL2-2.0.6\Lib\$(Platform);$(SolutionDir)Libs\SDL2_ttf-2.0.14\lib\$(Platform);$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;Real-Time-Rendering.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDIr)Libs\SDL2_image-2.0.3\Lib\$(Platform);$(SolutionDIr)Libs\SDL2-2.0.8\Lib\$(Platform);$(SolutionDir)Libs\SDL2_ttf-2.0.14\lib\$(Platform);$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;Real-Time-Rendering.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -122,15 +122,15 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)/Libs/glm/;$(SolutionDir)/Libs/SDL2-2.0.6/include/;$(SolutionDir)/Real-Time-Rendering;$(SolutionDir)/Libs/SDL2_ttf-2.0.14/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/Libs/glm/;$(SolutionDir)/Libs/SDL2_image-2.0.3/include/;$(SolutionDir)/Libs/SDL2-2.0.8/include/;$(SolutionDir)/Real-Time-Rendering;$(SolutionDir)/Libs/SDL2_ttf-2.0.14/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDIr)Libs\SDL2-2.0.6\Lib\$(Platform);$(SolutionDir)Libs\SDL2_ttf-2.0.14\lib\$(Platform);$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDIr)Libs\SDL2_image-2.0.3\Lib\$(Platform);$(SolutionDIr)Libs\SDL2-2.0.8\Lib\$(Platform);$(SolutionDir)Libs\SDL2_ttf-2.0.14\lib\$(Platform);$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;Real-Time-Rendering.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;Real-Time-Rendering.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll" /Y</Command>
+      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.8\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -140,16 +140,16 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)/Libs/glm/;$(SolutionDir)/Libs/SDL2-2.0.6/include/;$(SolutionDir)/Real-Time-Rendering;$(SolutionDir)/Libs/SDL2_ttf-2.0.14/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/Libs/glm/;$(SolutionDir)/Libs/SDL2_image-2.0.3/include/;$(SolutionDir)/Libs/SDL2-2.0.8/include/;$(SolutionDir)/Real-Time-Rendering;$(SolutionDir)/Libs/SDL2_ttf-2.0.14/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDIr)Libs\SDL2-2.0.6\Lib\$(Platform);$(SolutionDir)Libs\SDL2_ttf-2.0.14\lib\$(Platform);$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;Real-Time-Rendering.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDIr)Libs\SDL2_image-2.0.3\Lib\$(Platform);$(SolutionDIr)Libs\SDL2-2.0.8\Lib\$(Platform);$(SolutionDir)Libs\SDL2_ttf-2.0.14\lib\$(Platform);$(SolutionDir)LibraryBuilds\$(Configuration)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;Real-Time-Rendering.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.6\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll" /Y</Command>
+      <Command>copy "$(SolutionDir)Libs\SDL2-2.0.8\lib\$(Platform)\SDL2.dll" "$(SolutionDir)DemosBuilds\$(Configuration)\$(Platform)\SDL2.dll" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

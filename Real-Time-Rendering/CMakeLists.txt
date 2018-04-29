@@ -15,8 +15,8 @@ set(headers     Device.h;
                 VertexProcessor.h;
                 VertexShader.h;
                 ObjectParser.h;
-                DebugTools.h;
-                Exports.h)
+                Exports.h;
+                DefaultVertexShader.h)
 
 set(sourceFiles Device.cpp;
                 Camera.cpp;
@@ -29,10 +29,10 @@ set(sourceFiles Device.cpp;
                 RasterizeTextured.cpp;
                 RasterizeFilled.cpp;
                 VertexProcessor.cpp;
-                VertexShader.cpp;
                 Mesh.cpp;
                 ObjectParser.cpp;
-                DebugTools.cpp)
+                DefaultVertexShader.cpp)
+
 
 add_library(Real-Time-Rendering-Lib ${sourceFiles} ${headers})
 target_link_libraries(Real-Time-Rendering-Lib ${SDL2} ${SDL2main} ${SDL2image})

@@ -6,6 +6,7 @@
 
 namespace rtr{
 
+    ///Interface for creating view types such as orthoganol and perspectve
     class ViewMode {
         public:
         REALTIME_API virtual glm::vec3 operator()(glm::vec3& vert) const = 0;

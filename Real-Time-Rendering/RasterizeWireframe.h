@@ -5,6 +5,12 @@
 #include "Exports.h"
 namespace rtr {
 
+    /** \brief RasterizerMode that draws a white line between each vertex of an 
+     * objects face
+     */
+    /**
+     * Uses the Bresenham line drawing method from Device
+     */
     class RasterizeWireframe: public RasterizerMode {
 
         public:

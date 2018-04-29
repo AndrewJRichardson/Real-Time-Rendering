@@ -1,7 +1,7 @@
 #include "ObjectParser.h"
 
 //TODO: This needs some serious clean up
-void ObjectParser::ParseFile(std::string filename, Mesh** mesh) {
+void rtr::ObjectParser::ParseFile(std::string filename, Mesh** mesh) {
     std::ifstream file;
     file.open(filename);
     
@@ -178,7 +178,7 @@ void ObjectParser::ParseFile(std::string filename, Mesh** mesh) {
 }
 
 
-void ObjectParser::ProcessFaceChunk(std::string& chunk, Face& face, int setNum){
+void rtr::ObjectParser::ProcessFaceChunk(std::string& chunk, Face& face, int setNum){
     //Face descriptions in object files are not completely consistent
     //they can have up to 3 components seperated by slashes
     //f v/vt/vn
@@ -219,11 +219,11 @@ void ObjectParser::ProcessFaceChunk(std::string& chunk, Face& face, int setNum){
 }
 
 
-ObjectParser::ObjectParser()
+rtr::ObjectParser::ObjectParser()
 {
 }
 
 
-ObjectParser::~ObjectParser()
+rtr::ObjectParser::~ObjectParser()
 {
 }

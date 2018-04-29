@@ -12,6 +12,9 @@
 
 #include "Real-Time-Rendering.h"
 
+//This application is mererly a demo of the real-time rendering library
+//It is not part of the library itself
+
 //TODO Remove this using declaration and use proper scope resolution
 using namespace rtr;
 
@@ -56,14 +59,14 @@ int main(int argc, char* args[]) {
     p.ParseFile("resources/cube2.obj", &m);
 
     //Create an object, object allows a single mesh to be reused
-    VertexShader       v = {};
-    RasterizeWireframe r = {};
-    RasterizeTextured  t = {};
-    RasterizeFilled    f = {};
-    RasterizeVertex    x = {};
+    DefaultVertexShader v = {};
+    RasterizeWireframe  r = {};
+    RasterizeTextured   t = {};
+    RasterizeFilled     f = {};
+    RasterizeVertex     x = {};
     Object objC = Object(*m, glm::vec3(-10, 0, 10), v, x);
-    Object objB = Object(*m, glm::vec3(0, 0, 10), v, r);
-    Object objD = Object(*m, glm::vec3(10, 0, 10), v, f);
+    Object objB = Object(*m, glm::vec3(0,   0, 10), v, r);
+    Object objD = Object(*m, glm::vec3(10,  0, 10), v, f);
     Object objA = Object(*m, glm::vec3(20,  0, 10), v, t);
 
     //Attempt to init the video component of SDL and print an error if it fails
@@ -95,21 +98,17 @@ int main(int argc, char* args[]) {
         try {
             //Create a device to handle the rendering
             Device device		 = { *windowSurface, camera};
-            SDL_Surface* objTex = IMG_Load("resources/btex.png");
+            SDL_Surface* objTex  = IMG_Load("resources/btex.png");
 
-            objA.texture = objTex;
-			objB.texture = objTex;
-            objA.rotationAxis = glm::vec3(1, 1, 0);
-            objA.angle = 0;
-            objB.rotationAxis = glm::vec3(1, 1, 0);
-            objB.angle = 0;
-            objC.rotationAxis = glm::vec3(1, 1, 0);
-            objC.angle = 0;
-            objD.rotationAxis = glm::vec3(1, 1, 0);
-            objD.angle = 0;
             if(objTex == nullptr){
                 std::cout << "error loading texture: " << IMG_GetError() << std::endl;
             }
+
+            objA.texture = objTex;
+            objA.rotationAxis = glm::vec3(1, 1, 0);
+            objB.rotationAxis = glm::vec3(1, 1, 0);
+            objC.rotationAxis = glm::vec3(1, 1, 0);
+            objD.rotationAxis = glm::vec3(1, 1, 0);
 
             //device.currentRenderMode = &Device::RenderPoints;
             Pipeline* pipeline = new Pipeline {ViewPerspective(), device};

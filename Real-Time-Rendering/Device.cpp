@@ -14,7 +14,6 @@ rtr::Device::Device(SDL_Surface& surface, Camera& camera)
     screenSize        = bufferHeight * bufferWidth;
     zBuffer           = new float[screenSize];
     zBufferSize       = screenSize;
-    debugTool         = {};
     perspectiveMatrix = glm::perspective(glm::radians(90.f), (float)bufferWidth / bufferHeight, 1.f, 100.0f);
     threadLimit       = 4;
 }
@@ -29,7 +28,6 @@ rtr::Device::Device(const Device&& device)
     screenSize        = device.screenSize;
     zBufferSize       = device.zBufferSize;
     perspectiveMatrix = device.perspectiveMatrix;
-    debugTool         = device.debugTool;
 }
 
 
@@ -99,13 +97,12 @@ void rtr::Device::DebugDraw(const glm::vec3& point, int r, int g, int b, SDL_Win
     SDL_UpdateWindowSurface(&window);
 }
 
-//Projects a vertices into clip space
+
 glm::vec3 rtr::Device::Project(const glm::vec3& vert, const glm::mat4& transform) {
 	glm::vec4 t{ vert, 1 };
     return transform * t;
 }
 
-//Takes clip space coords and maps them to screen space
 glm::vec3 rtr::Device::MapToScreen(glm::vec3& vert){
     vert.x = (vert.x * bufferWidth  + halfWidth);
     vert.y = (vert.y * bufferHeight + halfHeight);
@@ -113,7 +110,6 @@ glm::vec3 rtr::Device::MapToScreen(glm::vec3& vert){
 }
 
 
-//Draws filled triangles using the scan line method
 //TODO: Can be optimised in the same manner that scan line texture has been
 void rtr::Device::DrawScanLine(const int currentY, const glm::vec3 pointA, 
                                const glm::vec3 pointB, const glm::vec3 pointC, 
@@ -210,6 +206,7 @@ void rtr::Device::DrawScanLineTexture(const int currentY, const FaceVertSet& a,
 // }
 
 
+
 void rtr::Device::RenderTriangle(glm::vec3& point1, glm::vec3& point2,
                                  glm::vec3& point3) {
     if (point1.z > 0 && point2.z > 0 && point3.z > 0) {
@@ -234,9 +231,9 @@ void rtr::Device::DrawLine(const glm::vec3& start, const glm::vec3& end) {
 }
 
 
-//TODO: remove once pipeline is finished
 //Draws filled triangles using the draw scanline method
-void rtr::Device::DrawTriangle(glm::vec3& pointA, glm::vec3& pointB, glm::vec3& pointC) {
+void rtr::Device::DrawTriangle(glm::vec3& pointA, glm::vec3& pointB, 
+                               glm::vec3& pointC) {
 
     int r = 0xFF, g = 0xFF, b = 0xFF;
     if (pointA.y > pointB.y) {
@@ -303,11 +300,9 @@ void rtr::Device::DrawTriangle(glm::vec3& pointA, glm::vec3& pointB, glm::vec3& 
             }
         }
     }
-
 }
 
 
-//TODO: move into RasterizeWireframe 
 void rtr::Device::DrawLineBresenham(const glm::vec3& start, const glm::vec3& end) {
 
     int x  = (int)start.x; //Store both values of both vectors

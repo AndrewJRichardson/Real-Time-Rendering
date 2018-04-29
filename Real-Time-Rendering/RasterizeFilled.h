@@ -9,15 +9,13 @@
 
 namespace rtr {
 
+    ///RasterizerMode that draws a white filled face 
+    /**
+     * Uses a scanline drawing method from Device
+     */
     class RasterizeFilled : public RasterizerMode {
-        private:
-        SDL_Window* window;
-        bool colour;
-        int c;
 
         public:
-        REALTIME_API RasterizeFilled();
-        REALTIME_API RasterizeFilled(SDL_Window& window);
         REALTIME_API void operator()(FaceVertSet, FaceVertSet, FaceVertSet,
                                      Device&, const Object&);
 

@@ -13,6 +13,11 @@
 
 namespace rtr {
 
+///Class for making a rendering pipeline
+/**
+ * Is a representation of an abstract rendering pipeline
+ * requires a ViewMode and a Device
+ */
 class Pipeline {
 
     private:
@@ -22,11 +27,15 @@ class Pipeline {
 
     public:
     Device&          device;
-    
+    ///Default Contructor
     REALTIME_API Pipeline(const ViewMode&,
                           Device& device);
-    //REALTIME_API ~Pipeline();
+    ///Renders the passed in object
+    /**
+     * Uses the VertexShader and RasterizerMode attached to the object
+     */
     REALTIME_API void Render(const Object&);
+    ///Renders an object but multi-threads the process
     REALTIME_API void RenderThreaded(const Object&);
 
 };

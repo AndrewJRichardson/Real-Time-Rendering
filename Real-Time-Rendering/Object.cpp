@@ -6,6 +6,8 @@ rtr::Object::Object(const Mesh& mesh, glm::vec3 pos,
 					RasterizerMode& ras) 
 					: mesh(mesh), vertShader(vertexShader), rasterizer(ras){
 	position = pos;
+	rotationAxis = glm::vec3(0,1,0);
+	angle = 0;
 }
 
 

@@ -6,6 +6,7 @@
 
 namespace rtr {
 
+///RasterizerMode that draws each vertex as a single white pixel
 class RasterizeVertex : public RasterizerMode {
 
     public:
