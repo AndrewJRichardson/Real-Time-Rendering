@@ -1,17 +1,18 @@
 #include "VertexProcessor.h"
+#include "glm/gtx/transform.hpp"
 
 glm::mat4 rtr::VertexProcessor::CreateMVPMatrix(const Object& object,
                                                 const Device& device) const {
     
-    glm::mat4 modelMatrix = glm::translate(glm::mat4(), 
-                                object.position);
+    glm::mat4 modelMatrix = 
+                                glm::translate(glm::mat4(), 
+                                object.position) * glm::rotate(glm::radians(object.angle), object.rotationAxis);
 
     return device.perspectiveMatrix * device.viewMatrix * modelMatrix;
 }
 
 void rtr::VertexProcessor::operator()(const Object& object,
                                       const ViewMode& viewmode,
-                                      RasterizerMode& rasterizer,
                                       const glm::mat4& transformMatrix,
                                       Device& device, const Face& face) const {
 
@@ -49,5 +50,5 @@ void rtr::VertexProcessor::operator()(const Object& object,
     point2.v = device.MapToScreen(point2.v);
     point3.v = device.MapToScreen(point3.v);
 
-    rasterizer(point1, point2, point3, device, object);
+    object.rasterizer(point1, point2, point3, device, object);
 }

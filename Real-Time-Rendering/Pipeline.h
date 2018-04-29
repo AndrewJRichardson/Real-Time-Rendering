@@ -16,7 +16,6 @@ namespace rtr {
 class Pipeline {
 
     private:
-    RasterizerMode&  rasterizer;
     const ViewMode&        viewmode;
     const VertexProcessor& vertexProcessor;
     int                    threadLimit;
@@ -24,7 +23,7 @@ class Pipeline {
     public:
     Device&          device;
     
-    REALTIME_API Pipeline(RasterizerMode&, const ViewMode&,
+    REALTIME_API Pipeline(const ViewMode&,
                           Device& device);
     //REALTIME_API ~Pipeline();
     REALTIME_API void Render(const Object&);

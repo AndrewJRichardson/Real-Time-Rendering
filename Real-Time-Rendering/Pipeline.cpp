@@ -1,10 +1,8 @@
 #include "Pipeline.h"
 
 
-rtr::Pipeline::Pipeline(RasterizerMode& rasterizer, 
-                        const ViewMode& viewmode,
+rtr::Pipeline::Pipeline(const ViewMode& viewmode,
                         Device& device) : device (device),
-                        rasterizer(rasterizer),
                         viewmode(viewmode),
                         vertexProcessor(VertexProcessor{}){ threadLimit = 4;}
 
@@ -31,7 +29,7 @@ void rtr::Pipeline::RenderThreaded(const Object& object){
        
                 int end = begin + count;
                 for (int i = begin; i < end; i++){
-                    vertexProcessor(object, viewmode, rasterizer, transformMatrix,
+                    vertexProcessor(object, viewmode, transformMatrix,
                                     device, object.mesh.faces[i]);
                 }
             }, facesPerThread, marker, std::ref(object.mesh)));
@@ -46,7 +44,7 @@ void rtr::Pipeline::RenderThreaded(const Object& object){
 void rtr::Pipeline::Render(const Object& object){
     glm::mat4 transformMatrix = vertexProcessor.CreateMVPMatrix(object, device);
     for (int i = 0; i < object.mesh.faceCount; i++){
-            vertexProcessor(object, viewmode, rasterizer, transformMatrix, 
+            vertexProcessor(object, viewmode, transformMatrix, 
                             device, object.mesh.faces[i]);
     }
 }

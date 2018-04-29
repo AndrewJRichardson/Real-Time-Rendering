@@ -2,8 +2,9 @@
 
 
 rtr::Object::Object(const Mesh& mesh, glm::vec3 pos,
-					const VertexShader& vertexShader) 
-					: mesh(mesh), vertShader(vertexShader) {
+					const VertexShader& vertexShader,
+					RasterizerMode& ras) 
+					: mesh(mesh), vertShader(vertexShader), rasterizer(ras){
 	position = pos;
 }
 

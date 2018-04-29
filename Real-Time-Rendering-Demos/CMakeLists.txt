@@ -40,6 +40,11 @@ add_custom_command(TARGET Demo POST_BUILD
 
 add_custom_command(TARGET Demo POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy
+                   "${CMAKE_SOURCE_DIR}/Libs/SDL2_image-2.0.3/lib/${ARCHITECTURE}/libpng16-16.dll"
+                   "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/libpng16-16.dll")
+
+add_custom_command(TARGET Demo POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy
                    "${CMAKE_SOURCE_DIR}/Libs/SDL2_ttf-2.0.14/lib/${ARCHITECTURE}/libfreetype-6.dll"
                    "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/libfreetype-6.dll")
 
@@ -47,7 +52,6 @@ add_custom_command(TARGET Demo POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy
                    "${CMAKE_SOURCE_DIR}/Libs/SDL2_image-2.0.3/lib/${ARCHITECTURE}/SDL2_image.dll"
                    "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/SDL2_image.dll")
-
 
 add_custom_command(TARGET Demo POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy

@@ -39,10 +39,9 @@ int main(int argc, char* args[]) {
     #define FPS_INTERVAL 1.0 //seconds.
 
     Uint32 fps_lasttime = SDL_GetTicks(); //the last recorded time.
-    Uint32 fps_current = 0; //the current FPS.
-    Uint32 fps_frames = 0; //frames passed since the last recorded fps.
+    Uint32 fps_current  = 0; //the current FPS.
+    Uint32 fps_frames   = 0; //frames passed since the last recorded fps.
 
-    std::unique_ptr<float[]> blah = std::make_unique<float[]>(10);        
     //The window to render to
     SDL_Window* window = NULL;
 
@@ -57,18 +56,23 @@ int main(int argc, char* args[]) {
     p.ParseFile("resources/cube2.obj", &m);
 
     //Create an object, object allows a single mesh to be reused
-    VertexShader v = {};
-    Object objA = Object(*m, glm::vec3(0, 0, 10), v);
-    Object objB = Object(*m, glm::vec3(10, 0, 10), v);
-
+    VertexShader       v = {};
+    RasterizeWireframe r = {};
+    RasterizeTextured  t = {};
+    RasterizeFilled    f = {};
+    RasterizeVertex    x = {};
+    Object objC = Object(*m, glm::vec3(-10, 0, 10), v, x);
+    Object objB = Object(*m, glm::vec3(0, 0, 10), v, r);
+    Object objD = Object(*m, glm::vec3(10, 0, 10), v, f);
+    Object objA = Object(*m, glm::vec3(20,  0, 10), v, t);
 
     //Attempt to init the video component of SDL and print an error if it fails
     if (init(&window, &windowSurface)) {
 
         //TODO: These inits should be added to init
-        //Init SDL_image for PNGs 
+        //Init SDL_image for PNGs
         IMG_Init(IMG_INIT_PNG);
-       
+
         // Init SDL_ttf and some variables so that FPS text can be rendered
         TTF_Init();
         TTF_Font*			font			 = TTF_OpenFont("resources/PT_Sans.ttf", 12);
@@ -78,7 +82,7 @@ int main(int argc, char* args[]) {
         SDL_Surface*		textSurface		 = NULL;
         SDL_GameController* controller		 = NULL;
         int					controllerSwitch = 0;
-        
+
         SDL_SetWindowGrab		 (window, SDL_TRUE);
         SDL_SetRelativeMouseMode (SDL_TRUE);
 
@@ -95,15 +99,26 @@ int main(int argc, char* args[]) {
 
             objA.texture = objTex;
 			objB.texture = objTex;
+            objA.rotationAxis = glm::vec3(1, 1, 0);
+            objA.angle = 0;
+            objB.rotationAxis = glm::vec3(1, 1, 0);
+            objB.angle = 0;
+            objC.rotationAxis = glm::vec3(1, 1, 0);
+            objC.angle = 0;
+            objD.rotationAxis = glm::vec3(1, 1, 0);
+            objD.angle = 0;
             if(objTex == nullptr){
                 std::cout << "error loading texture: " << IMG_GetError() << std::endl;
             }
-            
+
             //device.currentRenderMode = &Device::RenderPoints;
-            RasterizeFilled r(*window);
-            Pipeline* pipeline = new Pipeline {r, ViewPerspective(), device};
+            Pipeline* pipeline = new Pipeline {ViewPerspective(), device};
             bool quit = false;
             while (!quit) {
+                objA.angle += 0.1;
+                objB.angle += 0.1;
+                objC.angle += 0.1;
+                objD.angle += 0.1;
                 //device.Clear(camera);
                 (*pipeline).device.Clear();
                 SDL_Event event;
@@ -119,26 +134,26 @@ int main(int argc, char* args[]) {
                     else if (event.type == SDL_CONTROLLERBUTTONDOWN) {
                         if (event.cbutton.button == SDL_CONTROLLER_BUTTON_LEFTSHOULDER) {
                             controllerSwitch++;
-                            
-                            switch (controllerSwitch) {
-                                case 0:
-                                    delete pipeline;
-                                    pipeline = new Pipeline{RasterizeVertex{}, ViewPerspective{}, device};
-                                    break;
-                                case 1:
-                                    delete pipeline;
-                                    pipeline = new Pipeline{RasterizeWireframe{}, ViewPerspective{}, device};
-                                    break;
-                                case 2:
-                                    delete pipeline;
-                                    pipeline = new Pipeline{RasterizeFilled{}, ViewPerspective{}, device};
-                                    break;
-                                case 3:
-                                    delete pipeline;
-                                    pipeline = new Pipeline{RasterizeTextured{}, ViewPerspective{}, device};
-                                    controllerSwitch = -1;
-                                    break;
-                            }
+
+                            // switch (controllerSwitch) {
+                            //     case 0:
+                            //         delete pipeline;
+                            //         pipeline = new Pipeline{RasterizeVertex{}, ViewPerspective{}, device};
+                            //         break;
+                            //     case 1:
+                            //         delete pipeline;
+                            //         pipeline = new Pipeline{RasterizeWireframe{}, ViewPerspective{}, device};
+                            //         break;
+                            //     case 2:
+                            //         delete pipeline;
+                            //         pipeline = new Pipeline{RasterizeFilled{}, ViewPerspective{}, device};
+                            //         break;
+                            //     case 3:
+                            //         delete pipeline;
+                            //         pipeline = new Pipeline{RasterizeTextured{}, ViewPerspective{}, device};
+                            //         controllerSwitch = -1;
+                            //         break;
+                            // }
                         }
 
                     }
@@ -162,23 +177,23 @@ int main(int argc, char* args[]) {
                                 std::cout << "Delay: " << delay << std::endl;
                             }
                             break;
-                        case SDLK_1:
-                            delete pipeline;
-                            pipeline = new Pipeline{RasterizeVertex{}, ViewPerspective{}, device};
-                            // pipeline.rasterizer = RasterizeVertex();
-                            break;
-                        case SDLK_2:
-                        	delete pipeline;
-                            pipeline = new Pipeline{RasterizeWireframe{}, ViewPerspective{}, device};
-                        	break;
-                        case SDLK_3:
-                        	delete pipeline;
-                            pipeline = new Pipeline{RasterizeFilled{}, ViewPerspective{}, device};
-                        	break;
-                        case SDLK_4:
-                            delete pipeline;
-                            pipeline = new Pipeline{RasterizeTextured{}, ViewPerspective{}, device};
-                            break;
+                        // case SDLK_1:
+                        //     delete pipeline;
+                        //     pipeline = new Pipeline{RasterizeVertex{}, ViewPerspective{}, device};
+                        //     // pipeline.rasterizer = RasterizeVertex();
+                        //     break;
+                        // case SDLK_2:
+                        // 	delete pipeline;
+                        //     pipeline = new Pipeline{RasterizeWireframe{}, ViewPerspective{}, device};
+                        // 	break;
+                        // case SDLK_3:
+                        // 	delete pipeline;
+                        //     pipeline = new Pipeline{RasterizeFilled{}, ViewPerspective{}, device};
+                        // 	break;
+                        // case SDLK_4:
+                        //     delete pipeline;
+                        //     pipeline = new Pipeline{RasterizeTextured{}, ViewPerspective{}, device};
+                        //     break;
 
                             //TODO; camera class should probably handle these calculations
                         case SDLK_w:
@@ -194,7 +209,7 @@ int main(int argc, char* args[]) {
                             device.camera.position -= glm::cross(device.camera.front, device.camera.up) * camSpeed;
                             break;
                         case SDLK_i:
-                            device.camera.position = glm::vec3(device.camera.position.x, device.camera.position.y + camSpeed, 
+                            device.camera.position = glm::vec3(device.camera.position.x, device.camera.position.y + camSpeed,
                                                         device.camera.position.z);
                             break;
                         case SDLK_k:
@@ -231,7 +246,10 @@ int main(int argc, char* args[]) {
                 //Tell device to render an object
                 //device.Render(objA);
                 // pipeline->Render(objA);
+                pipeline->Render(objA);
                 pipeline->Render(objB);
+                pipeline->Render(objC);
+                pipeline->Render(objD);
                 //Update the window with changes
                 fps_frames++;
                 if (fps_lasttime < SDL_GetTicks() - FPS_INTERVAL*1000)

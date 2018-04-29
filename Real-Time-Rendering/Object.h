@@ -6,14 +6,23 @@
 #include "SDL.h"
 
 namespace rtr {
+	class RasterizerMode;
+	class RasterizeFilled;
+
 class Object
 {
 public:
 	const Mesh& 		mesh;
 	const VertexShader& vertShader;
+	RasterizerMode& rasterizer;
 	SDL_Surface* texture;
 	glm::vec3 position;
-	REALTIME_API Object(const Mesh&, glm::vec3, const VertexShader&);
+	glm::vec3 rotationAxis;
+	float angle;
+
+	REALTIME_API Object(const Mesh&, glm::vec3, const VertexShader&,
+						RasterizerMode&);
+
 	REALTIME_API ~Object();
 };
 
