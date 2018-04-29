@@ -39,7 +39,7 @@ int main(int argc, char* args[]) {
     #define FPS_INTERVAL 1.0 //seconds.
 
     Uint32 fps_lasttime = SDL_GetTicks(); //the last recorded time.
-    Uint32 fps_current; //the current FPS.
+    Uint32 fps_current = 0; //the current FPS.
     Uint32 fps_frames = 0; //frames passed since the last recorded fps.
 
     std::unique_ptr<float[]> blah = std::make_unique<float[]>(10);        
@@ -91,7 +91,8 @@ int main(int argc, char* args[]) {
         try {
             //Create a device to handle the rendering
             Device device		 = { *windowSurface, camera};
-            SDL_Surface* objTex = IMG_Load("resources/tex.png");
+            SDL_Surface* objTex = IMG_Load("resources/btex.png");
+
             objA.texture = objTex;
 			objB.texture = objTex;
             if(objTex == nullptr){
@@ -119,7 +120,6 @@ int main(int argc, char* args[]) {
                         if (event.cbutton.button == SDL_CONTROLLER_BUTTON_LEFTSHOULDER) {
                             controllerSwitch++;
                             
-                            //! Fix this once pipeline redesign is finished
                             switch (controllerSwitch) {
                                 case 0:
                                     delete pipeline;
@@ -132,6 +132,10 @@ int main(int argc, char* args[]) {
                                 case 2:
                                     delete pipeline;
                                     pipeline = new Pipeline{RasterizeFilled{}, ViewPerspective{}, device};
+                                    break;
+                                case 3:
+                                    delete pipeline;
+                                    pipeline = new Pipeline{RasterizeTextured{}, ViewPerspective{}, device};
                                     controllerSwitch = -1;
                                     break;
                             }
@@ -171,6 +175,10 @@ int main(int argc, char* args[]) {
                         	delete pipeline;
                             pipeline = new Pipeline{RasterizeFilled{}, ViewPerspective{}, device};
                         	break;
+                        case SDLK_4:
+                            delete pipeline;
+                            pipeline = new Pipeline{RasterizeTextured{}, ViewPerspective{}, device};
+                            break;
 
                             //TODO; camera class should probably handle these calculations
                         case SDLK_w:

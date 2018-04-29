@@ -7,9 +7,11 @@ rtr::RasterizeFilled::RasterizeFilled(SDL_Window& window) : window (&window){col
 
 
  void rtr::RasterizeFilled::operator()(FaceVertSet pointA, FaceVertSet pointB,
-                                       FaceVertSet pointC, Device& device) {
+                                       FaceVertSet pointC, Device& device,
+                                       const Object& object) {
     
-    device.RenderTriangle(pointA.v, pointB.v, pointC.v);
+    if (pointA.v.z >= 2 && pointB.v.z >= 2 && pointC.v.z >= 2)
+        device.RenderTriangle(pointA.v, pointB.v, pointC.v);
 }
 // }
 // int r = 0x00, g = 0x00, b = 0x00;

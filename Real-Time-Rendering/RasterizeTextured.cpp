@@ -1,9 +1,11 @@
 #include "RasterizeTextured.h"
 
 
-void rtr::RasterizeTextured::Render(FaceVertSet a, FaceVertSet b, FaceVertSet c,
-                                    Device& device, const Object& object){
-    
+void rtr::RasterizeTextured::operator()(FaceVertSet a, FaceVertSet b, FaceVertSet c,
+                                        Device& device, const Object& object){
+
+    if (a.v.z <= 2 || b.v.z <=2 || c.v.z <=2)
+        return;
     
     if (a.v.y > b.v.y) {
         FaceVertSet tSet = b;

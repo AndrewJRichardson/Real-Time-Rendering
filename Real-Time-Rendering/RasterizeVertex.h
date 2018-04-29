@@ -10,7 +10,7 @@ class RasterizeVertex : public RasterizerMode {
 
     public:
     REALTIME_API void operator()(FaceVertSet, FaceVertSet, FaceVertSet,
-                                 Device&);
+                                 Device&, const Object&);
 };
 
 }

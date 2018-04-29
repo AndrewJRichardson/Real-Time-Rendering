@@ -19,8 +19,7 @@ namespace rtr {
         REALTIME_API RasterizeFilled();
         REALTIME_API RasterizeFilled(SDL_Window& window);
         REALTIME_API void operator()(FaceVertSet, FaceVertSet, FaceVertSet,
-                                     Device&);
-        REALTIME_API void test(glm::vec3&, glm::vec3&, glm::vec3&, Device&);
+                                     Device&, const Object&);
 
     };
 }

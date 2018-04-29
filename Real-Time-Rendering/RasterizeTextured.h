@@ -5,15 +5,15 @@
 #include "Mesh.h"
 #include "Device.h"
 #include "Object.h"
+#include "RasterizerMode.h"
 
 namespace rtr {
 
-    class RasterizeTextured{
+    class RasterizeTextured : public RasterizerMode{
 
         public:
-        REALTIME_API void Render(FaceVertSet a, FaceVertSet b, FaceVertSet c,
-                                 Device& device, const Object& object);
-
+        REALTIME_API void operator()(FaceVertSet, FaceVertSet, FaceVertSet,
+                                     Device&, const Object& object);
     };
 }
 

@@ -148,7 +148,6 @@ void rtr::Device::DrawScanLineTexture(const int currentY, const FaceVertSet& a,
     float z1 = Interpolate(a.v.z, b.v.z, gA);
     float z2 = Interpolate(c.v.z, d.v.z, gB);
 
-
     SDL_Surface* texture = object.texture;
 
     float su = Interpolate(a.vt.x, b.vt.x, gA);
@@ -420,4 +419,4 @@ float rtr::Device::SignedArea(glm::vec3& vert1, glm::vec3& vert2, glm::vec3& ver
 //     //Similar idea to Interpolate X
 //     float inter = ((i2 - i3)/(p2.x - p3.x)) * (p1.x - p3.x) + i3;
 //     return inter - i1; 
-}
+// }
