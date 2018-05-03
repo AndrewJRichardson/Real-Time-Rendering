@@ -65,7 +65,7 @@ void rtr::Device::Clear() {
 
 
 //Draws a pixel onto the device buffer
-void rtr::Device::DrawPoint(const glm::vec3& point, int r, int g, int b) {
+void rtr::Device::DrawPixel(const glm::vec3& point, int r, int g, int b) {
     
     if (point.x >= 0 && point.y >= 0 && point.x < bufferWidth && point.y < bufferHeight-1) {
         int index = ((int)point.x + ((int)point.y * bufferWidth));
@@ -75,10 +75,12 @@ void rtr::Device::DrawPoint(const glm::vec3& point, int r, int g, int b) {
 
          zBuffer[index] = point.z;
         *((Uint32*)buffer.pixels + index) = SDL_MapRGB(buffer.format, (Uint8)r, (Uint8)g, (Uint8)b);
+        *((Uint32*)buffer.pixels + index+1) = SDL_MapRGB(buffer.format, (Uint8)r, (Uint8)g, (Uint8)b);
+        *((Uint32*)buffer.pixels + index+2) = SDL_MapRGB(buffer.format, (Uint8)r, (Uint8)g, (Uint8)b);
     }
 }
 
-void rtr::Device::DrawPoint(const glm::vec3& point, Uint8 r, Uint8 g, Uint8 b) {
+void rtr::Device::DrawPixel(const glm::vec3& point, Uint8 r, Uint8 g, Uint8 b) {
     
     if (point.x >= 0 && point.y >= 0 && point.x < bufferWidth && point.y < bufferHeight-1) {
         int index = ((int)point.x + ((int)point.y * bufferWidth));
@@ -93,7 +95,7 @@ void rtr::Device::DrawPoint(const glm::vec3& point, Uint8 r, Uint8 g, Uint8 b) {
 
 
 void rtr::Device::DebugDraw(const glm::vec3& point, int r, int g, int b, SDL_Window& window) {
-    DrawPoint(point, r, g, b);
+    DrawPixel(point, r, g, b);
     SDL_UpdateWindowSurface(&window);
 }
 
@@ -111,40 +113,56 @@ glm::vec3 rtr::Device::MapToScreen(glm::vec3& vert){
 
 
 //TODO: Can be optimised in the same manner that scan line texture has been
-void rtr::Device::DrawScanLine(const int currentY, const glm::vec3 pointA, 
-                               const glm::vec3 pointB, const glm::vec3 pointC, 
-                               const glm::vec3 pointD, int r, int g, int b) {
+// void rtr::Device::DrawScanLine(const int currentY, const glm::vec3 pointA, 
+//                                const glm::vec3 pointB, const glm::vec3 pointC, 
+//                                const glm::vec3 pointD, int r, int g, int b) {
 
-    float gradientA = pointA.y != pointB.y ? (currentY - pointA.y) / (pointB.y - pointA.y) : 1;
-    float gradientB = pointC.y != pointD.y ? (currentY - pointC.y) / (pointD.y - pointC.y) : 1;
+//     float gradientA = pointA.y != pointB.y ? (currentY - pointA.y) / (pointB.y - pointA.y) : 1;
+//     float gradientB = pointC.y != pointD.y ? (currentY - pointC.y) / (pointD.y - pointC.y) : 1;
 
-    int sx = (int)Interpolate(pointA.x, pointB.x, gradientA);
-    int ex = (int)Interpolate(pointC.x, pointD.x, gradientB);
+//     int sx = (int)Interpolate(pointA.x, pointB.x, gradientA);
+//     int ex = (int)Interpolate(pointC.x, pointD.x, gradientB);
 
-    float z1 = Interpolate(pointA.z, pointB.z, gradientA);
-    float z2 = Interpolate(pointC.z, pointD.z, gradientB);
+//     float z1 = Interpolate(pointA.z, pointB.z, gradientA);
+//     float z2 = Interpolate(pointC.z, pointD.z, gradientB);
 
-    for (int x = sx; x < ex; x++) {
+//     for (int x = sx; x < ex; x++) {
 
-        float gradient = (x - sx) / (float)(ex - sx);
+//         float gradient = (x - sx) / (float)(ex - sx);
+//         float z = Interpolate(z1, z2, gradient);
+//         DrawPixel(glm::vec3(x, currentY, z), r, g, b);
+//     }
+// }
+
+void rtr::Device::DrawScanLine(const int currentY, int leftX, int rightX, 
+                               const glm::vec3 leftStart, const glm::vec3 leftEnd,
+                               const glm::vec3 rightStart, const glm::vec3 rightEnd, 
+                               const float gA, const float gB, int r, int g, int b) {
+
+
+    float z1 = Interpolate(leftStart.z, leftEnd.z, gA);
+    float z2 = Interpolate(rightStart.z, rightEnd.z, gA);
+
+    float gradInc = 1 / (float)(rightX - leftX);
+    float gradient = 0;
+
+    for (int x = leftX; x < rightX; x++) {
+
         float z = Interpolate(z1, z2, gradient);
-        DrawPoint(glm::vec3(x, currentY, z), r, g, b);
+        gradient += gradInc;
+        DrawPixel(glm::vec3(x, currentY, z), r, g, b);
     }
 }
 
+void rtr::Device::DrawScanLineTexture(const int currentY, int leftX, int rightX,
+                                      const FaceVertSet& a, const FaceVertSet& b,
+                                      const FaceVertSet& c, const FaceVertSet& d, 
+                                      const Object& object, const float gA, 
+                                      const float gB){
 
-void rtr::Device::DrawScanLineTexture(const int currentY, const FaceVertSet& a,
-                                      const FaceVertSet& b, const FaceVertSet& c,
-                                      const FaceVertSet& d, const Object& object,
-                                      const float gA, const float gB, const float gZ){
-
-    int sx = (int)Interpolate(a.v.x, b.v.x, gA);
-    int ex = (int)Interpolate(c.v.x, d.v.x, gB);
 
     float z1 = Interpolate(a.v.z, b.v.z, gA);
     float z2 = Interpolate(c.v.z, d.v.z, gB);
-
-    SDL_Surface* texture = object.texture;
 
     float su = Interpolate(a.vt.x, b.vt.x, gA);
     float eu = Interpolate(c.vt.x, d.vt.x, gB);
@@ -153,58 +171,27 @@ void rtr::Device::DrawScanLineTexture(const int currentY, const FaceVertSet& a,
 
     Uint8 r, g, bl;
 
-    float gradInc = 1 / (float)(ex - sx);
+    float gradInc = 1 / (float)(rightX - leftX);
     float gradient = 0;
+    int index;
 
-    for (int x = sx; x < ex; x++) {
+    for (int x = leftX; x < rightX; x++) {
         float z = Interpolate(z1, z2, gradient);
         float u = Interpolate(su, eu, gradient);
         float v = Interpolate(sv, ev, gradient);
+
         gradient += gradInc;
-        u *= texture->w;
-        v *= texture->h;
-        int index = ((int)u + (int)v * texture->w);
-        SDL_GetRGB(*((Uint32*)texture->pixels + index), texture->format, &r, &g, &bl);
-        DrawPoint(glm::vec3(x, currentY, z), r, g, bl);
+
+        u *= object.texture->w;
+        v *= object.texture->h;
+        index = ((int)u + (int)v * object.texture->w);
+
+        SDL_GetRGB(*((Uint32*)object.texture->pixels + index), 
+            object.texture->format, &r, &g, &bl);
+
+        DrawPixel(glm::vec3(x, currentY, z), r, g, bl);
     }
 }
-
-// //No longer used, remains for testing purposes only
-// void rtr::Device::DrawScanLineTextureOld(const int currentY, const FaceVertSet& a,
-//                                       const FaceVertSet& b, const FaceVertSet& c,
-//                                       const FaceVertSet& d, const Object& object)
-                                      
-//     float gradientA = a.v.y != b.v.y ? (currentY - a.v.y) / (b.v.y - a.v.y) : 1;
-//     float gradientB = c.v.y != d.v.y ? (currentY - c.v.y) / (d.v.y - c.v.y) : 1;
-
-//     int sx = (int)Interpolate(a.v.x, b.v.x, gradientA);
-//     int ex = (int)Interpolate(c.v.x, d.v.x, gradientB);
-
-//     float z1 = Interpolate(a.v.z, b.v.z, gradientA);
-//     float z2 = Interpolate(c.v.z, d.v.z, gradientB);
-
-//     SDL_Surface* texture = object.texture;
-
-//     float su = Interpolate(a.vt.x, b.vt.x, gradientA);
-//     float eu = Interpolate(c.vt.x, d.vt.x, gradientB);
-//     float sv = Interpolate(a.vt.y, b.vt.y, gradientA);
-//     float ev = Interpolate(c.vt.y, d.vt.y, gradientB);
- 
-//     Uint8 r, g, bl;
-
-//     for (int x = sx; x < ex; x++) {
-//         float gradient = (x - sx) / (float)(ex - sx);
-//         float z = Interpolate(z1, z2, gradient);
-//         float u = Interpolate(su, eu, gradient);
-//         float v = Interpolate(sv, ev, gradient);
-//         u *= texture->w;
-//         v *= texture->h;
-//         int index = ((int)u + (int)v * texture->w);
-//         SDL_GetRGB(*((Uint32*)texture->pixels + index), texture->format, &r, &g, &bl);
-//         DrawPoint(glm::vec3(x, currentY, z), r, g, bl);
-//     }
-// }
-
 
 
 void rtr::Device::RenderTriangle(glm::vec3& point1, glm::vec3& point2,
@@ -225,18 +212,16 @@ void rtr::Device::DrawLine(const glm::vec3& start, const glm::vec3& end) {
 
     glm::vec3 middle = start + distance / 2.f;
 
-    DrawPoint(middle, 0xff, 0xff, 0xff);
+    DrawPixel(middle, 0xff, 0xff, 0xff);
     DrawLine(start, middle);
     DrawLine(end, middle);
 }
 
-
-//Draws filled triangles using the draw scanline method
-void rtr::Device::DrawTriangle(glm::vec3& pointA, glm::vec3& pointB, 
-                               glm::vec3& pointC) {
-
-    int r = 0xFF, g = 0xFF, b = 0xFF;
-    if (pointA.y > pointB.y) {
+void rtr::Device::DrawTriangle(glm::vec3& pointA, glm::vec3& pointB,
+                               glm::vec3& pointC){
+    int r = 0xff, g = 0xff, b = 0xff;
+   
+     if (pointA.y > pointB.y) {
         glm::vec3 tPoint = pointB;
         pointB = pointA;
         pointA = tPoint;
@@ -253,54 +238,143 @@ void rtr::Device::DrawTriangle(glm::vec3& pointA, glm::vec3& pointB,
         pointB = pointA;
         pointA = tPoint;
     }
+    
+    float invAB = 0, invAC = 0, invBC = 0;
 
-    float invAB, invAC;
-
-    if (pointB.y - pointA.y > 0) {
+    if (pointB.y - pointA.y > 0)
         invAB = InverseSlope(pointA, pointB);
-    } else {
-        invAB = 0;
-    }
 
-    if (pointC.y - pointA.y > 0) {
+    if (pointC.y - pointA.y > 0)
         invAC = InverseSlope(pointA, pointC);
-    } else {
-        invAC = 0;
-    }
 
-    bool right = false, left = false;
+    if (pointC.y - pointB.y > 0)
+        invBC = InverseSlope(pointB, pointC);
 
-    if (pointB.y - pointA.y > 0) {
-        invAB = InverseSlope(pointA, pointB);
-    }
-    else if (pointB.x > pointA.x) {
-        right = true;
-    }
-    else {
-        left = true;
-    }
+    float gAB, gBC, gAC, 
+          gradAB = 0, gradBC = 0, gradAC = 0;
 
-    if (right || (!left && invAB > invAC)) {
-        for (int y = (int)pointA.y; y <= (int)pointC.y; y++) {
-            if (y < pointB.y) {
-                DrawScanLine(y, pointA, pointC, pointA, pointB, r, g, b);
+    if (pointA.y != pointB.y)
+        gAB = 1/(pointB.y - pointA.y);
+    else
+        gAB = 1;
+
+    if(pointA.y != pointC.y)
+        gAC = 1/(pointC.y - pointA.y);
+    else
+        gAC = 1;
+    
+    if(pointB.y != pointC.y)
+        gBC = 1/(pointC.y - pointB.y);
+    else
+        gBC = 1;
+
+
+    float ABx = pointA.x;
+    float ACx = pointA.x;
+    float BCx = pointB.x;
+
+
+    bool leftB = false;
+    if(SignedArea(pointA, pointB, pointC) < 0)
+        leftB = true;
+
+
+    for (int i = (int)pointA.y; i < (int)pointC.y; i++){
+            if(i < pointB.y - 1){
+                if(leftB)
+                    DrawScanLine(i, (int)ABx, (int)ACx, pointA, pointB, pointA, 
+                        pointC, gradAB, gradAC, r, g, b);
+                else
+                    DrawScanLine(i, (int)ACx, (int)ABx, pointA, pointC, pointA,
+                        pointB, gradAC, gradAB, r, g, b);
+                gradAB += gAB;
+                ABx += invAB;
+            }else{
+                if(leftB)
+                    DrawScanLine(i, (int)BCx, (int)ACx, pointB, pointC, pointA,
+                        pointC, gradBC, gradAC, r, g, b);
+                else
+                    DrawScanLine(i, (int)ACx, (int)BCx, pointA, pointC, pointB,
+                        pointC, gradAC, gradBC, r, g, b);
+                gradBC += gBC;
+                BCx += invBC;
             }
-            else {
-                DrawScanLine(y, pointA, pointC, pointB, pointC, r, g, b);
-            }
-        }
-    }
-    else {
-        for (int y = (int)pointA.y; y <= (int)pointC.y; y++) {
-            if (y < pointB.y) {
-                DrawScanLine(y, pointA, pointB, pointA, pointC, r, g, b);
-            }
-            else {
-                DrawScanLine(y, pointB, pointC, pointA, pointC, r, g, b);
-            }
-        }
+            gradAC += gAC;
+            ACx += invAC;
     }
 }
+
+
+// //Draws filled triangles using the draw scanline method
+// void rtr::Device::DrawTriangle(glm::vec3& pointA, glm::vec3& pointB, 
+//                                glm::vec3& pointC) {
+
+//     int r = 0xFF, g = 0xFF, b = 0xFF;
+//     if (pointA.y > pointB.y) {
+//         glm::vec3 tPoint = pointB;
+//         pointB = pointA;
+//         pointA = tPoint;
+//     }
+
+//     if (pointB.y > pointC.y) {
+//         glm::vec3 tPoint = pointC;
+//         pointC = pointB;
+//         pointB = tPoint;
+//     }
+
+//     if (pointA.y > pointB.y) {
+//         glm::vec3 tPoint = pointB;
+//         pointB = pointA;
+//         pointA = tPoint;
+//     }
+
+//     float invAB, invAC;
+
+//     if (pointB.y - pointA.y > 0) {
+//         invAB = InverseSlope(pointA, pointB);
+//     } else {
+//         invAB = 0;
+//     }
+
+//     if (pointC.y - pointA.y > 0) {
+//         invAC = InverseSlope(pointA, pointC);
+//     } else {
+//         invAC = 0;
+//     }
+
+//     bool right = false, left = false;
+
+//     if (pointB.y - pointA.y > 0) {
+//         invAB = InverseSlope(pointA, pointB);
+//     }
+//     else if (pointB.x > pointA.x) {
+//         right = true;
+//     }
+//     else {
+//         left = true;
+//     }
+
+//     if (right || (!left && invAB > invAC)) {
+//         for (int y = (int)pointA.y; y <= (int)pointC.y; y++) {
+//             if (y < pointB.y) {
+//                 DrawScanLine(y, pointA, pointC, pointA, pointB, r, g, b);
+//             }
+//             else {
+//                 DrawScanLine(y, pointA, pointC, pointB, pointC, r, g, b);
+//             }
+//         }
+//     }
+//     else {
+//         for (int y = (int)pointA.y; y <= (int)pointC.y; y++) {
+//             if (y < pointB.y) {
+//                 DrawScanLine(y, pointA, pointB, pointA, pointC, r, g, b);
+//             }
+//             else {
+//                 DrawScanLine(y, pointB, pointC, pointA, pointC, r, g, b);
+//             }
+//         }
+//     }
+// }
 
 
 void rtr::Device::DrawLineBresenham(const glm::vec3& start, const glm::vec3& end) {
@@ -336,7 +410,7 @@ void rtr::Device::DrawLineBresenham(const glm::vec3& start, const glm::vec3& end
     bool complete = false;
 
     while (!complete) {
-        DrawPoint(glm::vec3(x, y, start.z), 0xff, 0xff, 0xff); //Draw the current point
+        DrawPixel(glm::vec3(x, y, start.z), 0xff, 0xff, 0xff); //Draw the current point
 
         if (x == ex && y == ey) { //Exit if the vectors match
             complete = true;

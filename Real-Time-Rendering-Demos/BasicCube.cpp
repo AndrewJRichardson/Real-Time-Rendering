@@ -15,22 +15,24 @@
 //This application is mererly a demo of the real-time rendering library
 //It is not part of the library itself
 
+//SDL setup code adapted from this SDL2 tutorial:  http://lazyfoo.net/tutorials/SDL/
+//SDL Frame Rate counter is from: http://sdl.beuc.net/sdl.wiki/SDL_Average_FPS_Measurement
+
 //TODO Remove this using declaration and use proper scope resolution
-using namespace rtr;
 
 //TODO: Try to clean up this file if time permits
 //TODO: Seperate object loading and handling from setting up and rendering code
 //Globals, TODO: remove if possible, globals are bad
-const int SCREEN_WIDTH	= 800;
-const int SCREEN_HEIGHT = 600;
+// const int SCREEN_WIDTH	= 800;
+// const int SCREEN_HEIGHT = 600;
 
-bool init				(SDL_Window** window, SDL_Surface** windowSurface);
-bool loadMedia			(SDL_Surface** surface, std::string name);
-void close				(SDL_Window** window);
+bool init				(SDL_Window**, SDL_Surface**, int, int);
+bool loadMedia			(SDL_Surface**, std::string);
+void close				(SDL_Window**);
 int  fpsCounter			();
-void renderText			(std::string text, TTF_Font* font, SDL_Surface** surface,
-                         SDL_Color textColour, SDL_Color backgroundColour);
-void RegisterController (int ContId, SDL_GameController** controller);
+void renderText			(std::string, TTF_Font*, SDL_Surface**, SDL_Color, 
+                         SDL_Color);
+void RegisterController (int, SDL_GameController**);
 
 //SDL requires this signature for main
 int main(int argc, char* args[]) {
@@ -39,11 +41,11 @@ int main(int argc, char* args[]) {
     const int SCREEN_HEIGHT = 600;
     int delay = 0;
 
-    #define FPS_INTERVAL 1.0 //seconds.
+    #define FPS_INTERVAL 1.0 
 
-    Uint32 fps_lasttime = SDL_GetTicks(); //the last recorded time.
-    Uint32 fps_current  = 0; //the current FPS.
-    Uint32 fps_frames   = 0; //frames passed since the last recorded fps.
+    Uint32 fps_lasttime = SDL_GetTicks(); 
+    Uint32 fps_current  = 0;
+    Uint32 fps_frames   = 0;
 
     //The window to render to
     SDL_Window* window = NULL;
@@ -54,23 +56,23 @@ int main(int argc, char* args[]) {
     SDL_Surface* textSurface   = NULL;
 
     //Load a mesh from a .obj file
-    ObjectParser p = ObjectParser();
-    Mesh*        m = nullptr;
+    rtr::ObjectParser p = rtr::ObjectParser();
+    rtr::Mesh*        m = nullptr;
     p.ParseFile("resources/cube2.obj", &m);
 
     //Create an object, object allows a single mesh to be reused
-    DefaultVertexShader v = {};
-    RasterizeWireframe  r = {};
-    RasterizeTextured   t = {};
-    RasterizeFilled     f = {};
-    RasterizeVertex     x = {};
-    Object objC = Object(*m, glm::vec3(-10, 0, 10), v, x);
-    Object objB = Object(*m, glm::vec3(0,   0, 10), v, r);
-    Object objD = Object(*m, glm::vec3(10,  0, 10), v, f);
-    Object objA = Object(*m, glm::vec3(20,  0, 10), v, t);
+    rtr::DefaultVertexShader v = {};
+    rtr::RasterizeWireframe  r = {};
+    rtr::RasterizeTextured   t = {};
+    rtr::RasterizeFilled     f = {};
+    rtr::RasterizeVertex     x = {};
+    rtr::Object objC = rtr::Object(*m, glm::vec3(-10, 0, 10), v, x);
+    rtr::Object objB = rtr::Object(*m, glm::vec3(0,   0, 10), v, r);
+    rtr::Object objD = rtr::Object(*m, glm::vec3(10,  0, 10), v, f);
+    rtr::Object objA = rtr::Object(*m, glm::vec3(20,  0, 10), v, t);
 
     //Attempt to init the video component of SDL and print an error if it fails
-    if (init(&window, &windowSurface)) {
+    if (init(&window, &windowSurface, SCREEN_WIDTH, SCREEN_HEIGHT)) {
 
         //TODO: These inits should be added to init
         //Init SDL_image for PNGs
@@ -90,14 +92,13 @@ int main(int argc, char* args[]) {
         SDL_SetRelativeMouseMode (SDL_TRUE);
 
         //Create a camera to view the world with
-        Camera camera = Camera(glm::vec3(0, 0, -10));
+        rtr::Camera camera = rtr::Camera(glm::vec3(0, 0, -10));
         float camSpeed = 0.2f;
 
 
-        //TODO: Don't think this try is needed anyore, test
         try {
             //Create a device to handle the rendering
-            Device device		 = { *windowSurface, camera};
+            rtr::Device device   = { *windowSurface, camera};
             SDL_Surface* objTex  = IMG_Load("resources/btex.png");
 
             if(objTex == nullptr){
@@ -110,15 +111,15 @@ int main(int argc, char* args[]) {
             objC.rotationAxis = glm::vec3(1, 1, 0);
             objD.rotationAxis = glm::vec3(1, 1, 0);
 
-            //device.currentRenderMode = &Device::RenderPoints;
-            Pipeline* pipeline = new Pipeline {ViewPerspective(), device};
+            rtr::Pipeline* pipeline = new rtr::Pipeline {rtr::ViewPerspective(), device};
             bool quit = false;
+
             while (!quit) {
                 objA.angle += 0.1;
                 objB.angle += 0.1;
                 objC.angle += 0.1;
                 objD.angle += 0.1;
-                //device.Clear(camera);
+
                 (*pipeline).device.Clear();
                 SDL_Event event;
 
@@ -135,23 +136,7 @@ int main(int argc, char* args[]) {
                             controllerSwitch++;
 
                             // switch (controllerSwitch) {
-                            //     case 0:
-                            //         delete pipeline;
-                            //         pipeline = new Pipeline{RasterizeVertex{}, ViewPerspective{}, device};
-                            //         break;
-                            //     case 1:
-                            //         delete pipeline;
-                            //         pipeline = new Pipeline{RasterizeWireframe{}, ViewPerspective{}, device};
-                            //         break;
-                            //     case 2:
-                            //         delete pipeline;
-                            //         pipeline = new Pipeline{RasterizeFilled{}, ViewPerspective{}, device};
-                            //         break;
-                            //     case 3:
-                            //         delete pipeline;
-                            //         pipeline = new Pipeline{RasterizeTextured{}, ViewPerspective{}, device};
-                            //         controllerSwitch = -1;
-                            //         break;
+                            
                             // }
                         }
 
@@ -176,44 +161,47 @@ int main(int argc, char* args[]) {
                                 std::cout << "Delay: " << delay << std::endl;
                             }
                             break;
-                        // case SDLK_1:
-                        //     delete pipeline;
-                        //     pipeline = new Pipeline{RasterizeVertex{}, ViewPerspective{}, device};
-                        //     // pipeline.rasterizer = RasterizeVertex();
-                        //     break;
-                        // case SDLK_2:
-                        // 	delete pipeline;
-                        //     pipeline = new Pipeline{RasterizeWireframe{}, ViewPerspective{}, device};
-                        // 	break;
-                        // case SDLK_3:
-                        // 	delete pipeline;
-                        //     pipeline = new Pipeline{RasterizeFilled{}, ViewPerspective{}, device};
-                        // 	break;
-                        // case SDLK_4:
-                        //     delete pipeline;
-                        //     pipeline = new Pipeline{RasterizeTextured{}, ViewPerspective{}, device};
-                        //     break;
 
-                            //TODO; camera class should probably handle these calculations
+                         //TODO; camera class should probably handle these calculations
                         case SDLK_w:
-                            device.camera.position -= camSpeed * device.camera.front;
+
+                            device.camera.position -= camSpeed 
+                                * device.camera.front;
+                                
                             break;
                         case SDLK_s:
-                            device.camera.position += device.camera.front * camSpeed;
+
+                            device.camera.position += device.camera.front 
+                                * camSpeed;
+                                 
                             break;
+
                         case SDLK_d:
-                            device.camera.position += glm::cross(device.camera.front, device.camera.up) * camSpeed;
+                            device.camera.position += 
+                                glm::cross(device.camera.front, device.camera.up) 
+                                * camSpeed;
+                                
                             break;
+
                         case SDLK_a:
-                            device.camera.position -= glm::cross(device.camera.front, device.camera.up) * camSpeed;
+                            device.camera.position -= 
+                                glm::cross(device.camera.front, device.camera.up) 
+                                * camSpeed;
+                            
                             break;
+
                         case SDLK_i:
-                            device.camera.position = glm::vec3(device.camera.position.x, device.camera.position.y + camSpeed,
-                                                        device.camera.position.z);
+                            device.camera.position = glm::vec3(device.camera.position.x, 
+                                device.camera.position.y + camSpeed, 
+                                device.camera.position.z);
+
                             break;
+
                         case SDLK_k:
-                            device.camera.position = glm::vec3(device.camera.position.x, device.camera.position.y - camSpeed,
-                                                        device.camera.position.z);
+                            device.camera.position = glm::vec3(device.camera.position.x,
+                                device.camera.position.y - camSpeed,
+                                device.camera.position.z);
+
                             break;
 
                         default:
@@ -221,24 +209,37 @@ int main(int argc, char* args[]) {
                         }
                     }
                     else if (event.type == SDL_MOUSEMOTION) {
-                        device.camera.Rotate((float)-event.motion.xrel, (float)event.motion.yrel);
+                        device.camera.Rotate((float)-event.motion.xrel, 
+                            (float)event.motion.yrel);
                     }
                 }
+
                 if (controller) {
-                    Sint16 rX = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_RIGHTX);
-                    Sint16 rY = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_RIGHTY);
-                    Sint16 lX = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_LEFTX);
-                    Sint16 lY = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_LEFTY);
+                    Sint16 rX = SDL_GameControllerGetAxis(controller, 
+                        SDL_CONTROLLER_AXIS_RIGHTX);
+                    Sint16 rY = SDL_GameControllerGetAxis(controller, 
+                        SDL_CONTROLLER_AXIS_RIGHTY);
+                    Sint16 lX = SDL_GameControllerGetAxis(controller, 
+                        SDL_CONTROLLER_AXIS_LEFTX);
+                    Sint16 lY = SDL_GameControllerGetAxis(controller, 
+                        SDL_CONTROLLER_AXIS_LEFTY);
 
                     int deadZone = 3000;
 
-                    if (rX > deadZone || rX < -deadZone || rY > deadZone || rY < -deadZone) {
-                        device.camera.Rotate((float)(-rX * 0.00001), (float)(rY*0.00001));
+                    if (rX > deadZone || rX < -deadZone || rY > deadZone || 
+                        rY < -deadZone) {
+
+                        device.camera.Rotate((float)(-rX * 0.00001), 
+                            (float)(rY*0.00001));
                     }
                     if (lY > deadZone || lY < -deadZone) {
-                        device.camera.position += device.camera.front * (float)(lY * 0.000001);
+                        device.camera.position += device.camera.front 
+                            * (float)(lY * 0.000001);
+                             
                     }if (lX > deadZone || lX < -deadZone) {
-                        device.camera.position += glm::cross(device.camera.front, device.camera.up) * (float)(lX * 0.000001);
+                        device.camera.position += glm::cross(device.camera.front, 
+                            device.camera.up) * (float)(lX * 0.000001);
+
                     }
                 }
 
@@ -249,7 +250,7 @@ int main(int argc, char* args[]) {
                 pipeline->Render(objB);
                 pipeline->Render(objC);
                 pipeline->Render(objD);
-                //Update the window with changes
+
                 fps_frames++;
                 if (fps_lasttime < SDL_GetTicks() - FPS_INTERVAL*1000)
                 {
@@ -257,11 +258,14 @@ int main(int argc, char* args[]) {
                     fps_current = fps_frames;
                     fps_frames = 0;
                 }
-                renderText("FPS: " + std::to_string(fps_current), font, &textSurface, foregroundColor,
-                         backgroundColor);
+
+                renderText("FPS: " + std::to_string(fps_current), font, 
+                           &textSurface, foregroundColor, backgroundColor);
+
                 SDL_BlitSurface(textSurface, NULL, windowSurface, &textLocation);
                 SDL_FreeSurface(textSurface);
-                //SDL_BlitSurface(objTex, NULL, windowSurface, &textLocation);
+
+                //Update the window with changes
                 SDL_UpdateWindowSurface(window);
 
                 SDL_Delay(delay);
@@ -285,7 +289,8 @@ int main(int argc, char* args[]) {
 
 
 
-bool init(SDL_Window** window, SDL_Surface** windowSurface) {
+bool init(SDL_Window** window, SDL_Surface** windowSurface, int screenWidth, 
+          int screenHeight) {
 
     //Attempt to init the video component of SDL and print an error if it fails
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER) < 0) {
@@ -293,8 +298,10 @@ bool init(SDL_Window** window, SDL_Surface** windowSurface) {
         return false;
     }
     else {
-        *window = SDL_CreateWindow("SDL Test", 300, 300, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN
-                                   | SDL_WINDOW_RESIZABLE | SDL_WINDOW_MAXIMIZED);
+        *window = SDL_CreateWindow("SDL Test", 300, 300, screenWidth, screenHeight, 
+                                    SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | 
+                                    SDL_WINDOW_MAXIMIZED);
+
         if (*window == NULL) {
             printf("SDL window error! Error: %s\n", SDL_GetError());
             return false;
@@ -318,7 +325,9 @@ bool loadMedia(SDL_Surface** surface, std::string name) {
 }
 
 
-void renderText(std::string text, TTF_Font* font, SDL_Surface** surface, SDL_Color textColour, SDL_Color backgroundColour) {
+void renderText(std::string text, TTF_Font* font, SDL_Surface** surface, 
+                SDL_Color textColour, SDL_Color backgroundColour) {
+
     *surface = TTF_RenderText_Shaded(font, text.c_str(), textColour, backgroundColour);
 }
 
@@ -333,24 +342,9 @@ void close(SDL_Window** window) {
 }
 
 
-//TODO: Move to top of file or refactor into funstion somehow
-Uint32 framespersecond{ 0 };
-Uint32 lastFrameTicks{ 0 };
-
-int fpsCounter() {
-    Uint32 currentFrameTicks = SDL_GetTicks();
-    Uint32 difference = currentFrameTicks - lastFrameTicks;
-    lastFrameTicks = currentFrameTicks;
-
-    if (difference != 0) {
-        framespersecond = 1000 / difference;
-    }
-
-    //printf("FPS: %lu\n", framespersecond);
-    return framespersecond;
-}
 
 
+//Registered a controller so it can be used to control the camera
 void RegisterController(int ContId, SDL_GameController** controller) {
     if (SDL_IsGameController(ContId)) {
         *controller = SDL_GameControllerOpen(ContId);

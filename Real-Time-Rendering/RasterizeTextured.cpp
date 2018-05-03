@@ -6,54 +6,39 @@ void rtr::RasterizeTextured::operator()(FaceVertSet a, FaceVertSet b, FaceVertSe
 
     if (a.v.z <= 2 || b.v.z <=2 || c.v.z <=2)
         return;
-    
-    if (a.v.y > b.v.y) {
-        FaceVertSet tSet = b;
+
+   
+     if (a.v.y > b.v.y) {
+        FaceVertSet tPoint = b;
         b = a;
-        a = tSet;
+        a = tPoint;
     }
 
     if (b.v.y > c.v.y) {
-        FaceVertSet tSet = c;
+        FaceVertSet tPoint = c;
         c = b;
-        b = tSet;
+        b = tPoint;
     }
 
     if (a.v.y > b.v.y) {
-        FaceVertSet tSet = b;
+        FaceVertSet tPoint = b;
         b = a;
-        a = tSet;
-    }
-
-    float invAB, invAC;
-
-    if (b.v.y - a.v.y > 0) {
-        invAB = device.InverseSlope(a.v, b.v);
-    } else {
-        invAB = 0;
-    }
-
-    if (c.v.y - a.v.y > 0) {
-        invAC = device.InverseSlope(a.v, c.v);
-    } else {
-        invAC = 0;
-    }
-
-    bool right = false, left = false;
-
-    if (b.v.y - a.v.y > 0) {
-        invAB = device.InverseSlope(a.v, b.v);
-    }
-    else if (b.v.x > a.v.x) {
-        right = true;
-    }
-    else {
-        left = true;
+        a = tPoint;
     }
     
+    float invAB = 0, invAC = 0, invBC = 0;
+
+    if (b.v.y - a.v.y > 0)
+        invAB = device.InverseSlope(a.v, b.v);
+
+    if (c.v.y - a.v.y > 0)
+        invAC = device.InverseSlope(a.v, c.v);
+
+    if (c.v.y - b.v.y > 0)
+        invBC = device.InverseSlope(b.v, c.v);
+
     float gAB, gBC, gAC, 
-          gZ = 0,
-          gABB = 0, gBCC = 0, gACC = 0;
+          gradAB = 0, gradBC = 0, gradAC = 0;
 
     if (a.v.y != b.v.y)
         gAB = 1/(b.v.y - a.v.y);
@@ -70,36 +55,37 @@ void rtr::RasterizeTextured::operator()(FaceVertSet a, FaceVertSet b, FaceVertSe
     else
         gBC = 1;
 
-    // gABz = device.Interpolate(a.v.x, b.v.x, gAB);
-    // gACz = device.Interpolate(a.v.x, c.v.x, gAC);
-    // gBCz = device.Interpolate(b.v.x, c.v.x, gBC);
-    
-    if (right || (!left && invAB > invAC)) {
-        for (int y = (int)a.v.y; y <= (int)c.v.y; y++) {
-            if (y < b.v.y) {
-                device.DrawScanLineTexture(y, a, c, a, b, object, gACC, gABB, gZ);
-                gABB += gAB;
-            }
-            else {
-                device.DrawScanLineTexture(y, a, c, b, c, object, gACC, gBCC, gZ);
-                gBCC += gBC;
-            }
-            gACC += gAC;
-        }
-    }
-    else {
-        for (int y = (int)a.v.y; y <= (int)c.v.y; y++) {
-            if (y < b.v.y) {
-                device.DrawScanLineTexture(y, a, b, a, c, object, gABB, gACC, gZ);
-                gABB += gAB;
-            }
-            else {
-                device.DrawScanLineTexture(y, b, c, a, c, object, gBCC, gACC, gZ);
-                gBCC += gBC;
-            }
-            gACC += gAC;
-        }
-    }
 
+    float ABx = a.v.x, ACx = a.v.x, BCx = b.v.x;
+
+
+    bool leftB = false;
+    if(device.SignedArea(a.v, b.v, c.v) < 0)
+        leftB = true;
+
+
+    for (int i = (int)a.v.y; i < (int)c.v.y; i++){
+            if(i < b.v.y - 1){
+                if(leftB)
+                    device.DrawScanLineTexture(i, (int)ABx, (int)ACx, a, b, a, 
+                        c, object, gradAB, gradAC);
+                else
+                    device.DrawScanLineTexture(i, (int)ACx, (int)ABx, a, c, a,
+                        b, object, gradAC, gradAB);
+                gradAB += gAB;
+                ABx += invAB;
+            }else{
+                if(leftB)
+                    device.DrawScanLineTexture(i, (int)BCx, (int)ACx, b, c, a,
+                        c, object, gradBC, gradAC);
+                else
+                    device.DrawScanLineTexture(i, (int)ACx, (int)BCx, a, c, b,
+                        c, object, gradAC, gradBC);
+                gradBC += gBC;
+                BCx += invBC;
+            }
+            gradAC += gAC;
+            ACx += invAC;
+    }
 
 }

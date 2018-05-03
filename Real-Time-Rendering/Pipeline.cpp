@@ -48,3 +48,4 @@ void rtr::Pipeline::Render(const Object& object){
                             device, object.mesh.faces[i]);
     }
 }
+

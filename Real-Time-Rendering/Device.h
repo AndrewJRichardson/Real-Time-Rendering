@@ -17,7 +17,7 @@
 
 namespace rtr {
 
-    ///Various utility functions for rendering objects
+    ///Various utility fu;nctions for rendering objects
     /**
      * Device is essentially an abstract representation of a GPU
      * 
@@ -58,63 +58,77 @@ namespace rtr {
          * Also creates the view matrix, though this is planned to be moved
          */
         REALTIME_API void		Clear();
+
         ///Draws a coloured pixel into the frame buffer
-        REALTIME_API void		DrawPoint(const glm::vec3&, int, int, int);
+        REALTIME_API void		DrawPixel(const glm::vec3&, int, int, int);
+
         ///Same as DrawPoint but uses Uints for r,g,b
-        REALTIME_API void		DrawPoint(const glm::vec3&, Uint8, Uint8, Uint8);
+        REALTIME_API void		DrawPixel(const glm::vec3&, Uint8, Uint8, Uint8);
+
         ///Test feature, do not use
         REALTIME_API void       DebugDraw(const glm::vec3&, int, int, int, 
                                     SDL_Window&);
+
         ///DEPRECATED: Draws a line using the middle point recursion algorithm
         REALTIME_API void		DrawLine(const glm::vec3&, const glm::vec3&);
+
         ///Draws a line using bresenhams line algorithm
         REALTIME_API void		DrawLineBresenham(const glm::vec3&, const glm::vec3&);
+
         ///Projects a vertex into clip space
         /**
          * This method is just a multiplication now and will be removed 
          * in future
          */
         REALTIME_API glm::vec3  Project(const glm::vec3&, const glm::mat4&);
+
         ///Turns clip space points into screen space points
         REALTIME_API glm::vec3  MapToScreen(glm::vec3&);
+
         ///Draws filled triangles using the scan line method
-        REALTIME_API void		DrawScanLine(int, const glm::vec3, const glm::vec3, 
-                                    const glm::vec3, const glm::vec3, int, int, int);
-        ///Calculates the inverse slope (how x in relation to y) for a line
-        REALTIME_API float		InverseSlope(const glm::vec3&, const glm::vec3&);
-        ///Interpolates a point between two values based on the gradient
-        REALTIME_API float		Interpolate(float, float, float);
-        ///Clamps a value between 0 and 1
-        REALTIME_API float		Clamp(float);
-        REALTIME_API void		DrawTriangle(glm::vec3&,glm::vec3&,glm::vec3&);
-        ///Sorts triangles and tests to see if they infront of the camera
-        /**
-         * no longer sorts triangles, but will do again in the future
-         *  will likely be renamed at that point to better reflect functionality
-         */
-        REALTIME_API void		RenderTriangle(glm::vec3&, glm::vec3&, glm::vec3&);
+        REALTIME_API void		DrawScanLine(int, int, int, const glm::vec3,
+                                    const glm::vec3, const glm::vec3, 
+                                    const glm::vec3, const float,
+                                    const float, int, int, int);
+
         ///Draws textured lines between two points using a scanline method
         /**
          * A and B are the left edge of a triangle C and D are the right edge
          * 
          * gA, gB are the gradients for those lines, gZ is currently unused
          */
-        REALTIME_API void       DrawScanLineTexture(const int, const FaceVertSet&,
-                                    const FaceVertSet&, const FaceVertSet&,
-                                    const FaceVertSet&, const Object&,
-                                    const float, const float, const float);
+        REALTIME_API void       DrawScanLineTexture(const int, int, int,
+                                    const FaceVertSet&, const FaceVertSet&, 
+                                    const FaceVertSet&, const FaceVertSet&, 
+                                    const Object&, const float, const float);
+
+        ///Calculates the inverse slope (how x in relation to y) for a line
+        REALTIME_API float		InverseSlope(const glm::vec3&, const glm::vec3&);
+
+        ///Interpolates a point between two values based on the gradient
+        REALTIME_API float		Interpolate(float, float, float);
+
+        ///Clamps a value between 0 and 1
+        REALTIME_API float		Clamp(float);
+
+        REALTIME_API void		DrawTriangle(glm::vec3&,glm::vec3&,glm::vec3&);
+
+        ///Sorts triangles and tests to see if they infront of the camera
+        /**
+         * no longer sorts triangles, but will do again in the future
+         *  will likely be renamed at that point to better reflect functionality
+         */
+        REALTIME_API void		RenderTriangle(glm::vec3&, glm::vec3&, glm::vec3&);
+
         ///Calculates the signed area of a triangle
         /**
          * Actually returns signed area x2 as for rendering purposes only the sign
          * is required
          */
         REALTIME_API float      SignedArea(glm::vec3&, glm::vec3&, glm::vec3&);
+
         // REALTIME_API float      InterpolateX(glm::vec3&, glm::vec3&, glm::vec3&, float, float, float);
         // REALTIME_API float      InterpolateY(glm::vec3&, glm::vec3&, glm::vec3&, float, float, float);
-        //Used for testing only
-        // REALTIME_API float      DrawScanLineTextureOld(const int currentY, const FaceVertSet& a,
-        //                             const FaceVertSet& b, const FaceVertSet& c,
-        //                             const FaceVertSet& d, const Object& object);
 
     };
 }
