@@ -305,128 +305,58 @@ void rtr::Device::DrawTriangle(glm::vec3& pointA, glm::vec3& pointB,
 }
 
 
-// //Draws filled triangles using the draw scanline method
-// void rtr::Device::DrawTriangle(glm::vec3& pointA, glm::vec3& pointB, 
-//                                glm::vec3& pointC) {
-
-//     int r = 0xFF, g = 0xFF, b = 0xFF;
-//     if (pointA.y > pointB.y) {
-//         glm::vec3 tPoint = pointB;
-//         pointB = pointA;
-//         pointA = tPoint;
-//     }
-
-//     if (pointB.y > pointC.y) {
-//         glm::vec3 tPoint = pointC;
-//         pointC = pointB;
-//         pointB = tPoint;
-//     }
-
-//     if (pointA.y > pointB.y) {
-//         glm::vec3 tPoint = pointB;
-//         pointB = pointA;
-//         pointA = tPoint;
-//     }
-
-//     float invAB, invAC;
-
-//     if (pointB.y - pointA.y > 0) {
-//         invAB = InverseSlope(pointA, pointB);
-//     } else {
-//         invAB = 0;
-//     }
-
-//     if (pointC.y - pointA.y > 0) {
-//         invAC = InverseSlope(pointA, pointC);
-//     } else {
-//         invAC = 0;
-//     }
-
-//     bool right = false, left = false;
-
-//     if (pointB.y - pointA.y > 0) {
-//         invAB = InverseSlope(pointA, pointB);
-//     }
-//     else if (pointB.x > pointA.x) {
-//         right = true;
-//     }
-//     else {
-//         left = true;
-//     }
-
-//     if (right || (!left && invAB > invAC)) {
-//         for (int y = (int)pointA.y; y <= (int)pointC.y; y++) {
-//             if (y < pointB.y) {
-//                 DrawScanLine(y, pointA, pointC, pointA, pointB, r, g, b);
-//             }
-//             else {
-//                 DrawScanLine(y, pointA, pointC, pointB, pointC, r, g, b);
-//             }
-//         }
-//     }
-//     else {
-//         for (int y = (int)pointA.y; y <= (int)pointC.y; y++) {
-//             if (y < pointB.y) {
-//                 DrawScanLine(y, pointA, pointB, pointA, pointC, r, g, b);
-//             }
-//             else {
-//                 DrawScanLine(y, pointB, pointC, pointA, pointC, r, g, b);
-//             }
-//         }
-//     }
-// }
-
 
 void rtr::Device::DrawLineBresenham(const glm::vec3& start, const glm::vec3& end) {
 
-    int x  = (int)start.x; //Store both values of both vectors
-    int y  = (int)start.y; //so we don't have to cast them repeatedly in the following loop 
-    int ex = (int)end.x;
-    int ey = (int)end.y;
+    int startX  = (int)start.x; //Store both values of both vectors
+    int startY  = (int)start.y; //so we don't have to cast them repeatedly in the following loop 
+    int endX = (int)end.x;
+    int endY = (int)end.y;
 
-    int dx = std::abs((int)end.x - (int)start.x);
-    int dy = std::abs((int)end.y - (int)start.y);
+    int distX = std::abs((int)end.x - (int)start.x);
+    int distY = std::abs((int)end.y - (int)start.y);
 
-    int error = dx - dy; //error is used to determine which pixel we draw too
+    int error = distX - distY; 
 
-    int ix; //used to store the values we will increment/decrement the error by
-    int iy; //increment and decrement is based on which direction the line is going
+    int incX;
+    int incY; 
 
-    if (x < end.x) {
-        ix = 1;
+    //Which way is the line going
+    if (startX < end.x) {
+        incX = 1;
     }
     else {
-        ix = -1;
+        incX = -1;
     }
 
-    if (y < end.y) {
-        iy = 1;
+    if (startY < end.y) {
+        incY = 1;
     }
     else {
-        iy = -1;
+        incY = -1;
     }
 
 
     bool complete = false;
 
     while (!complete) {
-        DrawPixel(glm::vec3(x, y, start.z), 0xff, 0xff, 0xff); //Draw the current point
+        DrawPixel(glm::vec3(startX, startY, start.z), 0xff, 0xff, 0xff); 
 
-        if (x == ex && y == ey) { //Exit if the vectors match
+        if (startX == endX && startY == endY) { 
             complete = true;
             continue;
         }
 
-        //A difference of 0.5 is used in bresenham's algorithm to determine whether we should move the passive axis along
-        //since we are using integers we need to scale the error by 2 to account for the loss of precision
+        //Mult by 2 to account for precision loss of using int
+        //instead of floats
         int tError = error * 2;
-        if (tError > -dy) {
-            error -= dy;
-            x += ix;
+        if (tError > -distY) {
+            error -= distY;
+            startX += incX;
         }
-        if (tError < dx) {
-            error += dx;
-            y += iy;
+        if (tError < distX) {
+            error += distX;
+            startY += incY;
         }
     }
 }
