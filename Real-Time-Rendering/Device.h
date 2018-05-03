@@ -91,6 +91,12 @@ namespace rtr {
                                     const glm::vec3, const float,
                                     const float, int, int, int);
 
+        REALTIME_API void		DrawScanLine(int, const glm::vec3,
+                                    const glm::vec3, const glm::vec3, 
+                                    const glm::vec3,
+                                    int, int, int);
+
+
         ///Draws textured lines between two points using a scanline method
         /**
          * A and B are the left edge of a triangle C and D are the right edge

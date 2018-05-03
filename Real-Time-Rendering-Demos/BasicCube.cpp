@@ -67,8 +67,8 @@ int main(int argc, char* args[]) {
     rtr::RasterizeFilled     f = {};
     rtr::RasterizeVertex     x = {};
     rtr::Object objC = rtr::Object(*m, glm::vec3(-10, 0, 10), v, x);
-    rtr::Object objB = rtr::Object(*m, glm::vec3(0,   0, 10), v, r);
-    rtr::Object objD = rtr::Object(*m, glm::vec3(10,  0, 10), v, f);
+    rtr::Object objB = rtr::Object(*m, glm::vec3(10,   0, 10), v, r);
+    rtr::Object objD = rtr::Object(*m, glm::vec3(0,  0, 10), v, f);
     rtr::Object objA = rtr::Object(*m, glm::vec3(20,  0, 10), v, t);
 
     //Attempt to init the video component of SDL and print an error if it fails
@@ -106,6 +106,7 @@ int main(int argc, char* args[]) {
             }
 
             objA.texture = objTex;
+
             objA.rotationAxis = glm::vec3(1, 1, 0);
             objB.rotationAxis = glm::vec3(1, 1, 0);
             objC.rotationAxis = glm::vec3(1, 1, 0);
@@ -244,8 +245,6 @@ int main(int argc, char* args[]) {
                 }
 
                 //Tell device to render an object
-                //device.Render(objA);
-                // pipeline->Render(objA);
                 pipeline->Render(objA);
                 pipeline->Render(objB);
                 pipeline->Render(objC);

@@ -36,6 +36,7 @@ public:
 	SDL_Surface* texture;
 	glm::vec3 position;
 	glm::vec3 rotationAxis;
+	glm::vec3 scale;
 	float angle;
 
 	//TODO: make rasterizerMode const so it can be passed

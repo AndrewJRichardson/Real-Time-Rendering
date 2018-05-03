@@ -5,8 +5,11 @@ glm::mat4 rtr::VertexProcessor::CreateMVPMatrix(const Object& object,
                                                 const Device& device) const {
     
     glm::mat4 modelMatrix = 
-                                glm::translate(glm::mat4(), 
-                                object.position) * glm::rotate(glm::radians(object.angle), object.rotationAxis);
+    glm::translate(glm::mat4(), object.position) 
+        * 
+         glm::rotate(glm::radians(object.angle), object.rotationAxis) 
+        *
+         glm::scale(object.scale);
 
     return device.perspectiveMatrix * device.viewMatrix * modelMatrix;
 }

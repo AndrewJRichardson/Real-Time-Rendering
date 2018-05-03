@@ -113,26 +113,26 @@ glm::vec3 rtr::Device::MapToScreen(glm::vec3& vert){
 
 
 //TODO: Can be optimised in the same manner that scan line texture has been
-// void rtr::Device::DrawScanLine(const int currentY, const glm::vec3 pointA, 
-//                                const glm::vec3 pointB, const glm::vec3 pointC, 
-//                                const glm::vec3 pointD, int r, int g, int b) {
+void rtr::Device::DrawScanLine(const int currentY, const glm::vec3 pointA, 
+                               const glm::vec3 pointB, const glm::vec3 pointC, 
+                               const glm::vec3 pointD, int r, int g, int b) {
 
-//     float gradientA = pointA.y != pointB.y ? (currentY - pointA.y) / (pointB.y - pointA.y) : 1;
-//     float gradientB = pointC.y != pointD.y ? (currentY - pointC.y) / (pointD.y - pointC.y) : 1;
+    float gradientA = pointA.y != pointB.y ? (currentY - pointA.y) / (pointB.y - pointA.y) : 1;
+    float gradientB = pointC.y != pointD.y ? (currentY - pointC.y) / (pointD.y - pointC.y) : 1;
 
-//     int sx = (int)Interpolate(pointA.x, pointB.x, gradientA);
-//     int ex = (int)Interpolate(pointC.x, pointD.x, gradientB);
+    int sx = (int)Interpolate(pointA.x, pointB.x, gradientA);
+    int ex = (int)Interpolate(pointC.x, pointD.x, gradientB);
 
-//     float z1 = Interpolate(pointA.z, pointB.z, gradientA);
-//     float z2 = Interpolate(pointC.z, pointD.z, gradientB);
+    float z1 = Interpolate(pointA.z, pointB.z, gradientA);
+    float z2 = Interpolate(pointC.z, pointD.z, gradientB);
 
-//     for (int x = sx; x < ex; x++) {
+    for (int x = sx; x < ex; x++) {
 
-//         float gradient = (x - sx) / (float)(ex - sx);
-//         float z = Interpolate(z1, z2, gradient);
-//         DrawPixel(glm::vec3(x, currentY, z), r, g, b);
-//     }
-// }
+        float gradient = (x - sx) / (float)(ex - sx);
+        float z = Interpolate(z1, z2, gradient);
+        DrawPixel(glm::vec3(x, currentY, z), r, g, b);
+    }
+}
 
 void rtr::Device::DrawScanLine(const int currentY, int leftX, int rightX, 
                                const glm::vec3 leftStart, const glm::vec3 leftEnd,
