@@ -5,8 +5,6 @@
 
 namespace rtr{
 
-class glm::vec3;
-
 ///Default vertex shader, returns the vertex unmodified
 /**
  * Use this shader if you dont want to apply any per vertex

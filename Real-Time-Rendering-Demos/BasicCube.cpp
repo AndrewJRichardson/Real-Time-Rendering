@@ -115,10 +115,10 @@ int main(int argc, char* args[]) {
             bool quit = false;
 
             while (!quit) {
-                objA.angle += 0.1;
-                objB.angle += 0.1;
-                objC.angle += 0.1;
-                objD.angle += 0.1;
+                objA.angle += 0.1f;
+                objB.angle += 0.1f;
+                objC.angle += 0.1f;
+                objD.angle += 0.1f;
 
                 (*pipeline).device.Clear();
                 SDL_Event event;
