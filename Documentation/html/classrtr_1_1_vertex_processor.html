@@ -89,6 +89,7 @@ $(document).ready(function(){initNavTree('classrtr_1_1_vertex_processor.html',''
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classrtr_1_1_vertex_processor-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">rtr::VertexProcessor Class Reference</div>  </div>
@@ -107,6 +108,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:afc2948069baff80471823e1d7087bc16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae90c04b36223f17f8db5340dec84e721"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_exports_8h.html#a2232c1e3cbed91ccd24090fb10911aa8">REALTIME_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrtr_1_1_vertex_processor.html#ae90c04b36223f17f8db5340dec84e721">operator()</a> (const <a class="el" href="classrtr_1_1_object.html">Object</a> &amp;, const <a class="el" href="classrtr_1_1_view_mode.html">ViewMode</a> &amp;, const glm::mat4 &amp;, <a class="el" href="classrtr_1_1_device.html">Device</a> &amp;, const <a class="el" href="classrtr_1_1_face.html">Face</a> &amp;) const</td></tr>
 <tr class="separator:ae90c04b36223f17f8db5340dec84e721"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a5a5e7f7027fd3ac7907934e1a1259ce4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrtr_1_1_vertex_processor.html#a5a5e7f7027fd3ac7907934e1a1259ce4">backface</a> = true</td></tr>
+<tr class="separator:a5a5e7f7027fd3ac7907934e1a1259ce4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Processes a mesh for rendering one face at a time. </p>
@@ -196,13 +202,30 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Calls all operations for rendering the face of an object operations in order MVP transform -&gt; Backface Culling -&gt; <a class="el" href="classrtr_1_1_vertex_shader.html" title="Interface class to derive vertex shaders from. ">VertexShader</a> -&gt; <a class="el" href="classrtr_1_1_view_mode.html" title="Interface for creating view types such as orthoganol and perspectve. ">ViewMode</a> -&gt; <a class="el" href="classrtr_1_1_rasterizer_mode.html" title="Interface class for creating a rasterizer mode. ">RasterizerMode</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="_vertex_processor_8cpp_source.html#l00014">14</a> of file <a class="el" href="_vertex_processor_8cpp_source.html">VertexProcessor.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vertex_processor_8cpp_source.html#l00017">17</a> of file <a class="el" href="_vertex_processor_8cpp_source.html">VertexProcessor.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a5a5e7f7027fd3ac7907934e1a1259ce4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a5e7f7027fd3ac7907934e1a1259ce4">&#9670;&nbsp;</a></span>backface</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool rtr::VertexProcessor::backface = true</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_vertex_processor_8h_source.html#l00054">54</a> of file <a class="el" href="_vertex_processor_8h_source.html">VertexProcessor.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering/<a class="el" href="_vertex_processor_8h_source.html">VertexProcessor.h</a></li>
-<li>C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering/<a class="el" href="_vertex_processor_8cpp_source.html">VertexProcessor.cpp</a></li>
+<li><a class="el" href="_vertex_processor_8h_source.html">VertexProcessor.h</a></li>
+<li><a class="el" href="_vertex_processor_8cpp_source.html">VertexProcessor.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

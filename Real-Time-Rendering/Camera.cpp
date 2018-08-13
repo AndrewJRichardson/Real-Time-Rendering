@@ -15,8 +15,8 @@ glm::mat4 rtr::Camera::LookAt() const {
 }
 
 void rtr::Camera::Rotate(float yaw, float pitch) {
-    this->yaw += yaw;     // test
-    this->pitch += pitch; // test2
+    this->yaw += yaw;
+    this->pitch += pitch;
 
     // make sure that when pitch is out of bounds, screen doesn't get flipped
     if (this->pitch > 89.0f) {

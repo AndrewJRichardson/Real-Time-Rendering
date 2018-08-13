@@ -100,18 +100,6 @@ $(document).ready(function(){initNavTree('classrtr_1_1_object.html','');});
  <a href="classrtr_1_1_object.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_object_8h_source.html">Object.h</a>&gt;</code></p>
-<div class="dynheader">
-Collaboration diagram for rtr::Object:</div>
-<div class="dyncontent">
-<div class="center"><img src="classrtr_1_1_object__coll__graph.png" border="0" usemap="#rtr_1_1_object_coll__map" alt="Collaboration graph"/></div>
-<map name="rtr_1_1_object_coll__map" id="rtr_1_1_object_coll__map">
-<area shape="rect" id="node2" href="classrtr_1_1_vertex_shader.html" title="Interface class to derive vertex shaders from. " alt="" coords="5,184,127,211"/>
-<area shape="rect" id="node3" href="classrtr_1_1_rasterizer_mode.html" title="Interface class for creating a rasterizer mode. " alt="" coords="151,184,285,211"/>
-<area shape="rect" id="node4" href="classrtr_1_1_mesh.html" title="Stores information for a mesh. " alt="" coords="309,184,383,211"/>
-<area shape="rect" id="node5" href="classrtr_1_1_face.html" title="Holds the information regarding a face of a mesh. " alt="" coords="311,95,381,121"/>
-<area shape="rect" id="node6" href="structrtr_1_1_face_vert_set.html" title="holds a vector for a vertex of a face and its corresponding UV vector if it exists ..." alt="" coords="289,5,403,32"/>
-</map>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -135,6 +123,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a7d36388f860763d5fc44bfd04d6fa754"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad94b86de09900fd68d36654be1662711"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrtr_1_1_object.html#ad94b86de09900fd68d36654be1662711">rotationAxis</a></td></tr>
 <tr class="separator:ad94b86de09900fd68d36654be1662711"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58e6610da404b105ebd1fd8126f036aa"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrtr_1_1_object.html#a58e6610da404b105ebd1fd8126f036aa">scale</a></td></tr>
+<tr class="separator:a58e6610da404b105ebd1fd8126f036aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d65b4f8558c11b79a2f405df8ea7cf1"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrtr_1_1_object.html#a1d65b4f8558c11b79a2f405df8ea7cf1">angle</a></td></tr>
 <tr class="separator:a1d65b4f8558c11b79a2f405df8ea7cf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -187,7 +177,7 @@ Public Attributes</h2></td></tr>
 <p>Default contructor. </p>
 <p>Sets rotation axis to glm::vec3(0,1,0) and angle to 0 </p>
 
-<p class="definition">Definition at line <a class="el" href="_object_8cpp_source.html#l00004">4</a> of file <a class="el" href="_object_8cpp_source.html">Object.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_object_8cpp_source.html#l00005">5</a> of file <a class="el" href="_object_8cpp_source.html">Object.cpp</a>.</p>
 
 </div>
 </div>
@@ -207,7 +197,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Currently serves no purpose </p>
 
-<p class="definition">Definition at line <a class="el" href="_object_8cpp_source.html#l00014">14</a> of file <a class="el" href="_object_8cpp_source.html">Object.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_object_8cpp_source.html#l00016">16</a> of file <a class="el" href="_object_8cpp_source.html">Object.cpp</a>.</p>
 
 </div>
 </div>
@@ -224,7 +214,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_object_8h_source.html#l00039">39</a> of file <a class="el" href="_object_8h_source.html">Object.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_object_8h_source.html#l00040">40</a> of file <a class="el" href="_object_8h_source.html">Object.h</a>.</p>
 
 </div>
 </div>
@@ -292,6 +282,22 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a58e6610da404b105ebd1fd8126f036aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58e6610da404b105ebd1fd8126f036aa">&#9670;&nbsp;</a></span>scale</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::vec3 rtr::Object::scale</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_object_8h_source.html#l00039">39</a> of file <a class="el" href="_object_8h_source.html">Object.h</a>.</p>
+
+</div>
+</div>
 <a id="a1c37d118d9a55c3c2fe7560654957549"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1c37d118d9a55c3c2fe7560654957549">&#9670;&nbsp;</a></span>texture</h2>
 
@@ -325,8 +331,8 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering/<a class="el" href="_object_8h_source.html">Object.h</a></li>
-<li>C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering/<a class="el" href="_object_8cpp_source.html">Object.cpp</a></li>
+<li><a class="el" href="_object_8h_source.html">Object.h</a></li>
+<li><a class="el" href="_object_8cpp_source.html">Object.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

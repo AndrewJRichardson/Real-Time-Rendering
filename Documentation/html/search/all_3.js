@@ -9,8 +9,7 @@ var searchData=
   ['device_2eh',['Device.h',['../_device_8h.html',1,'']]],
   ['drawline',['DrawLine',['../classrtr_1_1_device.html#ab99891b25674ee8a8100da6dc92f81ed',1,'rtr::Device']]],
   ['drawlinebresenham',['DrawLineBresenham',['../classrtr_1_1_device.html#af9c6ebd94fa1fe544c3c74cc2befad93',1,'rtr::Device']]],
-  ['drawpoint',['DrawPoint',['../classrtr_1_1_device.html#a76a1095b6a2e5f74ad2f66c11953e87f',1,'rtr::Device::DrawPoint(const glm::vec3 &amp;, int, int, int)'],['../classrtr_1_1_device.html#a97a0c4fba7714f09ccbcc0b0c69caa7f',1,'rtr::Device::DrawPoint(const glm::vec3 &amp;, Uint8, Uint8, Uint8)']]],
-  ['drawscanline',['DrawScanLine',['../classrtr_1_1_device.html#a2b2988a4ca615ca4e873fa6d7be81f2e',1,'rtr::Device']]],
-  ['drawscanlinetexture',['DrawScanLineTexture',['../classrtr_1_1_device.html#ab4810bab0f3d9721d375c528eaa5ff80',1,'rtr::Device']]],
-  ['drawtriangle',['DrawTriangle',['../classrtr_1_1_device.html#aa766bacce6712a07435765e0ea14a7e6',1,'rtr::Device']]]
+  ['drawpixel',['DrawPixel',['../classrtr_1_1_device.html#a15eb995753f33b24be3b19b1da2e4258',1,'rtr::Device::DrawPixel(const glm::vec3 &amp;, int, int, int)'],['../classrtr_1_1_device.html#a7b7aeef32e5ee5a0b1c97d401792d6db',1,'rtr::Device::DrawPixel(const glm::vec3 &amp;, Uint8, Uint8, Uint8)']]],
+  ['drawscanline',['DrawScanLine',['../classrtr_1_1_device.html#a8bf03760a10c0acfd22862d21127a282',1,'rtr::Device']]],
+  ['drawscanlinetexture',['DrawScanLineTexture',['../classrtr_1_1_device.html#aae43aa7c73bd9580eb8586e531bd38f7',1,'rtr::Device']]]
 ];
