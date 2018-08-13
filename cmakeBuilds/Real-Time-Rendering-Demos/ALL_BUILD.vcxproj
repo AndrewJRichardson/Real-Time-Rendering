@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{15E6A622-A1C4-3F70-89B7-C8D415E5682D}</ProjectGuid>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <ProjectGuid>{A910529A-CA51-3565-8C88-D66CE94A8C42}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
     <ProjectName>ALL_BUILD</ProjectName>
@@ -63,7 +63,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.6\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.8\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_image-2.0.3\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -73,7 +73,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.6\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.8\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_image-2.0.3\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -83,7 +83,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.6\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.8\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_image-2.0.3\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -93,7 +93,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.6\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.8\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_image-2.0.3\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -102,70 +102,14 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering-Demos\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-Hc:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering" "-BC:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds" --check-stamp-file "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos/CMakeFiles/generate.stamp"
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos/CMakeLists.txt;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering-Demos\CMakeLists.txt;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering-Demos\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\cmakeBuilds\Real-Time-Rendering-Demos\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-Hc:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering" "-BC:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds" --check-stamp-file "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos/CMakeFiles/generate.stamp"
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos/CMakeLists.txt;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering-Demos\CMakeLists.txt;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering-Demos\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\cmakeBuilds\Real-Time-Rendering-Demos\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-Hc:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering" "-BC:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds" --check-stamp-file "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos/CMakeFiles/generate.stamp"
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos/CMakeLists.txt;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering-Demos\CMakeLists.txt;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering-Demos\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\cmakeBuilds\Real-Time-Rendering-Demos\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-Hc:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering" "-BC:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds" --check-stamp-file "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering-Demos/CMakeFiles/generate.stamp"
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering-Demos/CMakeLists.txt;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering-Demos\CMakeLists.txt;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering-Demos\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\cmakeBuilds\Real-Time-Rendering-Demos\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
-    </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\cmakeBuilds\ZERO_CHECK.vcxproj">
-      <Project>{80DC5CA7-DA50-3C55-8F1E-D8314BB88DBF}</Project>
+      <Project>{8919E916-43C5-3866-AA7C-47FF3FF26D03}</Project>
       <Name>ZERO_CHECK</Name>
     </ProjectReference>
     <ProjectReference Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\cmakeBuilds\Real-Time-Rendering-Demos\Demo.vcxproj">
-      <Project>{6DEE6D7C-E32E-330C-86EB-37E26D91B466}</Project>
+      <Project>{122AB05F-3062-3BD9-9F23-0C8046E5A7C8}</Project>
       <Name>Demo</Name>
     </ProjectReference>
   </ItemGroup>

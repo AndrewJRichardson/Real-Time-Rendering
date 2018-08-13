@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering-Demos\BasicCube.cpp">
@@ -10,7 +10,7 @@
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{B95D081B-C3F5-3CB8-86FB-E4F4DBBD0AED}</UniqueIdentifier>
+      <UniqueIdentifier>{254E6781-7667-3E3C-A10E-01F734F4FEA7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{325FF7F1-D9E5-3784-AF77-5A647316B66E}</ProjectGuid>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <ProjectGuid>{4A87E2CF-68AA-393E-8D6C-BE6EC4D8FCA5}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
     <ProjectName>Real-Time-Rendering-Lib</ProjectName>
@@ -83,7 +83,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.6\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.8\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_image-2.0.3\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -100,10 +100,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;REALTIME_EXPORTS;CMAKE_INTDIR=\"Debug\";Real_Time_Rendering_Lib_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.6\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.8\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_image-2.0.3\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.6\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.8\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_image-2.0.3\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -111,7 +111,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\..\Libs\SDL2-2.0.6\lib\x64\SDL2.lib;..\..\Libs\SDL2-2.0.6\lib\x64\SDL2main.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\..\Libs\SDL2-2.0.8\lib\x64\SDL2.lib;..\..\Libs\SDL2-2.0.8\lib\x64\SDL2main.lib;..\..\Libs\SDL2_image-2.0.3\lib\x64\SDL2_image.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -126,7 +126,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.6\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.8\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_image-2.0.3\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -138,14 +138,15 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;REALTIME_EXPORTS;CMAKE_INTDIR="Release";Real_Time_Rendering_Lib_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
-      <DebugInformationFormat></DebugInformationFormat>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;REALTIME_EXPORTS;CMAKE_INTDIR=\"Release\";Real_Time_Rendering_Lib_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.6\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.8\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_image-2.0.3\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.6\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.8\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_image-2.0.3\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -153,7 +154,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\..\Libs\SDL2-2.0.6\lib\x64\SDL2.lib;..\..\Libs\SDL2-2.0.6\lib\x64\SDL2main.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\..\Libs\SDL2-2.0.8\lib\x64\SDL2.lib;..\..\Libs\SDL2-2.0.8\lib\x64\SDL2main.lib;..\..\Libs\SDL2_image-2.0.3\lib\x64\SDL2_image.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -168,7 +169,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.6\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.8\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_image-2.0.3\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -180,14 +181,15 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;REALTIME_EXPORTS;CMAKE_INTDIR="MinSizeRel";Real_Time_Rendering_Lib_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
-      <DebugInformationFormat></DebugInformationFormat>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;REALTIME_EXPORTS;CMAKE_INTDIR=\"MinSizeRel\";Real_Time_Rendering_Lib_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.6\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.8\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_image-2.0.3\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.6\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.8\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_image-2.0.3\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -195,7 +197,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\..\Libs\SDL2-2.0.6\lib\x64\SDL2.lib;..\..\Libs\SDL2-2.0.6\lib\x64\SDL2main.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\..\Libs\SDL2-2.0.8\lib\x64\SDL2.lib;..\..\Libs\SDL2-2.0.8\lib\x64\SDL2main.lib;..\..\Libs\SDL2_image-2.0.3\lib\x64\SDL2_image.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -210,7 +212,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.6\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.8\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_image-2.0.3\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -226,10 +228,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;REALTIME_EXPORTS;CMAKE_INTDIR=\"RelWithDebInfo\";Real_Time_Rendering_Lib_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.6\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.8\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_image-2.0.3\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.6\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\glm;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2-2.0.8\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_ttf-2.0.14\include;C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Libs\SDL2_image-2.0.3\include;c:\users\andre\onedrive - blackburn college\year 3 project\project\real-time-rendering\Real-Time-Rendering;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -237,7 +239,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\..\Libs\SDL2-2.0.6\lib\x64\SDL2.lib;..\..\Libs\SDL2-2.0.6\lib\x64\SDL2main.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\..\Libs\SDL2-2.0.8\lib\x64\SDL2.lib;..\..\Libs\SDL2-2.0.8\lib\x64\SDL2main.lib;..\..\Libs\SDL2_image-2.0.3\lib\x64\SDL2_image.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -254,7 +256,7 @@
     <CustomBuild Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\CMakeLists.txt">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-Hc:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering" "-BC:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds" --check-stamp-file "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering/CMakeFiles/generate.stamp"
+"C:\Program Files\CMake\bin\cmake.exe" "-Hc:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering" "-Bc:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering/cmakebuilds" --check-stamp-file "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering/CMakeFiles/generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -267,7 +269,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-Hc:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering" "-BC:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds" --check-stamp-file "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering/CMakeFiles/generate.stamp"
+"C:\Program Files\CMake\bin\cmake.exe" "-Hc:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering" "-Bc:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering/cmakebuilds" --check-stamp-file "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering/CMakeFiles/generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -280,7 +282,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-Hc:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering" "-BC:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds" --check-stamp-file "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering/CMakeFiles/generate.stamp"
+"C:\Program Files\CMake\bin\cmake.exe" "-Hc:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering" "-Bc:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering/cmakebuilds" --check-stamp-file "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering/CMakeFiles/generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -293,7 +295,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/Real-Time-Rendering/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-Hc:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering" "-BC:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds" --check-stamp-file "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering/CMakeFiles/generate.stamp"
+"C:\Program Files\CMake\bin\cmake.exe" "-Hc:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering" "-Bc:/users/andre/onedrive - blackburn college/year 3 project/project/real-time-rendering/cmakebuilds" --check-stamp-file "C:/Users/andre/OneDrive - Blackburn College/Year 3 project/Project/Real-Time-Rendering/cmakeBuilds/Real-Time-Rendering/CMakeFiles/generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -307,17 +309,20 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\Device.cpp"  />
-    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\Camera.cpp"  />
-    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\Object.cpp"  />
-    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\Pipeline.cpp"  />
-    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\ViewPerspective.cpp"  />
-    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\ViewOrthogonal.cpp"  />
-    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\RasterizeVertex.cpp"  />
-    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\RasterizeWireframe.cpp"  />
-    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\Mesh.cpp"  />
-    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\ObjectParser.cpp"  />
-    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\DebugTools.cpp"  />
+    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\Device.cpp" />
+    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\Camera.cpp" />
+    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\Object.cpp" />
+    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\Pipeline.cpp" />
+    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\ViewPerspective.cpp" />
+    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\ViewOrthogonal.cpp" />
+    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\RasterizeVertex.cpp" />
+    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\RasterizeWireframe.cpp" />
+    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\RasterizeTextured.cpp" />
+    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\RasterizeFilled.cpp" />
+    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\VertexProcessor.cpp" />
+    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\Mesh.cpp" />
+    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\ObjectParser.cpp" />
+    <ClCompile Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\DefaultVertexShader.cpp" />
     <ClInclude Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\Device.h" />
     <ClInclude Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\Camera.h" />
     <ClInclude Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\Object.h" />
@@ -327,13 +332,17 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\ViewOrthogonal.h" />
     <ClInclude Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\RasterizeVertex.h" />
     <ClInclude Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\RasterizeWireframe.h" />
+    <ClInclude Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\RasterizeTextured.h" />
+    <ClInclude Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\RasterizeFilled.h" />
+    <ClInclude Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\VertexProcessor.h" />
+    <ClInclude Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\VertexShader.h" />
     <ClInclude Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\ObjectParser.h" />
-    <ClInclude Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\DebugTools.h" />
     <ClInclude Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\Exports.h" />
+    <ClInclude Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\Real-Time-Rendering\DefaultVertexShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\cmakeBuilds\ZERO_CHECK.vcxproj">
-      <Project>{80DC5CA7-DA50-3C55-8F1E-D8314BB88DBF}</Project>
+      <Project>{8919E916-43C5-3866-AA7C-47FF3FF26D03}</Project>
       <Name>ZERO_CHECK</Name>
     </ProjectReference>
   </ItemGroup>

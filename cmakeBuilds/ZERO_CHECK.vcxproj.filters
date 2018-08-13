@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <CustomBuild Include="C:\Users\andre\OneDrive - Blackburn College\Year 3 project\Project\Real-Time-Rendering\cmakeBuilds\CMakeFiles\53779e34ba7ba853d98797a0cee11da2\generate.stamp.rule">
@@ -7,7 +7,7 @@
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{AA51DC17-66D0-3502-938A-DB6F3FDECC7A}</UniqueIdentifier>
+      <UniqueIdentifier>{30706F9A-D978-3F11-9D7D-9B76CC3850FA}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
