@@ -15,3 +15,14 @@ For the purposes of demoing this app I have included the release build files in 
 * Press left bumper on a 360 pad to switch between a few different model settings. 
 * Press right bumper to reset the camera.
 * Press A to toggle backface culling.
+
+## Images of the project in action
+### The four rendering modes
+![](./MDimages/4cube.png)
+### A model loaded from a .obj file
+![](./MDimages/suzz.png)
+### A wireframe cube with backface culling turned off
+![](./MDimages/Cube.png)
+### A textured cube, showing the affects of affine texture warp
+Affine texture mapping was used instead of perspective correct texturing for performance reasons (and it gives me nostalgia for the look of early real-time 3D games!)
+![](./MDimages/btexwarp.png)
