@@ -49,6 +49,9 @@ namespace rtr {
         REALTIME_API void operator()(const Object&, const ViewMode&, 
                                      const glm::mat4&,
                                      Device&, const Face&) const;
+
+        //For demo purporses
+        bool backface = true;
     };
 }
 

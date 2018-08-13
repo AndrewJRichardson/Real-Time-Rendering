@@ -5,13 +5,13 @@ glm::mat4 rtr::VertexProcessor::CreateMVPMatrix(const Object& object,
                                                 const Device& device) const {
     
     glm::mat4 modelMatrix = 
-    glm::translate(glm::mat4(), object.position) 
+        glm::translate(glm::mat4(), object.position) 
         * 
          glm::rotate(glm::radians(object.angle), object.rotationAxis) 
         *
          glm::scale(object.scale);
 
-    return device.perspectiveMatrix * device.viewMatrix * modelMatrix;
+    return device.projectionMatrix * device.viewMatrix * modelMatrix;
 }
 
 void rtr::VertexProcessor::operator()(const Object& object,
@@ -37,7 +37,7 @@ void rtr::VertexProcessor::operator()(const Object& object,
 
 
     float angle = glm::dot(norm, point1.v);
-    if (angle <= 0){
+    if (angle <= 0 && backface){
           return;
     }    
 

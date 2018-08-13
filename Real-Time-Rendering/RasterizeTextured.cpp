@@ -3,6 +3,16 @@
 
 void rtr::RasterizeTextured::operator()(FaceVertSet a, FaceVertSet b, FaceVertSet c,
                                         Device& device, const Object& object){
+    if (a.v.x < 0 || a.v.x > device.bufferWidth ||
+        b.v.x < 0 || b.v.x > device.bufferWidth ||
+        c.v.x < 0 || c.v.x > device.bufferWidth ||
+        a.v.y < 0 || a.v.y > device.bufferHeight ||
+        b.v.y < 0 || b.v.y > device.bufferHeight ||
+        c.v.y < 0 || c.v.y > device.bufferHeight){ 
+            return;
+        }
+
+
 
     if (a.v.z <= 2 || b.v.z <=2 || c.v.z <=2)
         return;

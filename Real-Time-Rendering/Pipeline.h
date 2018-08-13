@@ -22,10 +22,10 @@ class Pipeline {
 
     private:
     const ViewMode&        viewmode;
-    const VertexProcessor& vertexProcessor;
     int                    threadLimit;
 
     public:
+    VertexProcessor& vertexProcessor;
     Device&          device;
     ///Default Contructor
     REALTIME_API Pipeline(const ViewMode&,
