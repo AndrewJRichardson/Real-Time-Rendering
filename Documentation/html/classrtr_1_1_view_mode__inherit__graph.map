@@ -1,0 +1,4 @@
+<map id="rtr::ViewMode" name="rtr::ViewMode">
+<area shape="rect" id="node2" href="$classrtr_1_1_view_orthogonal.html" title="ViewMode that projects vertexes to give an orthoganol view. " alt="" coords="5,80,139,107"/>
+<area shape="rect" id="node3" href="$classrtr_1_1_view_perspective.html" title="ViewMode for rendering vertexes with a perspective based view. " alt="" coords="163,80,301,107"/>
+</map>
