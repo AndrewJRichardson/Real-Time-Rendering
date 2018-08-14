@@ -1,2 +1,4 @@
 
-Documentation/* linguist-documentation=true
+Documentation/* linguist-documentation
+Libs/* linguist-vendored
+*.html linguist-documentation
