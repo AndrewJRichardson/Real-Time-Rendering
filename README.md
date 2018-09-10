@@ -14,7 +14,7 @@ There is some very barebones documentation available in the documentation folder
 ## Running this project
 The project can be built with CMAKE.
 
-For the purposes of demoing this app I have included the release build files in this repo (generally a bad practice). To run the demo goto Demo Build > demo.exe. The demo will show 4 cubes by default and you can move around with mouse and keyboard. However, the demo was mainly designed to work with an xbox 360 controller (So I could stand up while presenting the demo and let others try it while I presented). The file that creates the 
+For the purposes of demoing this app I have included the release build files in this repo (generally a bad practice). To run the demo goto Demo Build > demo.exe. The demo will show 4 cubes by default and you can move around with mouse and keyboard. However, the demo was mainly designed to work with an xbox 360 controller (So I could stand up while presenting the demo and let others try it while I presented).
 
 * Analog sticks work like first person game controls.
 * Press left bumper on a 360 pad to switch between a few different model settings. 
